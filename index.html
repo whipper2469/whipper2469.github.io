@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Made Simple - AI Solutions for Home and Business</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        primaryDark: '#4f46e5',
+                        secondary: '#10b981'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+        }
+        
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .nav-scroll {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        #menu {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-gray-50">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="flex justify-between items-center py-5 px-6 md:px-12 fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent">
+        <div class="text-2xl font-bold text-white">AI Made Simple</div>
+
+        <!-- Desktop Menu -->
+        <ul class="hidden md:flex space-x-8 items-center">
+            <li><a href="#services" class="text-white hover:text-blue-200 transition">Services</a></li>
+            <li><a href="#booking" class="text-white hover:text-blue-200 transition">Book Now</a></li>
+            <li><a href="#contact" class="text-white hover:text-blue-200 transition">Contact</a></li>
+        </ul>
+
+        <!-- Mobile Hamburger -->
+        <button id="menu-btn" class="md:hidden flex flex-col space-y-1.5">
+            <span class="block w-6 h-0.5 bg-white"></span>
+            <span class="block w-6 h-0.5 bg-white"></span>
+            <span class="block w-6 h-0.5 bg-white"></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <div id="menu" class="hidden md:hidden bg-white shadow-lg fixed top-16 right-4 w-48 rounded-lg p-4 space-y-4 z-50">
+        <a href="#services" class="block text-gray-700 hover:text-blue-600">Services</a>
+        <a href="#booking" class="block text-gray-700 hover:text-blue-600">Book Now</a>
+        <a href="#contact" class="block text-gray-700 hover:text-blue-600">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg pt-32 pb-24 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">AI Help for Your Home or Business</h1>
+            <p class="text-xl text-indigo-100 mb-10 max-w-2xl mx-auto">
+                Save time and get more done with simple AI solutions. No tech skills required.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#booking" class="px-8 py-4 bg-white text-indigo-600 font-medium rounded-full shadow-lg hover:bg-gray-100 transition">
+                    Book a Session
+                </a>
+                <a href="#services" class="px-8 py-4 bg-transparent border-2 border-white text-white font-medium rounded-full hover:bg-white hover:text-indigo-600 transition">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">What We Offer</h2>
+            <p class="text-gray-600 text-center max-w-2xl mx-auto mb-16">
+                Simple, practical AI solutions tailored to your specific needs
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="service-card bg-gray-50 p-8 rounded-xl border border-gray-100">
+                    <div class="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-5">
+                        <i class="fas fa-envelope text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Email Automation</h3>
+                    <p class="text-gray-600">Let AI draft, respond to, and organize your emails so you can focus on what matters.</p>
+                </div>
+                
+                <div class="service-card bg-gray-50 p-8 rounded-xl border border-gray-100">
+                    <div class="w-14 h-14 bg-purple-100 rounded-lg flex items-center justify-center mb-5">
+                        <i class="fas fa-file-alt text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Document Summarization</h3>
+                    <p class="text-gray-600">Quickly understand long documents with AI-powered summaries and key point extraction.</p>
+                </div>
+                
+                <div class="service-card bg-gray-50 p-8 rounded-xl border border-gray-100">
+                    <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-5">
+                        <i class="fas fa-bullhorn text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Content Creation</h3>
+                    <p class="text-gray-600">Create engaging social media posts, blog content, and marketing copy with AI assistance.</p>
+                </div>
+                
+                <div class="service-card bg-gray-50 p-8 rounded-xl border border-gray-100">
+                    <div class="w-14 h-14 bg-red-100 rounded-lg flex items-center justify-center mb-5">
+                        <i class="fas fa-tasks text-red-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Business Process Automation</h3>
+                    <p class="text-gray-600">Identify and automate repetitive tasks to save time and reduce errors in your workflow.</p>
+                </div>
+                
+                <div class="service-card bg-gray-50 p-8 rounded-xl border border-gray-100">
+                    <div class="w-14 h-14 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
+                        <i class="fas fa-chart-line text-yellow-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Data Analysis</h3>
+                    <p class="text-gray-600">Turn raw data into actionable insights with AI-powered analysis and visualization.</p>
+                </div>
+                
+                <div class="service-card bg-gray-50 p-8 rounded-xl border border-gray-100">
+                    <div class="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-5">
+                        <i class="fas fa-graduation-cap text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Personalized Training</h3>
+                    <p class="text-gray-600">One-on-one sessions to help you master AI tools specifically for your needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="py-20 bg-gray-100 px-6">
+        <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-8 md:p-12">
+            <h2 class="text-3xl font-bold text-center mb-4">Book Your Session</h2>
+            <p class="text-gray-600 text-center mb-10 max-w-2xl mx-auto">
+                Ready to harness the power of AI? Book a session at your convenience.
+            </p>
+            
+            <div class="w-full">
+                <iframe 
+                    src="https://calendar.app.google/2WBGPp15tVQ2QR5z9" 
+                    style="border:0;" 
+                    width="100%" 
+                    height="600" 
+                    frameborder="0" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            
+            <div class="mt-10 text-center">
+                <p class="text-gray-600 mb-2">Prefer to schedule another way?</p>
+                <p class="text-lg font-medium">📞 519-589-0620 | 📧 kevin.roy8@icloud.com</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6 bg-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Have Questions?</h2>
+            <p class="text-gray-600 text-lg mb-10 max-w-2xl mx-auto">
+                We're here to help you understand how AI can work for you.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left max-w-2xl mx-auto">
+                <div class="bg-gray-50 p-6 rounded-xl">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-phone text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Call or Text</h3>
+                    <p class="text-gray-600">519-589-0620</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-envelope text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Email Us</h3>
+                    <p class="text-gray-600">kevin.roy8@icloud.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12 px-6 text-white">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="md:col-span-2">
+                <h3 class="text-2xl font-bold mb-4">AI Made Simple</h3>
+                <p class="max-w-xs text-gray-400">Helping individuals and businesses harness the power of AI without the complexity.</p>
+            </div>
+            
+            <div>
+                <h4 class="font-semibold mb-4">Quick Links</h4>
+                <ul class="space-y-2">
+                    <li><a href="#services" class="text-gray-400 hover:text-white transition">Services</a></li>
+                    <li><a href="#booking" class="text-gray-400 hover:text-white transition">Book Now</a></li>
+                    <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-semibold mb-4">Connect</h4>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-indigo-600 transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-indigo-600 transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-indigo-600 transition">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="max-w-6xl mx-auto mt-12 pt-8 border-t border-gray-800 text-center text-sm text-gray-400">
+            <p>© 2023 AI Made Simple. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Script for Mobile Menu and Navbar Behavior -->
+    <script>
+        const menuBtn = document.getElementById("menu-btn");
+        const menu = document.getElementById("menu");
+        const navbar = document.getElementById("navbar");
+
+        menuBtn.addEventListener("click", () => {
+            menu.classList.toggle("hidden");
+            menu.classList.toggle("flex");
+            menu.classList.toggle("flex-col");
+        });
+
+        // Change navbar style on scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scroll');
+                navbar.classList.remove('bg-transparent');
+                navbar.classList.add('text-gray-900');
+            } else {
+                navbar.classList.remove('nav-scroll');
+                navbar.classList.add('bg-transparent');
+                navbar.classList.remove('text-gray-900');
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+                menu.classList.remove('flex');
+                menu.classList.remove('flex-col');
+            });
+        });
+    </script>
+
+</body>
+</html>
