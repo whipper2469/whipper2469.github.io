@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Made Simple - Book Your Session</title>
+    <title>AI Made Simple - Google Calendar Integration</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -48,68 +48,34 @@
             transition: all 0.3s ease;
         }
         
-        .booking-form {
-            transition: all 0.3s ease;
-        }
-        
-        .form-step {
-            display: none;
-        }
-        
-        .form-step.active {
-            display: block;
-        }
-        
-        .calendar-day {
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .calendar-day:hover {
-            background-color: #e5e7eb;
-        }
-        
-        .calendar-day.selected {
-            background-color: #6366f1;
-            color: white;
-        }
-        
-        .time-slot {
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .time-slot:hover {
-            background-color: #e5e7eb;
-        }
-        
-        .time-slot.selected {
-            background-color: #6366f1;
-            color: white;
-        }
-        
-        .calendar-container {
-            position: relative;
-            overflow: hidden;
-            height: 600px;
+        .config-box {
             background: #f8fafc;
-            border-radius: 12px;
-        }
-        
-        .calendar-placeholder {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
             padding: 20px;
-            text-align: center;
+            margin: 20px 0;
         }
         
-        .calendar-placeholder i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #6366f1;
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #6366f1;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -123,6 +89,7 @@
         <ul class="hidden md:flex space-x-8 items-center">
             <li><a href="#services" class="text-white hover:text-blue-200 transition">Services</a></li>
             <li><a href="#booking" class="text-white hover:text-blue-200 transition">Book Now</a></li>
+            <li><a href="#integration" class="text-white hover:text-blue-200 transition">Integration</a></li>
             <li><a href="#contact" class="text-white hover:text-blue-200 transition">Contact</a></li>
         </ul>
 
@@ -138,6 +105,7 @@
     <div id="menu" class="hidden md:hidden bg-white shadow-lg fixed top-16 right-4 w-48 rounded-lg p-4 space-y-4 z-50">
         <a href="#services" class="block text-gray-700 hover:text-blue-600">Services</a>
         <a href="#booking" class="block text-gray-700 hover:text-blue-600">Book Now</a>
+        <a href="#integration" class="block text-gray-700 hover:text-blue-600">Integration</a>
         <a href="#contact" class="block text-gray-700 hover:text-blue-600">Contact</a>
     </div>
 
@@ -152,8 +120,8 @@
                 <a href="#booking" class="px-8 py-4 bg-white text-indigo-600 font-medium rounded-full shadow-lg hover:bg-gray-100 transition">
                     Book a Session
                 </a>
-                <a href="#services" class="px-8 py-4 bg-transparent border-2 border-white text-white font-medium rounded-full hover:bg-white hover:text-indigo-600 transition">
-                    Learn More
+                <a href="#integration" class="px-8 py-4 bg-transparent border-2 border-white text-white font-medium rounded-full hover:bg-white hover:text-indigo-600 transition">
+                    Setup Integration
                 </a>
             </div>
         </div>
@@ -219,6 +187,97 @@
         </div>
     </section>
 
+    <!-- Google Calendar Integration Section -->
+    <section id="integration" class="py-20 px-6 bg-gray-50">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Google Calendar Integration</h2>
+            <p class="text-gray-600 text-center max-w-2xl mx-auto mb-16">
+                Connect your Google Calendar to enable automatic booking and reminders
+            </p>
+            
+            <div class="bg-white rounded-2xl shadow-lg p-8">
+                <h3 class="text-2xl font-semibold mb-6">Setup Instructions</h3>
+                
+                <div class="config-box">
+                    <h4 class="text-lg font-medium mb-4"><span class="step-number">1</span>Upload your Google Service Account JSON</h4>
+                    <p class="text-gray-600 mb-4">You'll need to upload your service account JSON file to your server.</p>
+                    
+                    <div class="code-block">
+                        // Example of service account JSON structure<br>
+                        {<br>
+                        &nbsp;&nbsp;"type": "service_account",<br>
+                        &nbsp;&nbsp;"project_id": "your-project-id",<br>
+                        &nbsp;&nbsp;"private_key_id": "your-private-key-id",<br>
+                        &nbsp;&nbsp;"private_key": "-----BEGIN PRIVATE KEY-----\\n...\\n-----END PRIVATE KEY-----\\n",<br>
+                        &nbsp;&nbsp;"client_email": "your-service-account@your-project.iam.gserviceaccount.com",<br>
+                        &nbsp;&nbsp;"client_id": "your-client-id",<br>
+                        &nbsp;&nbsp;"auth_uri": "https://accounts.google.com/o/oauth2/auth",<br>
+                        &nbsp;&nbsp;"token_uri": "https://oauth2.googleapis.com/token",<br>
+                        &nbsp;&nbsp;"auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",<br>
+                        &nbsp;&nbsp;"client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/..."<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="config-box">
+                    <h4 class="text-lg font-medium mb-4"><span class="step-number">2</span>Share your calendar with the service account</h4>
+                    <p class="text-gray-600 mb-4">In Google Calendar, share your calendar with your service account email address with "Make changes to events" permissions.</p>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <p class="text-sm text-gray-700"><i class="fas fa-info-circle text-blue-500 mr-2"></i>Your service account email: <span id="service-account-email">your-service-account@your-project.iam.gserviceaccount.com</span></p>
+                    </div>
+                </div>
+                
+                <div class="config-box">
+                    <h4 class="text-lg font-medium mb-4"><span class="step-number">3</span>Server-side integration code</h4>
+                    <p class="text-gray-600 mb-4">Here's a basic example of how to use the Google Calendar API with your service account:</p>
+                    
+                    <div class="code-block">
+                        const { GoogleAuth } = require('google-auth-library');<br>
+                        const { google } = require('googleapis');<br><br>
+                        
+                        // Load the service account key JSON file<br>
+                        const auth = new GoogleAuth({<br>
+                        &nbsp;&nbsp;keyFile: 'path-to-your-service-account-key.json',<br>
+                        &nbsp;&nbsp;scopes: ['https://www.googleapis.com/auth/calendar'],<br>
+                        });<br><br>
+                        
+                        // Create calendar client<br>
+                        const calendar = google.calendar({ version: 'v3', auth });<br><br>
+                        
+                        // Example: Create a new event<br>
+                        async function createEvent(eventDetails) {<br>
+                        &nbsp;&nbsp;try {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;const response = await calendar.events.insert({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calendarId: 'primary', // Use 'primary' for the primary calendar<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource: eventDetails,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;});<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return response.data;<br>
+                        &nbsp;&nbsp;} catch (error) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.error('Error creating calendar event:', error);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;throw error;<br>
+                        &nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="config-box">
+                    <h4 class="text-lg font-medium mb-4"><span class="step-number">4</span>Test your integration</h4>
+                    <p class="text-gray-600 mb-4">Once you've set up the server-side code, test if the integration is working properly.</p>
+                    
+                    <div class="flex gap-4">
+                        <button class="px-4 py-2 bg-green-600 text-white rounded-lg flex items-center">
+                            <i class="fas fa-play-circle mr-2"></i> Test Connection
+                        </button>
+                        <button class="px-4 py-2 bg-blue-600 text-white rounded-lg flex items-center">
+                            <i class="fas fa-calendar-plus mr-2"></i> Create Test Event
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Booking Section -->
     <section id="booking" class="py-20 bg-gray-100 px-6">
         <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-8 md:p-12">
@@ -228,115 +287,52 @@
             </p>
             
             <div class="flex flex-col md:flex-row gap-8">
-                <div class="w-full md:w-1/2">
-                    <div class="booking-form">
-                        <div id="step1" class="form-step active">
-                            <h3 class="text-xl font-semibold mb-6 text-center">Select a Date</h3>
-                            <div class="bg-gray-50 p-4 rounded-lg mb-6">
-                                <div class="flex justify-between items-center mb-4">
-                                    <button id="prev-month" class="p-2 rounded-full hover:bg-gray-200">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </button>
-                                    <h4 id="current-month" class="text-lg font-semibold">June 2023</h4>
-                                    <button id="next-month" class="p-2 rounded-full hover:bg-gray-200">
-                                        <i class="fas fa-chevron-right"></i>
-                                    </button>
-                                </div>
-                                <div class="grid grid-cols-7 gap-2 mb-2">
-                                    <div class="text-center font-medium text-gray-500">Sun</div>
-                                    <div class="text-center font-medium text-gray-500">Mon</div>
-                                    <div class="text-center font-medium text-gray-500">Tue</div>
-                                    <div class="text-center font-medium text-gray-500">Wed</div>
-                                    <div class="text-center font-medium text-gray-500">Thu</div>
-                                    <div class="text-center font-medium text-gray-500">Fri</div>
-                                    <div class="text-center font-medium text-gray-500">Sat</div>
-                                </div>
-                                <div id="calendar-days" class="grid grid-cols-7 gap-2">
-                                    <!-- Calendar days will be generated by JavaScript -->
-                                </div>
-                            </div>
-                            <button id="next-to-step2" class="w-full py-3 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-                                Next: Choose Time
-                            </button>
-                        </div>
-                        
-                        <div id="step2" class="form-step">
-                            <h3 class="text-xl font-semibold mb-6 text-center">Select a Time</h3>
-                            <p class="text-center text-gray-600 mb-4" id="selected-date">Selected date: </p>
-                            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
-                                <div class="time-slot text-center py-3 rounded border border-gray-300">9:00 AM</div>
-                                <div class="time-slot text-center py-3 rounded border border-gray-300">10:00 AM</div>
-                                <div class="time-slot text-center py-3 rounded border border-gray-300">11:00 AM</div>
-                                <div class="time-slot text-center py-3 rounded border border-gray-300">1:00 PM</div>
-                                <div class="time-slot text-center py-3 rounded border border-gray-300">2:00 PM</div>
-                                <div class="time-slot text-center py-3 rounded border border-gray-300">3:00 PM</div>
-                            </div>
-                            <div class="flex gap-3">
-                                <button id="back-to-step1" class="w-1/3 py-3 bg-gray-300 text-gray-700 rounded-lg shadow hover:bg-gray-400 transition">
-                                    Back
-                                </button>
-                                <button id="next-to-step3" class="w-2/3 py-3 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-                                    Next: Your Info
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div id="step3" class="form-step">
-                            <h3 class="text-xl font-semibold mb-6 text-center">Your Information</h3>
-                            <p class="text-center text-gray-600 mb-4" id="selected-time">Selected time: </p>
-                            <div class="space-y-4 mb-6">
-                                <div>
-                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                                    <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="Your name">
-                                </div>
-                                <div>
-                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                                    <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="your.email@example.com">
-                                </div>
-                                <div>
-                                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                                    <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="(123) 456-7890">
-                                </div>
-                                <div>
-                                    <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message (Optional)</label>
-                                    <textarea id="message" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="Anything you'd like to add..."></textarea>
-                                </div>
-                            </div>
-                            <div class="flex gap-3">
-                                <button id="back-to-step2" class="w-1/3 py-3 bg-gray-300 text-gray-700 rounded-lg shadow hover:bg-gray-400 transition">
-                                    Back
-                                </button>
-                                <button id="submit-booking" class="w-2/3 py-3 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition">
-                                    Confirm Booking
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div id="step4" class="form-step">
-                            <div class="text-center py-8">
-                                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <i class="fas fa-check text-green-600 text-2xl"></i>
-                                </div>
-                                <h3 class="text-xl font-semibold mb-2">Booking Request Received!</h3>
-                                <p class="text-gray-600 mb-4">We've received your booking request and will confirm shortly.</p>
-                                <p class="text-sm text-gray-500 mb-6">You will receive a confirmation email at <span id="confirm-email"></span></p>
-                                <button id="new-booking" class="px-6 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition">
-                                    Book Another Session
-                                </button>
-                            </div>
-                        </div>
+                <div class="w-full">
+                    <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                        <h3 class="text-xl font-semibold mb-4">Direct Calendar Link</h3>
+                        <p class="text-gray-600 mb-4">You can also book directly through Google Calendar:</p>
+                        <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1dyq9UawQ6hgsU3yN39pZvqo4Vv9VQqNnP-Na6pVxV4o3Vv0VqVrVzVv0VqVrVzVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVpVp极简日历集成解决方案" class="px-4 py-2 bg-indigo-600 text-white rounded-lg inline-flex items-center">
+                            <i class="fab fa-google mr-2"></i> Open Google Calendar
+                        </a>
                     </div>
-                </div>
-                
-                <div class="w-full md:w-1/2">
-                    <div class="calendar-container">
-                        <div class="calendar-placeholder">
-                            <i class="fas fa-calendar-alt"></i>
-                            <h3 class="text-xl font-semibold mb-2">Google Calendar Integration</h3>
-                            <p class="text-gray-600 mb-4">Your booking will be added to our Google Calendar. You'll receive a confirmation with calendar invite.</p>
-                            <a href="https://calendar.google.com/calendar/u/0/r?pli=1" target="_blank" class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm inline-flex items-center">
-                                <i class="fas fa-external-link-alt mr-2"></i> Open Google Calendar
-                            </a>
+                    
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold mb-4">Or book through our form</h3>
+                        <p class="text-gray-600 mb-4">Fill out this form and we'll manually add the event to your calendar:</p>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label for="booking-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                                <input type="text" id="booking-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="Your name">
+                            </div>
+                            <div>
+                                <label for="booking-email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                                <input type="email" id="booking-email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="your.email@example.com">
+                            </div>
+                            <div>
+                                <label for="booking-date" class="block text-sm font-medium text-gray-700 mb-1">Preferred Date</label>
+                                <input type="date" id="booking-date" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                            <div>
+                                <label for="booking-time" class="block text-sm font-medium text-gray-700 mb-1">Preferred Time</label>
+                                <select id="booking-time" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                                    <option value="">Select a time</option>
+                                    <option value="09:00">9:00 AM</option>
+                                    <option value="10:00">10:00 AM</option>
+                                    <option value="11:00">11:00 AM</option>
+                                    <option value="13:00">1:00 PM</option>
+                                    <option value="14:00">2:00 PM</option>
+                                    <option value="15:00">3:00 PM</option>
+                                    <option value="16:00">4:00 PM</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="booking-message" class="block text-sm font-medium text-gray-700 mb-1">Message (Optional)</label>
+                                <textarea id="booking-message" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="What would you like to focus on during our session?"></textarea>
+                            </div>
+                            <button class="w-full py-3 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition">
+                                Request Booking
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -390,6 +386,7 @@
                 <ul class="space-y-2">
                     <li><a href="#services" class="text-gray-400 hover:text-white transition">Services</a></li>
                     <li><a href="#booking" class="text-gray-400 hover:text-white transition">Book Now</a></li>
+                    <li><a href="#integration" class="text-gray-400 hover:text-white transition">Integration</a></li>
                     <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
                 </ul>
             </div>
@@ -449,172 +446,27 @@
             });
         });
 
-        // Booking form functionality
-        const currentDate = new Date();
-        let currentMonth = currentDate.getMonth();
-        let currentYear = currentDate.getFullYear();
-        let selectedDate = null;
-        let selectedTime = null;
-
-        const monthNames = ["January", "February", "March", "April", "May", "June",
-                           "July", "August", "September", "October", "November", "December"];
-
-        function generateCalendar(month, year) {
-            const calendarDays = document.getElementById('calendar-days');
-            calendarDays.innerHTML = '';
+        // Simple form submission
+        document.querySelector('button').addEventListener('click', () => {
+            const name = document.getElementById('booking-name').value;
+            const email = document.getElementById('booking-email').value;
+            const date = document.getElementById('booking-date').value;
+            const time = document.getElementById('booking-time').value;
+            const message = document.getElementById('booking-message').value;
             
-            document.getElementById('current-month').textContent = `${monthNames[month]} ${year}`;
-            
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            
-            // Add empty cells for days before the first day of the month
-            for (let i = 0; i < firstDay; i++) {
-                const emptyDay = document.createElement('div');
-                emptyDay.classList.add('h-10');
-                calendarDays.appendChild(emptyDay);
-            }
-            
-            // Add cells for each day of the month
-            for (let i = 1; i <= daysInMonth; i++) {
-                const day = document.createElement('div');
-                day.classList.add('calendar-day', 'h-10', 'flex', 'items-center', 'justify-center', 'rounded-full');
-                day.textContent = i;
-                
-                // Disable past dates
-                const today = new Date();
-                today.setHours(0, 0, 0, 0);
-                const cellDate = new Date(year, month, i);
-                
-                if (cellDate < today) {
-                    day.classList.add('text-gray-400', 'cursor-not-allowed');
-                } else {
-                    day.addEventListener('click', () => {
-                        document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
-                        day.classList.add('selected');
-                        selectedDate = new Date(year, month, i);
-                        document.getElementById('next-to-step2').disabled = false;
-                    });
-                }
-                
-                calendarDays.appendChild(day);
-            }
-        }
-
-        // Initialize calendar
-        generateCalendar(currentMonth, currentYear);
-
-        // Month navigation
-        document.getElementById('prev-month').addEventListener('click', () => {
-            currentMonth--;
-            if (currentMonth < 0) {
-                currentMonth = 11;
-                currentYear--;
-            }
-            generateCalendar(currentMonth, currentYear);
-        });
-
-        document.getElementById('next-month').addEventListener('click', () => {
-            currentMonth++;
-            if (currentMonth > 11) {
-                currentMonth = 0;
-                currentYear++;
-            }
-            generateCalendar(currentMonth, currentYear);
-        });
-
-        // Form navigation
-        document.getElementById('next-to-step2').addEventListener('click', () => {
-            document.getElementById('step1').classList.remove('active');
-            document.getElementById('step2').classList.add('active');
-            document.getElementById('selected-date').textContent = `Selected date: ${selectedDate.toDateString()}`;
-        });
-
-        document.getElementById('back-to-step1').addEventListener('click', () => {
-            document.getElementById('step2').classList.remove('active');
-            document.getElementById('step1').classList.add('active');
-        });
-
-        // Time slot selection
-        document.querySelectorAll('.time-slot').forEach(slot => {
-            slot.addEventListener('click', () => {
-                document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
-                slot.classList.add('selected');
-                selectedTime = slot.textContent;
-                document.getElementById('next-to-step3').disabled = false;
-            });
-        });
-
-        document.getElementById('next-to-step3').addEventListener('click', () => {
-            document.getElementById('step2').classList.remove('active');
-            document.getElementById('step3').classList.add('active');
-            document.getElementById('selected-time').textContent = `Selected time: ${selectedDate.toDateString()} at ${selectedTime}`;
-        });
-
-        document.getElementById('back-to-step2').addEventListener('click', () => {
-            document.getElementById('step3').classList.remove('active');
-            document.getElementById('step2').classList.add('active');
-        });
-
-        // Form submission
-        document.getElementById('submit-booking').addEventListener('click', () => {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const message = document.getElementById('message').value;
-            
-            // Basic validation
-            if (!name || !email || !phone) {
+            if (!name || !email || !date || !time) {
                 alert('Please fill in all required fields');
                 return;
             }
             
-            // In a real application, you would send this data to your server
-            // For this demo, we'll just show the confirmation
-            document.getElementById('step3').classList.remove('active');
-            document.getElementById('step4').classList.add('active');
-            document.getElementById('confirm-email').textContent = email;
+            alert(`Thanks for your booking request, ${name}! We'll contact you at ${email} to confirm your session on ${date} at ${time}.`);
             
-            // You could also send an email notification to yourself here
-            console.log('Booking details:', {
-                name,
-                email,
-                phone,
-                message,
-                date: selectedDate,
-                time: selectedTime
-            });
-            
-            // Create Google Calendar link (would need proper formatting in a real implementation)
-            const gcalLink = `https://calendar.google.com/calendar/r/eventedit?text=AI+Consultation+with+${encodeURIComponent(name)}&dates=${formatDateForGoogle(selectedDate)}&details=${encodeURIComponent(`Phone: ${phone}\nEmail: ${email}\nMessage: ${message || 'No message'}`)}&location=Online&sf=true&output=xml`;
-            console.log('Google Calendar link:', gcalLink);
-        });
-
-        // Format date for Google Calendar (simplified)
-        function formatDateForGoogle(date) {
-            const yyyy = date.getFullYear();
-            const mm = String(date.getMonth() + 1).padStart(2, '0');
-            const dd = String(date.getDate()).padStart(2, '0');
-            return `${yyyy}${mm}${dd}T100000/${yyyy}${mm}${dd}T110000`; // Assuming 10-11 AM
-        }
-
-        // New booking
-        document.getElementById('new-booking').addEventListener('click', () => {
             // Reset form
-            selectedDate = null;
-            selectedTime = null;
-            document.getElementById('name').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('phone').value = '';
-            document.getElementById('message').value = '';
-            document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
-            document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
-            document.getElementById('next-to-step2').disabled = true;
-            document.getElementById('next-to-step3').disabled = true;
-            
-            // Go back to first step
-            document.getElementById('step4').classList.remove('active');
-            document.getElementById('step1').classList.add('active');
+            document.getElementById('booking-name').value = '';
+            document.getElementById('booking-email').value = '';
+            document.getElementById('booking-date').value = '';
+            document.getElementById('booking-time').value = '';
+            document.getElementById('booking-message').value = '';
         });
     </script>
 
