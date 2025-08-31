@@ -95,9 +95,54 @@
         .mobile-menu.open {
             max-height: 500px;
         }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .external-link-modal {
+            display: none;
+        }
     </style>
 </head>
 <body class="font-sans text-gray-800 bg-gray-50">
+
+    <!-- External Link Confirmation Modal -->
+    <div id="externalLinkModal" class="modal">
+        <div class="modal-content">
+            <h3 class="text-xl font-semibold mb-4">Leaving AI Made Simple</h3>
+            <p class="text-gray-600 mb-6">You are about to visit an external resource. How would you like to proceed?</p>
+            <div class="flex flex-col sm:flex-row gap-3">
+                <button id="openNewTab" class="flex-1 py-3 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition">
+                    Open in New Tab
+                </button>
+                <button id="leaveSite" class="flex-1 py-3 bg-gray-300 text-gray-700 rounded-lg shadow hover:bg-gray-400 transition">
+                    Leave This Site
+                </button>
+                <button id="cancelAction" class="flex-1 py-3 bg-red-600 text-white rounded-lg shadow hover:bg-red-700 transition">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Navigation -->
     <nav id="navbar" class="flex justify-between items-center py-5 px-6 md:px-12 fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent">
@@ -262,7 +307,7 @@
                         <span class="text-sm text-indigo-600 font-semibold">AI Integration</span>
                         <h3 class="text-xl font-semibold mt-2 mb-3">5 AI Tools Every Small Business Needs in 2023</h3>
                         <p class="text-gray-600 mb-4">Discover the essential AI tools that can help small businesses compete with larger enterprises.</p>
-                        <a href="#" class="text-indigo-600 font-semibold hover:underline">Read More</a>
+                        <a href="#blog-detail-1" class="text-indigo-600 font-semibold hover:underline read-more" data-blog="1">Read More</a>
                     </div>
                 </div>
                 
@@ -272,7 +317,7 @@
                         <span class="text-sm text-indigo-600 font-semibold">Automation</span>
                         <h3 class="text-xl font-semibold mt-2 mb-3">How to Automate Customer Service with AI</h3>
                         <p class="text-gray-600 mb-4">Learn how AI-powered chatbots and response systems can transform your customer service.</p>
-                        <a href="#" class="text-indigo-600 font-semibold hover:underline">Read More</a>
+                        <a href="#blog-detail-2" class="text-indigo-600 font-semibold hover:underline read-more" data-blog="2">Read More</a>
                     </div>
                 </div>
                 
@@ -282,7 +327,7 @@
                         <span class="text-sm text-indigo-600 font-semibold">Business Growth</span>
                         <h3 class="text-xl font-semibold mt-2 mb-3">Using AI to Identify New Business Opportunities</h3>
                         <p class="text-gray-600 mb-4">Discover how AI analytics can reveal hidden opportunities for business expansion.</p>
-                        <a href="#" class="text-indigo-600 font-semibold hover:underline">Read More</a>
+                        <a href="#blog-detail-3" class="text-indigo-600 font-semibold hover:underline read-more" data-blog="3">Read More</a>
                     </div>
                 </div>
                 
@@ -292,7 +337,7 @@
                         <span class="text-sm text-indigo-600 font-semibold">Productivity</span>
                         <h3 class="text-xl font-semibold mt-2 mb-3">10 Time-Saving AI Hacks for Entrepreneurs</h3>
                         <p class="text-gray-600 mb-4">Practical AI strategies to reclaim hours in your workweek and boost productivity.</p>
-                        <a href="#" class="text-indigo-600 font-semibold hover:underline">Read More</a>
+                        <a href="#blog-detail-4" class="text-indigo-600 font-semibold hover:underline read-more" data-blog="4">Read More</a>
                     </div>
                 </div>
                 
@@ -302,7 +347,7 @@
                         <span class="text-sm text-indigo-600 font-semibold">Content Creation</span>
                         <h3 class="text-xl font-semibold mt-2 mb-3">How AI Can 10x Your Content Marketing Results</h3>
                         <p class="text-gray-600 mb-4">Learn how to use AI for content ideation, creation, and distribution.</p>
-                        <a href="#" class="text-indigo-600 font-semibold hover:underline">Read More</a>
+                        <a href="#blog-detail-5" class="text-indigo-600 font-semibold hover:underline read-more" data-blog="5">Read More</a>
                     </div>
                 </div>
                 
@@ -312,7 +357,7 @@
                         <span class="text-sm text-indigo-600 font-semibold">Data Analysis</span>
                         <h3 class="text-xl font-semibold mt-2 mb-3">Turning Data into Decisions with AI Analytics</h3>
                         <p class="text-gray-600 mb-4">How small businesses can leverage AI for data-driven decision making.</p>
-                        <a href="#" class="text-indigo-600 font-semibold hover:underline">Read More</a>
+                        <a href="#blog-detail-6" class="text-indigo-600 font-semibold hover:underline read-more" data-blog="6">Read More</a>
                     </div>
                 </div>
             </div>
@@ -325,6 +370,104 @@
         </div>
     </section>
 
+    <!-- Blog Detail Modals -->
+    <div id="blog-detail-1" class="modal">
+        <div class="modal-content">
+            <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700" onclick="closeModal('blog-detail-1')">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <h2 class="text-2xl font-bold mb-4">5 AI Tools Every Small Business Needs in 2023</h2>
+            <div class="text-sm text-indigo-600 font-semibold mb-4">AI Integration</div>
+            <p class="text-gray-600 mb-4">Staying competitive in today's market requires leveraging the right technology. Here are 5 AI tools that can transform your small business:</p>
+            
+            <div class="text-left mb-6">
+                <h3 class="text-lg font-semibold mb-2">1. ChatGPT for Content Creation</h3>
+                <p class="text-gray-600 mb-4">Create marketing copy, emails, and product descriptions in seconds. Saves up to 10 hours per week on content tasks.</p>
+                
+                <h3 class="text-lg font-semibold mb-2">2. Grammarly for Error-Free Communication</h3>
+                <p class="text-gray-600 mb-4">Ensure all your business communications are professional and error-free with AI-powered writing assistance.</p>
+                
+                <h3 class="text-lg font-semibold mb-2">3. Canva for Design</h3>
+                <p class="text-gray-600 mb-4">Create professional designs, social media graphics, and marketing materials with AI-powered design suggestions.</p>
+                
+                <h3 class="text-lg font-semibold mb-2">4. Calendly for Scheduling</h3>
+                <p class="text-gray-600 mb-4">Automate appointment scheduling and eliminate back-and-forth emails with clients and team members.</p>
+                
+                <h3 class="text-lg font-semibold mb-2">5. QuickBooks for Financial Management</h3>
+                <p class="text-gray-600 mb-4">AI-powered financial insights and automated bookkeeping save hours each month and provide valuable business intelligence.</p>
+            </div>
+            
+            <div class="bg-indigo-50 p-4 rounded-lg mb-6">
+                <h4 class="font-semibold mb-2">Implementation Tips:</h4>
+                <ul class="list-disc list-inside text-gray-700">
+                    <li>Start with one tool that addresses your biggest pain point</li>
+                    <li>Take advantage of free trials to test different options</li>
+                    <li>Train your team on how to use the tools effectively</li>
+                    <li>Measure time savings and ROI after implementation</li>
+                </ul>
+            </div>
+            
+            <p class="text-gray-600 mb-6">Want help implementing these tools in your business? <a href="#booking" class="text-indigo-600 font-semibold hover:underline">Schedule a consultation</a> to develop a customized AI strategy.</p>
+            
+            <div class="flex gap-3">
+                <a href="https://chat.openai.com" class="flex-1 py-2 px-4 bg-indigo-600 text-white rounded text-center hover:bg-indigo-700" target="_blank">Explore ChatGPT</a>
+                <a href="https://www.grammarly.com" class="flex-1 py-2 px-4 bg-green-600 text-white rounded text-center hover:bg-green-700" target="_blank">Explore Grammarly</a>
+                <button onclick="closeModal('blog-detail-1')" class="flex-1 py-2 px-4 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="blog-detail-2" class="modal">
+        <div class="modal-content">
+            <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700" onclick="closeModal('blog-detail-2')">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <h2 class="text-2xl font-bold mb-4">How to Automate Customer Service with AI</h2>
+            <div class="text-sm text-indigo-600 font-semibold mb-4">Automation</div>
+            <p class="text-gray-600 mb-4">AI-powered customer service can transform how you interact with customers, providing instant responses 24/7 while reducing costs.</p>
+            
+            <div class="text-left mb-6">
+                <h3 class="text-lg font-semibold mb-2">Benefits of AI Customer Service:</h3>
+                <ul class="list-disc list-inside text-gray-700 mb-4">
+                    <li>24/7 availability without increasing staff</li>
+                    <li>Instant responses to common questions</li>
+                    <li>Reduced wait times for customers</li>
+                    <li>Consistent brand voice across all interactions</li>
+                    <li>Data collection for service improvement</li>
+                </ul>
+                
+                <h3 class="text-lg font-semibold mb-2">Implementation Steps:</h3>
+                <ol class="list-decimal list-inside text-gray-700 mb-4">
+                    <li>Identify frequently asked questions and common issues</li>
+                    <li>Choose an AI chatbot platform (ManyChat, Drift, or Custom solution)</li>
+                    <li>Develop response templates for common inquiries</li>
+                    <li>Implement seamless handoff to human agents when needed</li>
+                    <li>Continuously train and improve the AI with real interactions</li>
+                </ol>
+            </div>
+            
+            <div class="bg-indigo-50 p-4 rounded-lg mb-6">
+                <h4 class="font-semibold mb-2">Best Practices:</h4>
+                <ul class="list-disc list-inside text-gray-700">
+                    <li>Always disclose when customers are interacting with AI</li>
+                    <li>Make it easy to reach a human when needed</li>
+                    <li>Regularly update your knowledge base with new information</li>
+                    <li>Use conversational language that matches your brand voice</li>
+                </ul>
+            </div>
+            
+            <p class="text-gray-600 mb-6">Need help setting up AI customer service for your business? <a href="#booking" class="text-indigo-600 font-semibold hover:underline">Book a consultation</a> to get started.</p>
+            
+            <div class="flex gap-3">
+                <a href="https://manychat.com" class="flex-1 py-2 px-4 bg-indigo-600 text-white rounded text-center hover:bg-indigo-700" target="_blank">Explore ManyChat</a>
+                <a href="https://www.drift.com" class="flex-1 py-2 px-4 bg-blue-600 text-white rounded text-center hover:bg-blue-700" target="_blank">Explore Drift</a>
+                <button onclick="closeModal('blog-detail-2')" class="flex-1 py-2 px-4 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional blog detail modals would follow similar pattern -->
+
     <!-- Community Section -->
     <section id="community" class="py-20 px-6 bg-gradient-to-br from-indigo-50 to-purple-50">
         <div class="max-w-4xl mx-auto">
@@ -336,7 +479,7 @@
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Join Our AI Architects Community</h2>
                 <p class="text-lg mb-6 max-w-2xl mx-auto">The first 100 people to join our Skool community will get free lifetime access!</p>
                 <p class="mb-8">Connect with like-minded entrepreneurs and AI enthusiasts who are helping each other grow businesses and start new ventures.</p>
-                <a href="https://www.skool.com/ai-architects-8165" class="inline-flex items-center px-8 py-4 bg-white text-indigo-600 font-bold rounded-full shadow-lg hover:bg-gray-100 transition text-lg">
+                <a href="https://www.skool.com/ai-architects-8165" class="external-link inline-flex items-center px-8 py-4 bg-white text-indigo-600 font-bold rounded-full shadow-lg hover:bg-gray-100 transition text-lg" data-url="https://www.skool.com/ai-architects-8165">
                     <i class="fas fa-rocket mr-2"></i> Join Now - Free for First 100
                 </a>
             </div>
@@ -466,6 +609,8 @@
         const menuBtn = document.getElementById("menu-btn");
         const mobileMenu = document.getElementById("mobile-menu");
         const navbar = document.getElementById("navbar");
+        const externalLinkModal = document.getElementById("externalLinkModal");
+        let currentExternalLink = "";
 
         menuBtn.addEventListener("click", () => {
             mobileMenu.classList.toggle("open");
@@ -507,6 +652,50 @@
                     });
                 }
             });
+        });
+
+        // Blog detail modals
+        document.querySelectorAll('.read-more').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const blogId = this.getAttribute('data-blog');
+                document.getElementById(`blog-detail-${blogId}`).style.display = 'flex';
+            });
+        });
+
+        // Close modal function
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // External link handling
+        document.querySelectorAll('.external-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                currentExternalLink = this.getAttribute('data-url');
+                externalLinkModal.style.display = 'flex';
+            });
+        });
+
+        // External link modal actions
+        document.getElementById('openNewTab').addEventListener('click', function() {
+            window.open(currentExternalLink, '_blank');
+            externalLinkModal.style.display = 'none';
+        });
+
+        document.getElementById('leaveSite').addEventListener('click', function() {
+            window.location.href = currentExternalLink;
+        });
+
+        document.getElementById('cancelAction').addEventListener('click', function() {
+            externalLinkModal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
         });
     </script>
 
