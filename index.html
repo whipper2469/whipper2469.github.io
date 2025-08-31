@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Made Simple | Book Your Consultation</title>
+    <title>Book Your AI Consultation | AI Made Simple</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -12,21 +12,12 @@
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
         }
         
         .gradient-bg {
             background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-        }
-        
-        .service-card {
-            transition: all 0.3s ease;
-            border-left: 4px solid transparent;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            border-left: 4px solid #6366f1;
         }
         
         .nav-scroll {
@@ -40,59 +31,6 @@
             border-radius: 12px;
             padding: 25px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-        
-        .benefit-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .benefit-icon {
-            background: #e0e7ff;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-        
-        .stat-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-        
-        .testimonial-card {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            margin: 15px 0;
-        }
-        
-        .avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: #e0e7ff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #6366f1;
-            margin-right: 15px;
         }
         
         .calendar-embed {
@@ -115,14 +53,16 @@
             border-radius: 12px;
         }
         
-        .feature-highlight {
-            background: linear-gradient(120deg, #e0e7ff 0%, #c7d2fe 100%);
+        .info-card {
+            background: white;
             border-radius: 12px;
             padding: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
         }
     </style>
 </head>
-<body class="font-sans text-gray-800 bg-gray-50">
+<body class="font-sans text-gray-800">
 
     <!-- Navigation -->
     <nav id="navbar" class="flex justify-between items-center py-5 px-6 md:px-12 fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent">
@@ -130,13 +70,10 @@
 
         <!-- Desktop Menu -->
         <ul class="hidden md:flex space-x-8 items-center">
-            <li><a href="#services" class="text-white hover:text-blue-200 transition">Services</a></li>
-            <li><a href="#benefits" class="text-white hover:text-blue-200 transition">Benefits</a></li>
-            <li><a href="#booking" class="text-white hover:text-blue-200 transition">Consultation</a></li>
-            <li><a href="#testimonials" class="text-white hover:text-blue-200 transition">Success Stories</a></li>
+            <li><a href="#booking" class="text-white hover:text-blue-200 transition">Book Consultation</a></li>
             <li>
-                <a href="#booking" class="px-5 py-2.5 bg-white text-indigo-600 font-medium rounded-full shadow-lg hover:bg-gray-100 transition">
-                    Book Now
+                <a href="https://whipper2469.github.io/index.html" class="px-5 py-2.5 bg-white text-indigo-600 font-medium rounded-full shadow-lg hover:bg-gray-100 transition">
+                    Back to Main Site
                 </a>
             </li>
         </ul>
@@ -151,309 +88,80 @@
 
     <!-- Mobile Menu (hidden by default) -->
     <div id="menu" class="hidden md:hidden bg-white shadow-lg fixed top-16 right-4 w-48 rounded-lg p-4 space-y-4 z-50">
-        <a href="#services" class="block text-gray-700 hover:text-blue-600">Services</a>
-        <a href="#benefits" class="block text-gray-700 hover:text-blue-600">Benefits</a>
-        <a href="#booking" class="block text-gray-700 hover:text-blue-600">Consultation</a>
-        <a href="#testimonials" class="block text-gray-700 hover:text-blue-600">Success Stories</a>
-        <a href="#booking" class="block px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition">
-            Book Now
+        <a href="#booking" class="block text-gray-700 hover:text-blue-600">Book Consultation</a>
+        <a href="https://whipper2469.github.io/index.html" class="block px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition">
+            Back to Main Site
         </a>
     </div>
 
     <!-- Hero Section -->
-    <section class="gradient-bg pt-32 pb-24 px-6 text-center">
+    <section class="gradient-bg pt-32 pb-20 px-6 text-center">
         <div class="max-w-4xl mx-auto">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">Transform Your Business with AI Automation</h1>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">Book Your AI Consultation</h1>
             <p class="text-xl text-indigo-100 mb-10 max-w-2xl mx-auto">
-                I'll show you how to harness the power of AI to automate tasks and workflows, saving you time and money while increasing productivity.
+                Schedule a session to discover how AI can transform your business workflows and save you time.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#booking" class="px-8 py-4 bg-white text-indigo-600 font-medium rounded-full shadow-lg hover:bg-gray-100 transition">
-                    Book a Free Consultation
-                </a>
-                <a href="#services" class="px-8 py-4 bg-transparent border-2 border-white text-white font-medium rounded-full hover:bg-white hover:text-indigo-600 transition">
-                    Explore Services
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="py-12 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="stat-card">
-                    <div class="text-3xl font-bold text-indigo-600 mb-2">40%</div>
-                    <p class="text-gray-600">Average time savings</p>
-                </div>
-                <div class="stat-card">
-                    <div class="text-3xl font-bold text-indigo-600 mb-2">75%</div>
-                    <p class="text-gray-600">Task automation potential</p>
-                </div>
-                <div class="stat-card">
-                    <div class="text-3xl font-bold text-indigo-600 mb-2">5-15x</div>
-                    <p class="text-gray-600">Return on investment</p>
-                </div>
-                <div class="stat-card">
-                    <div class="text-3xl font-bold text-indigo-600 mb-2">100+</div>
-                    <p class="text-gray-600">Processes automated</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-20 px-6 bg-gray-50">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">AI-Powered Business Solutions</h2>
-            <p class="text-gray-600 text-center max-w-2xl mx-auto mb-16">
-                Customized AI implementations designed to streamline your operations and boost efficiency
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="service-card bg-white p-8 rounded-xl">
-                    <div class="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-5">
-                        <i class="fas fa-envelope-open-text text-blue-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Email Management Automation</h3>
-                    <p class="text-gray-600">AI-powered email sorting, prioritization, and response drafting to keep your inbox organized and efficient.</p>
-                </div>
-                
-                <div class="service-card bg-white p-8 rounded-xl">
-                    <div class="w-14 h-14 bg-purple-100 rounded-lg flex items-center justify-center mb-5">
-                        <i class="fas fa-tasks text-purple-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Workflow Optimization</h3>
-                    <p class="text-gray-600">Identify and automate repetitive tasks to create seamless workflows that save hours each week.</p>
-                </div>
-                
-                <div class="service-card bg-white p-8 rounded-xl">
-                    <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-5">
-                        <i class="fas fa-chart-line text-green-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Data Analysis & Reporting</h3>
-                    <p class="text-gray-600">Transform raw data into actionable insights with AI-driven analysis and automated reporting.</p>
-                </div>
-                
-                <div class="service-card bg-white p-8 rounded-xl">
-                    <div class="w-14 h-14 bg-red-100 rounded-lg flex items-center justify-center mb-5">
-                        <i class="fas fa-file-alt text-red-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Document Processing</h3>
-                    <p class="text-gray-600">Automate document summarization, categorization, and information extraction from various formats.</p>
-                </div>
-                
-                <div class="service-card bg-white p-8 rounded-xl">
-                    <div class="w-14 h-14 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
-                        <i class="fas fa-comments text-yellow-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Customer Interaction Systems</h3>
-                    <p class="text-gray-600">Implement AI chatbots and response systems to handle common customer inquiries 24/7.</p>
-                </div>
-                
-                <div class="service-card bg-white p-8 rounded-xl">
-                    <div class="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-5">
-                        <i class="fas fa-cogs text-indigo-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Process Integration</h3>
-                    <p class="text-gray-600">Connect disparate systems and create automated workflows between your existing tools and platforms.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Google Calendar Integration Section -->
-    <section class="py-20 px-6 bg-white">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Seamless Online Scheduling</h2>
-            <p class="text-gray-600 text-center max-w-2xl mx-auto mb-16">
-                Book your consultation instantly with our integrated Google Calendar scheduling system
-            </p>
-            
-            <div class="feature-highlight mb-16">
-                <div class="flex flex-col md:flex-row items-center">
-                    <div class="md:w-1/2 mb-8 md:mb-0">
-                        <h3 class="text-2xl font-semibold mb-4">Professional Appointment Scheduling</h3>
-                        <p class="text-gray-700 mb-4">I use Google Calendar's appointment scheduling to make booking your consultation effortless:</p>
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>View my real-time availability</li>
-                            <li>Book appointments 24/7</li>
-                            <li>Automatically avoid double-booking</li>
-                            <li>Receive instant confirmation</li>
-                            <li>Get calendar invites and reminders</li>
-                        </ul>
-                    </div>
-                    <div class="md:w-1/2 flex justify-center">
-                        <div class="bg-white p-6 rounded-lg shadow-lg max-w-xs">
-                            <i class="fas fa-calendar-check text-4xl text-indigo-600 mb-4"></i>
-                            <h4 class="text-xl font-semibold mb-2">How It Works</h4>
-                            <ol class="list-decimal list-inside text-gray-700 space-y-2 text-sm">
-                                <li>Click the booking button below</li>
-                                <li>Select your preferred date and time</li>
-                                <li>Provide your contact information</li>
-                                <li>Receive immediate confirmation</li>
-                                <li>Get a calendar invite with meeting details</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                <div>
-                    <h3 class="text-2xl font-semibold mb-4">Ready to Transform Your Business?</h3>
-                    <p class="text-gray-600 mb-6">Schedule your free 30-minute consultation to discover how AI can automate your workflows and save you time.</p>
-                    
-                    <div class="bg-indigo-50 p-6 rounded-lg mb-6">
-                        <h4 class="font-semibold mb-3">What we'll cover:</h4>
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>Analysis of your current workflows</li>
-                            <li>Identification of automation opportunities</li>
-                            <li>Customized AI strategy for your business</li>
-                            <li>Implementation timeline and ROI projection</li>
-                        </ul>
-                    </div>
-                    
-                    <a href="https://calendar.app.google/DUcaULz2W4Xbzb1S8" 
-                       class="w-full py-4 bg-indigo-600 text-white rounded-lg text-center block hover:bg-indigo-700 transition shadow-lg text-lg font-semibold">
-                        <i class="fab fa-google mr-2"></i> Book Your Consultation Now
-                    </a>
-                </div>
-                
-                <div class="calendar-container">
-                    <h3 class="text-xl font-semibold mb-6">Direct Booking Calendar</h3>
-                    <p class="text-gray-600 mb-6">Use the calendar below to see my availability and book your appointment directly:</p>
-                    
-                    <div class="calendar-placeholder">
-                        <iframe 
-                            src="https://calendar.app.google/DUcaULz2W4Xbzb1S8" 
-                            class="calendar-embed"
-                            frameborder="0"
-                            allowfullscreen>
-                        </iframe>
-                        <p class="text-sm text-gray-500 mt-4">Can't see the calendar? <a href="https://calendar.app.google/DUcaULz2W4Xbzb1S8" class="text-indigo-600 hover:underline">Click here to open it directly</a></p>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
     <!-- Booking Section -->
-    <section id="booking" class="py-20 bg-gray-100 px-6">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-4">Schedule Your Free AI Consultation</h2>
-            <p class="text-gray-600 text-center mb-10 max-w-2xl mx-auto">
-                Let's explore how AI can transform your business operations. Select a time that works for you.
-            </p>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                <div class="calendar-container">
-                    <h3 class="text-xl font-semibold mb-6">Book through Google Calendar</h3>
-                    <p class="text-gray-600 mb-6">Select an available time slot for your free 30-minute AI consultation. You'll receive a confirmation email with meeting details.</p>
-                    
-                    <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
-                        <h4 class="font-semibold mb-3">What to expect:</h4>
-                        <ul class="list-disc list-inside text-gray-600 space-y-2">
-                            <li>Analysis of your current workflows</li>
-                            <li>Identification of automation opportunities</li>
-                            <li>Customized AI strategy for your business</li>
-                            <li>Implementation timeline and ROI projection</li>
+    <section id="booking" class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                <div class="lg:col-span-2">
+                    <div class="calendar-container">
+                        <h3 class="text-xl font-semibold mb-6">Select Your Appointment Time</h3>
+                        <p class="text-gray-600 mb-6">Choose an available time slot for your consultation. You'll receive a confirmation email with meeting details.</p>
+                        
+                        <div class="calendar-placeholder">
+                            <iframe 
+                                src="https://calendar.app.google/DUcaULz2W4Xbzb1S8" 
+                                class="calendar-embed"
+                                frameborder="0"
+                                allowfullscreen>
+                            </iframe>
+                            <p class="text-sm text-gray-500 mt-4">Can't see the calendar? <a href="https://calendar.app.google/DUcaULz2W4Xbzb1S8" class="text-indigo-600 hover:underline">Click here to open it directly</a></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="info-card">
+                        <div class="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-5 mx-auto">
+                            <i class="fas fa-video text-indigo-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4 text-center">Consultation Details</h3>
+                        <ul class="space-y-3 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-clock text-indigo-500 mt-1 mr-3"></i>
+                                <span>30-minute video consultation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-calendar-check text-indigo-500 mt-1 mr-3"></i>
+                                <span>You'll receive a calendar invite</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-star text-indigo-500 mt-1 mr-3"></i>
+                                <span>Free of charge with no obligation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-lightbulb text-indigo-500 mt-1 mr-3"></i>
+                                <span>Customized AI strategy for your business</span>
+                            </li>
                         </ul>
                     </div>
                     
-                    <a href="https://calendar.app.google/DUcaULz2W4Xbzb1S8" 
-                       class="w-full py-3 bg-indigo-600 text-white rounded-lg text-center block hover:bg-indigo-700 transition shadow mb-4">
-                        <i class="fab fa-google mr-2"></i> View Available Times on Google Calendar
-                    </a>
-                    <p class="text-sm text-gray-500 text-center">You'll be redirected to Google Calendar to book your appointment</p>
-                </div>
-                
-                <div class="calendar-container">
-                    <h3 class="text-xl font-semibold mb-6">Prefer to schedule via email?</h3>
-                    <p class="text-gray-600 mb-6">Send us your preferred times and we'll confirm your appointment. We typically respond within 2 business hours.</p>
-                    
-                    <form class="space-y-4">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="Your name">
+                    <div class="info-card">
+                        <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-5 mx-auto">
+                            <i class="fas fa-headset text-green-600 text-2xl"></i>
                         </div>
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="your.email@example.com">
-                        </div>
-                        <div>
-                            <label for="business" class="block text-sm font-medium text-gray-700 mb-1">Business Type</label>
-                            <input type="text" id="business" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., Consulting, E-commerce, Legal">
-                        </div>
-                        <div>
-                            <label for="goals" class="block text-sm font-medium text-gray-700 mb-1">Primary Automation Goals</label>
-                            <textarea id="goals" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="What would you like to automate?"></textarea>
-                        </div>
-                        <button type="submit" class="w-full py-3 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition">
-                            Request Consultation
-                        </button>
-                    </form>
-                </div>
-            </div>
-            
-            <div class="mt-10 text-center">
-                <p class="text-gray-600 mb-2">Need immediate assistance or have questions?</p>
-                <p class="text-lg font-medium">📞 519-589-0620 | 📧 kevin.roy8@icloud.com</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-20 px-6 bg-white">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Success Stories</h2>
-            <p class="text-gray-600 text-center max-w-2xl mx-auto mb-16">
-                See how businesses like yours have transformed their operations with AI automation
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="testimonial-card">
-                    <div class="flex items-center mb-4">
-                        <div class="avatar">JD</div>
-                        <div>
-                            <h4 class="font-semibold">James Davidson</h4>
-                            <p class="text-sm text-gray-500">Marketing Agency Owner</p>
+                        <h3 class="text-xl font-semibold mb-4 text-center">Need Assistance?</h3>
+                        <p class="text-gray-600 mb-4">If you have trouble booking or prefer to schedule another way:</p>
+                        <div class="text-center">
+                            <p class="text-lg font-medium mb-2">📞 519-589-0620</p>
+                            <p class="text-lg font-medium">📧 kevin.roy8@icloud.com</p>
                         </div>
                     </div>
-                    <p class="text-gray-600">"AI Made Simple helped us automate client reporting and social media management. We've saved 15 hours a week and can now handle 40% more clients without adding staff."</p>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="flex items-center mb-4">
-                        <div class="avatar">SR</div>
-                        <div>
-                            <h4 class="font-semibold">Sarah Reynolds</h4>
-                            <p class="text-sm text-gray-500">E-commerce Store Owner</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-600">"The AI customer service solutions implemented have reduced our response time from hours to minutes. We've seen a 30% increase in customer satisfaction scores."</p>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="flex items-center mb-4">
-                        <div class="avatar">MR</div>
-                        <div>
-                            <h4 class="font-semibold">Michael Roberts</h4>
-                            <p class="text-sm text-gray-500">Legal Practice Manager</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-600">"Document processing automation has been a game-changer. We now process client intake 3x faster with 90% fewer errors. The ROI was evident within the first month."</p>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="flex items-center mb-4">
-                        <div class="avatar">ER</div>
-                        <div>
-                            <h4 class="font-semibold">Emily Rodriguez</h4>
-                            <p class="text-sm text-gray-500">Non-profit Director</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-600">"We automated our donor communication and grant application processes. This freed up our team to focus on mission-critical work while maintaining 100% communication consistency."</p>
                 </div>
             </div>
         </div>
@@ -461,8 +169,8 @@
 
     <!-- Footer -->
     <footer class="bg-gray-900 py-12 px-6 text-white">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div class="md:col-span-2">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
                 <h3 class="text-2xl font-bold mb-4">AI Made Simple</h3>
                 <p class="max-w-xs text-gray-400">Helping businesses harness the power of AI to automate tasks, streamline workflows, and boost productivity.</p>
             </div>
@@ -470,16 +178,14 @@
             <div>
                 <h4 class="font-semibold mb-4">Quick Links</h4>
                 <ul class="space-y-2">
-                    <li><a href="#services" class="text-gray-400 hover:text-white transition">Services</a></li>
-                    <li><a href="#benefits" class="text-gray-400 hover:text-white transition">Benefits</a></li>
-                    <li><a href="#booking" class="text-gray-400 hover:text-white transition">Consultation</a></li>
-                    <li><a href="#testimonials" class="text-gray-400 hover:text-white transition">Success Stories</a></li>
+                    <li><a href="https://whipper2469.github.io/index.html" class="text-gray-400 hover:text-white transition">Main Website</a></li>
+                    <li><a href="#booking" class="text-gray-400 hover:text-white transition">Book Consultation</a></li>
                 </ul>
             </div>
             
             <div>
-                <h4 class="font-semibold mb-4">Connect</h4>
-                <div class="flex space-x-4">
+                <h4 class="font-semibold mb-4">Contact</h4>
+                <div class="flex space-x-4 mb-4">
                     <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-indigo-600 transition">
                         <i class="fab fa-facebook-f"></i>
                     </a>
@@ -491,8 +197,7 @@
                     </a>
                 </div>
                 
-                <div class="mt-6">
-                    <h4 class="font-semibold mb-2">Contact</h4>
+                <div>
                     <p class="text-gray-400 text-sm">📞 519-589-0620</p>
                     <p class="text-gray-400 text-sm">📧 kevin.roy8@icloud.com</p>
                 </div>
@@ -561,26 +266,6 @@
                     `;
                 };
             }
-        });
-
-        // Simple form submission
-        document.querySelector('form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            
-            if (!name || !email) {
-                alert('Please fill in all required fields');
-                return;
-            }
-            
-            alert(`Thanks for your consultation request, ${name}! We'll contact you at ${email} within 2 business hours to schedule your session.`);
-            
-            // Reset form
-            document.getElementById('name').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('business').value = '';
-            document.getElementById('goals').value = '';
         });
     </script>
 
