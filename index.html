@@ -22,7 +22,41 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
+        <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const openLinks = document.querySelectorAll(".read-more");
+  const modals = document.querySelectorAll(".modal");
+
+  // Open modal
+  openLinks.forEach(link => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute("data-blog");
+      const modal = document.querySelector(`#blog-detail-${targetId}`);
+      if (modal) modal.style.display = "flex";
+    });
+  });
+
+  // Close modal when clicking X or close button
+  window.closeModal = function(id) {
+    const modal = document.getElementById(id);
+    if (modal) {
+      modal.classList.add("hide");
+      setTimeout(() => {
+        modal.style.display = "none";
+        modal.classList.remove("hide");
+      }, 250);
+    }
+  };
+
+  // Close modal when clicking outside content
+  modals.forEach(modal => {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal(modal.id);
+    });
+  });
+});
+</script>
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
@@ -109,18 +143,48 @@
             align-items: center;
         }
         
-        .modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-        }
-        
-        .external-link-modal {
-            display: none;
-        }
+        .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    padding: 2rem;
+}
+
+/* Animation keyframes */
+@keyframes fadeInZoom {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeOutZoom {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0.85); }
+}
+
+/* Modal content box */
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 700px;
+    width: 90%;
+    text-align: left;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    animation: fadeInZoom 0.3s ease-out;
+}
+.modal.hide .modal-content {
+    animation: fadeOutZoom 0.25s ease-in forwards;
+}
     </style>
 </head>
 <body class="font-sans text-gray-800 bg-gray-50">
