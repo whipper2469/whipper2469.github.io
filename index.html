@@ -117,33 +117,26 @@
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
+            position: relative;
         }
         
-        .external-link-modal {
-            display: none;
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+        }
+        
+        .close-modal:hover {
+            color: #374151;
         }
     </style>
 </head>
 <body class="font-sans text-gray-800 bg-gray-50">
-
-    <!-- External Link Confirmation Modal -->
-    <div id="externalLinkModal" class="modal">
-        <div class="modal-content">
-            <h3 class="text-xl font-semibold mb-4">Leaving AI Made Simple</h3>
-            <p class="text-gray-600 mb-6">You are about to visit an external resource. How would you like to proceed?</p>
-            <div class="flex flex-col sm:flex-row gap-3">
-                <button id="openNewTab" class="flex-1 py-3 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition">
-                    Open in New Tab
-                </button>
-                <button id="leaveSite" class="flex-1 py-3 bg-gray-300 text-gray-700 rounded-lg shadow hover:bg-gray-400 transition">
-                    Leave This Site
-                </button>
-                <button id="cancelAction" class="flex-1 py-3 bg-red-600 text-white rounded-lg shadow hover:bg-red-700 transition">
-                    Cancel
-                </button>
-            </div>
-        </div>
-    </div>
 
     <!-- Navigation -->
     <nav id="navbar" class="flex justify-between items-center py-5 px-6 md:px-12 fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent">
@@ -308,7 +301,7 @@
                         <span class="text-sm text-indigo-600 font-semibold">AI Integration</span>
                         <h3 class="text-xl font-semibold mt-2 mb-3">Using AI to Identify New Business Opportunities</h3>
                         <p class="text-gray-600 mb-4">Discover how AI can help you uncover hidden opportunities by analyzing customer behavior and market trends.</p>
-                        <a href="#blog-detail-1" class="text-indigo-600 font-semibold hover:underline read-more" data-blog="1">Read More</a>
+                        <a href="#" class="text-indigo-600 font-semibold hover:underline read-more" data-blog="1">Read More</a>
                     </div>
                 </div>
                 
@@ -318,7 +311,7 @@
                         <span class="text-sm text-indigo-600 font-semibold">Automation</span>
                         <h3 class="text-xl font-semibold mt-2 mb-3">10 Time-Saving AI Hacks for Entrepreneurs</h3>
                         <p class="text-gray-600 mb-4">Learn practical AI strategies to reclaim hours in your workweek and boost productivity.</p>
-                        <a href="#blog-detail-2" class="text-indigo-600 font-semibold hover:underline read-more" data-blog="2">Read More</a>
+                        <a href="#" class="text-indigo-600 font-semibold hover:underline read-more" data-blog="2">Read More</a>
                     </div>
                 </div>
                 
@@ -328,7 +321,7 @@
                         <span class="text-sm text-indigo-600 font-semibold">Content Marketing</span>
                         <h3 class="text-xl font-semibold mt-2 mb-3">How AI Can 10x Your Content Marketing Results</h3>
                         <p class="text-gray-600 mb-4">Discover how AI can transform your content creation and distribution strategies.</p>
-                        <a href="#blog-detail-3" class="text-indigo-600 font-semibold hover:underline read-more" data-blog="3">Read More</a>
+                        <a href="#" class="text-indigo-600 font-semibold hover:underline read-more" data-blog="3">Read More</a>
                     </div>
                 </div>
                 
@@ -338,7 +331,7 @@
                         <span class="text-sm text-indigo-600 font-semibold">Data Analytics</span>
                         <h3 class="text-xl font-semibold mt-2 mb-3">Turning Data into Decisions with AI Analytics</h3>
                         <p class="text-gray-600 mb-4">Learn how AI-driven analytics tools transform raw numbers into actionable strategies.</p>
-                        <a href="#blog-detail-4" class="text-indigo-600 font-semibold hover:underline read-more" data-blog="4">Read More</a>
+                        <a href="#" class="text-indigo-600 font-semibold hover:underline read-more" data-blog="4">Read More</a>
                     </div>
                 </div>
                 
@@ -348,7 +341,7 @@
                         <span class="text-sm text-indigo-600 font-semibold">AI Tools</span>
                         <h3 class="text-xl font-semibold mt-2 mb-3">5 AI Tools Every Small Business Needs in 2023</h3>
                         <p class="text-gray-600 mb-4">Discover the essential AI tools that can help small businesses compete with larger enterprises.</p>
-                        <a href="#blog-detail-5" class="text-indigo-600 font-semibold hover:underline read-more" data-blog="5">Read More</a>
+                        <a href="#" class="text-indigo-600 font-semibold hover:underline read-more" data-blog="5">Read More</a>
                     </div>
                 </div>
                 
@@ -358,7 +351,7 @@
                         <span class="text-sm text-indigo-600 font-semibold">Customer Service</span>
                         <h3 class="text-xl font-semibold mt-2 mb-3">How to Automate Customer Service with AI</h3>
                         <p class="text-gray-600 mb-4">Learn how AI-powered chatbots and response systems can transform your customer service.</p>
-                        <a href="#blog-detail-6" class="text-indigo-600 font-semibold hover:underline read-more" data-blog="6">Read More</a>
+                        <a href="#" class="text-indigo-600 font-semibold hover:underline read-more" data-blog="6">Read More</a>
                     </div>
                 </div>
             </div>
@@ -374,9 +367,7 @@
     <!-- Blog Detail Modals -->
     <div id="blog-detail-1" class="modal">
         <div class="modal-content">
-            <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700" onclick="closeModal('blog-detail-1')">
-                <i class="fas fa-times text-xl"></i>
-            </button>
+            <button class="close-modal" onclick="closeModal('blog-detail-1')">×</button>
             <h2 class="text-2xl font-bold mb-4">Using AI to Identify New Business Opportunities</h2>
             <div class="text-sm text-indigo-600 font-semibold mb-4">AI Integration</div>
             <p class="text-gray-600 mb-4">Artificial Intelligence can help businesses uncover hidden opportunities by analyzing customer behavior, market trends, and competitor strategies. From predictive analytics to natural language processing, AI enables entrepreneurs to validate ideas faster and spot areas for growth before the competition.</p>
@@ -400,9 +391,7 @@
 
     <div id="blog-detail-2" class="modal">
         <div class="modal-content">
-            <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700" onclick="closeModal('blog-detail-2')">
-                <i class="fas fa-times text-xl"></i>
-            </button>
+            <button class="close-modal" onclick="closeModal('blog-detail-2')">×</button>
             <h2 class="text-2xl font-bold mb-4">10 Time-Saving AI Hacks for Entrepreneurs</h2>
             <div class="text-sm text-indigo-600 font-semibold mb-4">Automation</div>
             <p class="text-gray-600 mb-4">Running a business is demanding, but AI can automate the tasks that drain your time. From drafting emails and scheduling social media posts to generating proposals and handling repetitive workflows, AI lets you focus on strategy instead of busywork.</p>
@@ -427,9 +416,7 @@
 
     <div id="blog-detail-3" class="modal">
         <div class="modal-content">
-            <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700" onclick="closeModal('blog-detail-3')">
-                <i class="fas fa-times text-xl"></i>
-            </button>
+            <button class="close-modal" onclick="closeModal('blog-detail-3')">×</button>
             <h2 class="text-2xl font-bold mb-4">How AI Can 10x Your Content Marketing Results</h2>
             <div class="text-sm text-indigo-600 font-semibold mb-4">Content Marketing</div>
             <p class="text-gray-600 mb-4">AI is a game-changer for content creation and distribution. It can generate blog drafts, suggest headlines, repurpose content across platforms, and even predict what type of content will resonate most with your audience.</p>
@@ -454,9 +441,7 @@
 
     <div id="blog-detail-4" class="modal">
         <div class="modal-content">
-            <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700" onclick="closeModal('blog-detail-4')">
-                <i class="fas fa-times text-xl"></i>
-            </button>
+            <button class="close-modal" onclick="closeModal('blog-detail-4')">×</button>
             <h2 class="text-2xl font-bold mb-4">Turning Data into Decisions with AI Analytics</h2>
             <div class="text-sm text-indigo-600 font-semibold mb-4">Data Analytics</div>
             <p class="text-gray-600 mb-4">Data is useless without insights. AI-driven analytics tools transform raw numbers into actionable strategies. They can identify patterns, predict outcomes, and give entrepreneurs a real-time view of their business performance.</p>
@@ -479,8 +464,6 @@
         </div>
     </div>
 
-    <!-- Additional blog modals would go here -->
-
     <!-- Community Section -->
     <section id="community" class="py-20 px-6 bg-gradient-to-br from-indigo-50 to-purple-50">
         <div class="max-w-4xl mx-auto">
@@ -492,7 +475,7 @@
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Join Our AI Architects Community</h2>
                 <p class="text-lg mb-6 max-w-2xl mx-auto">The first 100 people to join our Skool community will get free lifetime access!</p>
                 <p class="mb-8">Connect with like-minded entrepreneurs and AI enthusiasts who are helping each other grow businesses and start new ventures.</p>
-                <a href="https://www.skool.com/ai-architects-8165" class="external-link inline-flex items-center px-8 py-4 bg-white text-indigo-600 font-bold rounded-full shadow-lg hover:bg-gray-100 transition text-lg" data-url="https://www.skool.com/ai-architects-8165">
+                <a href="https://www.skool.com/ai-architects-8165" class="inline-flex items-center px-8 py-4 bg-white text-indigo-600 font-bold rounded-full shadow-lg hover:bg-gray-100 transition text-lg">
                     <i class="fas fa-rocket mr-2"></i> Join Now - Free for First 100
                 </a>
             </div>
@@ -622,8 +605,6 @@
         const menuBtn = document.getElementById("menu-btn");
         const mobileMenu = document.getElementById("mobile-menu");
         const navbar = document.getElementById("navbar");
-        const externalLinkModal = document.getElementById("externalLinkModal");
-        let currentExternalLink = "";
 
         menuBtn.addEventListener("click", () => {
             mobileMenu.classList.toggle("open");
@@ -680,29 +661,6 @@
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
         }
-
-        // External link handling
-        document.querySelectorAll('.external-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                currentExternalLink = this.getAttribute('data-url');
-                externalLinkModal.style.display = 'flex';
-            });
-        });
-
-        // External link modal actions
-        document.getElementById('openNewTab').addEventListener('click', function() {
-            window.open(currentExternalLink, '_blank');
-            externalLinkModal.style.display = 'none';
-        });
-
-        document.getElementById('leaveSite').addEventListener('click', function() {
-            window.location.href = currentExternalLink;
-        });
-
-        document.getElementById('cancelAction').addEventListener('click', function() {
-            externalLinkModal.style.display = 'none';
-        });
 
         // Close modal when clicking outside
         window.addEventListener('click', function(e) {
