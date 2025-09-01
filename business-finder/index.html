@@ -1,1 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waterloo-Guelph Business Finder</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --success: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --waterloo: #ff6b6b;
+            --guelph: #06d6a0;
+        }
+        
+        body {
+            background-color: #f0f4f8;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(67, 97, 238, 0.8), rgba(58, 12, 163, 0.8)), url('https://images.unsplash.com/photo-1519003303723-5a0402d0bf87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+        }
+        
+        .search-box {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: -50px;
+            position: relative;
+            z-index: 100;
+        }
+        
+        .business-card {
+            transition: transform 0.3s;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+            height: 100%;
+            border: none;
+        }
+        
+        .business-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .rating {
+            color: #ffc107;
+        }
+        
+        .badge-danger {
+            background-color: #ff6b6b;
+        }
+        
+        .badge-warning {
+            background-color: #ffd166;
+        }
+        
+        .badge-success {
+            background-color: #06d6a0;
+        }
+        
+        .progress {
+            height: 8px;
+        }
+        
+        .stats-box {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .stats-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        #map {
+            height: 400px;
+            border-radius: 12px;
+            z-index: 10;
+        }
+        
+        .legend {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.7;
+        }
+        
+        .city-marker {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        
+        .waterloo-marker {
+            background-color: var(--waterloo);
+        }
+        
+        .guelph-marker {
+            background-color: var(--guelph);
+        }
+        
+        .business-marker {
+            background-color: var(--primary);
+        }
+        
+        .back-to-home {
+            position: absolute;
+            left: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand back-to-home" href="../">
+                <i class="fas fa-arrow-left me-2"></i>Back to Portfolio
+            </a>
+            <a class="navbar-brand mx-auto" href="#">
+                <i class="fas fa-chart-line me-2"></i>
+                Waterloo-Guelph Business Finder
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#map-section">Map</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold">Find Businesses Between Waterloo & Guelph</h1>
+            <p class="lead">Discover local businesses with poor online presence, bad reviews, or no website in the Waterloo-Guelph corridor</p>
+            <button class="btn btn-light btn-lg px-4 mt-3" id="demoBtn">
+                <i class="fas fa-play me-2"></i> View Demo
+            </button>
+        </div>
+    </section>
+
+    <!-- Search Box -->
+    <div class="container">
+        <div class="search-box">
+            <h3 class="mb-4">Find Business Opportunities</h3>
+            <div class="row">
+                <div class="col-md-5 mb-3">
+                    <label class="form-label">Location Range</label>
+                    <div class="d-flex align-items-center">
+                        <span class="city-marker waterloo-marker"></span>
+                        <span class="me-2">Waterloo</span>
+                        <i class="fas fa-arrow-right me-2"></i>
+                        <span class="city-marker guelph-marker"></span>
+                        <span>Guelph</span>
+                    </div>
+                    <input type="range" class="form-range mt-2" id="rangeSlider" min="0" max="100" value="50">
+                    <div class="d-flex justify-content-between">
+                        <small>Waterloo</small>
+                        <small>Cambridge</small>
+                        <small>Guelph</small>
+                    </div>
+                </div>
+                <div class="col-md-5 mb-3">
+                    <label class="form-label">Business Category</label>
+                    <select class="form-select" id="categorySelect">
+                        <option selected>All Categories</option>
+                        <option>Restaurants</option>
+                        <option>Retail Stores</option>
+                        <option>Healthcare</option>
+                        <option>Professional Services</option>
+                        <option>Home Services</option>
+                    </select>
+                </div>
+                <div class="col-md-2 mb-3 d-flex align-items-end">
+                    <button class="btn btn-primary w-100" id="searchBtn">
+                        <i class="fas fa-search me-2"></i> Search
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="noWebsite" checked>
+                        <label class="form-check-label" for="noWebsite">
+                            No Website
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="badReviews" checked>
+                        <label class="form-check-label" for="badReviews">
+                            Bad Reviews (< 3 stars)
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="poorSEO" checked>
+                        <label class="form-check-label" for="poorSEO">
+                            Poor SEO
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
+    <section class="container mt-5">
+        <h2 class="section-title">Potential Opportunities in the Region</h2>
+        <div class="row">
+            <div class="col-md-3 col-6">
+                <div class="stats-box">
+                    <i class="fas fa-building fs-1 text-primary mb-3"></i>
+                    <h3 class="stats-number">87</h3>
+                    <p>Businesses with No Website</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stats-box">
+                    <i class="fas fa-star-half-alt fs-1 text-primary mb-3"></i>
+                    <h3 class="stats-number">112</h3>
+                    <p>Businesses with Bad Reviews</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stats-box">
+                    <i class="fas fa-search fs-1 text-primary mb-3"></i>
+                    <h3 class="stats-number">156</h3>
+                    <p>Businesses with Poor SEO</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stats-box">
+                    <i class="fas fa-chart-line fs-1 text-primary mb-3"></i>
+                    <h3 class="stats-number">73</h3>
+                    <p>High Potential Leads</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="container mt-5" id="map-section">
+        <h2 class="section-title">Business Locations</h2>
+        <div class="row">
+            <div class="col-md-8">
+                <div id="map"></div>
+            </div>
+            <div class="col-md-4">
+                <div class="card business-card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Region Overview</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Waterloo-Guelph Corridor</h6>
+                        <p>This region includes:</p>
+                        <ul>
+                            <li>Waterloo - Technology hub with many small businesses</li>
+                            <li>Kitchener - Diverse business community</li>
+                            <li>Cambridge - Manufacturing and retail focus</li>
+                            <li>Guelph - Growing entrepreneurial ecosystem</li>
+                        </ul>
+                        <div class="legend mb-3">
+                            <h6>Map Legend</h6>
+                            <div><i class="city-marker waterloo-marker"></i> Waterloo</div>
+                            <div><i class="city-marker guelph-marker"></i> Guelph</div>
+                            <div><i class="city-marker business-marker"></i> Target Businesses</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="container mt-5">
+        <h2 class="section-title">Recommended Businesses</h2>
+        <div class="row" id="businessResults">
+            <!-- Business cards will be generated here -->
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="container mt-5" id="how-it-works">
+        <h2 class="section-title">How It Works</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm business-card">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-primary rounded-circle p-3 d-inline-block mb-3">
+                            <i class="fas fa-search text-white fs-2"></i>
+                        </div>
+                        <h4>1. Scan</h4>
+                        <p>Our system scans local business directories, review sites, and search engines to identify businesses with poor online presence.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm business-card">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-primary rounded-circle p-3 d-inline-block mb-3">
+                            <i class="fas fa-chart-bar text-white fs-2"></i>
+                        </div>
+                        <h4>2. Analyze</h4>
+                        <p>We analyze each business's website quality, review ratings, SEO performance, and social media presence.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm business-card">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-primary rounded-circle p-3 d-inline-block mb-3">
+                            <i class="fas fa-envelope-open-text text-white fs-2"></i>
+                        </div>
+                        <h4>3. Contact</h4>
+                        <p>Get a curated list of businesses that need your services, complete with contact information and specific areas for improvement.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-5" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>Waterloo-Guelph Business Finder</h5>
+                    <p>Helping web developers and digital marketers find businesses that need their services to grow in the Waterloo-Guelph region.</p>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none">Home</a></li>
+                        <li><a href="#how-it-works" class="text-white text-decoration-none">How It Works</a></li>
+                        <li><a href="#map-section" class="text-white text-decoration-none">Map</a></li>
+                        <li><a href="#contact" class="text-white text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope me-2"></i> info@waterlooguelphfinder.ca</li>
+                        <li><i class="fas fa-phone me-2"></i> (519) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> Kitchener, ON</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Subscribe</h5>
+                    <p>Get updates on new business leads</p>
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Your email">
+                        <button class="btn btn-primary">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center py-3">
+                <p class="mb-0">&copy; 2023 Waterloo-Guelph Business Finder. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Sample business data for Waterloo to Guelph region
+        const businesses = [
+            {
+                name: "Joe's Diner",
+                category: "Restaurant",
+                address: "123 King St, Waterloo",
+                rating: 2.5,
+                reviews: 23,
+                website: "None",
+                issues: ["No website", "Bad reviews", "Poor SEO"],
+                potential: 78,
+                lat: 43.4643,
+                lng: -80.5204
+            },
+            {
+                name: "City Hardware",
+                category: "Retail",
+                address: "456 Queen St, Kitchener",
+                rating: 2.8,
+                reviews: 34,
+                website: "cityhardware.com (Poor)",
+                issues: ["Outdated website", "Bad reviews"],
+                potential: 65,
+                lat: 43.4516,
+                lng: -80.4925
+            },
+            {
+                name: "Bloom Salon",
+                category: "Beauty",
+                address: "789 Weber St, Waterloo",
+                rating: 3.1,
+                reviews: 42,
+                website: "None",
+                issues: ["No website", "Poor social media"],
+                potential: 82,
+                lat: 43.4773,
+                lng: -80.5234
+            },
+            {
+                name: "Metro Auto Repair",
+                category: "Automotive",
+                address: "321 Hespeler Rd, Cambridge",
+                rating: 2.3,
+                reviews: 29,
+                website: "metroautony.com (Bad)",
+                issues: ["Bad website", "Bad reviews", "No SEO"],
+                potential: 71,
+                lat: 43.3975,
+                lng: -80.3115
+            },
+            {
+                name: "Sunrise Cafe",
+                category: "Restaurant",
+                address: "654 Gordon St, Guelph",
+                rating: 4.2,
+                reviews: 56,
+                website: "sunrisecafeny.com (Good)",
+                issues: ["Poor SEO", "No online ordering"],
+                potential: 59,
+                lat: 43.5250,
+                lng: -80.2294
+            },
+            {
+                name: "Tech Solutions",
+                category: "Services",
+                address: "987 Victoria Rd, Guelph",
+                rating: 2.7,
+                reviews: 18,
+                website: "None",
+                issues: ["No website", "Bad reviews", "No online presence"],
+                potential: 85,
+                lat: 43.5448,
+                lng: -80.2482
+            },
+            {
+                name: "Cambridge Books",
+                category: "Retail",
+                address: "123 Main St, Cambridge",
+                rating: 3.8,
+                reviews: 31,
+                website: "None",
+                issues: ["No website", "Poor online visibility"],
+                potential: 76,
+                lat: 43.3616,
+                lng: -80.3144
+            },
+            {
+                name: "Waterloo Watches",
+                category: "Retail",
+                address: "456 University Ave, Waterloo",
+                rating: 2.9,
+                reviews: 27,
+                website: "waterloowatches.com (Outdated)",
+                issues: ["Outdated website", "No e-commerce"],
+                potential: 68,
+                lat: 43.4723,
+                lng: -80.5449
+            }
+        ];
+
+        // Initialize map
+        function initMap() {
+            // Create map centered on the Waterloo-Guelph region
+            const map = L.map('map').setView([43.431, -80.377], 10);
+            
+            // Add OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            
+            // Add city markers
+            const waterlooMarker = L.marker([43.4643, -80.5204]).addTo(map)
+                .bindPopup('<b>Waterloo</b><br>Technology hub with many small businesses');
+                
+            const kitchenerMarker = L.marker([43.4516, -80.4925]).addTo(map)
+                .bindPopup('<b>Kitchener</b><br>Diverse business community');
+                
+            const cambridgeMarker = L.marker([43.3616, -80.3144]).addTo(map)
+                .bindPopup('<b>Cambridge</b><br>Manufacturing and retail focus');
+                
+            const guelphMarker = L.marker([43.5448, -80.2482]).addTo(map)
+                .bindPopup('<b>Guelph</b><br>Growing entrepreneurial ecosystem');
+            
+            // Add business markers
+            businesses.forEach(business => {
+                const marker = L.marker([business.lat, business.lng]).addTo(map);
+                marker.bindPopup(`
+                    <b>${business.name}</b><br>
+                    ${business.category}<br>
+                    Rating: ${business.rating}/5<br>
+                    Issues: ${business.issues.join(', ')}
+                `);
+            });
+            
+            // Add a line connecting Waterloo and Guelph
+            const points = [
+                [43.4643, -80.5204], // Waterloo
+                [43.4516, -80.4925], // Kitchener
+                [43.3616, -80.3144], // Cambridge
+                [43.5448, -80.2482]  // Guelph
+            ];
+            
+            const polyline = L.polyline(points, {
+                color: '#4361ee',
+                weight: 3,
+                opacity: 0.7,
+                dashArray: '10, 10'
+            }).addTo(map);
+        }
+
+        // Function to generate star ratings
+        function generateStars(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= Math.floor(rating)) {
+                    stars += '<i class="fas fa-star rating"></i>';
+                } else if (i === Math.ceil(rating) && !Number.isInteger(rating)) {
+                    stars += '<i class="fas fa-star-half-alt rating"></i>';
+                } else {
+                    stars += '<i class="far fa-star rating"></i>';
+                }
+            }
+            return stars;
+        }
+
+        // Function to display businesses
+        function displayBusinesses() {
+            const resultsContainer = document.getElementById('businessResults');
+            resultsContainer.innerHTML = '';
+            
+            const categoryFilter = document.getElementById('categorySelect').value;
+            const noWebsite = document.getElementById('noWebsite').checked;
+            const badReviews = document.getElementById('badReviews').checked;
+            const poorSEO = document.getElementById('poorSEO').checked;
+            
+            const filteredBusinesses = businesses.filter(business => {
+                if (categoryFilter !== 'All Categories' && business.category !== categoryFilter) {
+                    return false;
+                }
+                
+                if (noWebsite && !business.issues.some(issue => issue.includes('website'))) {
+                    return false;
+                }
+                
+                if (badReviews && business.rating >= 3) {
+                    return false;
+                }
+                
+                if (poorSEO && !business.issues.some(issue => issue.includes('SEO'))) {
+                    return false;
+                }
+                
+                return true;
+            });
+            
+            if (filteredBusinesses.length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-search fs-1 text-muted mb-3"></i>
+                        <h3>No businesses match your criteria</h3>
+                        <p class="text-muted">Try adjusting your filters to see more results</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            filteredBusinesses.forEach(business => {
+                const issuesHTML = business.issues.map(issue => 
+                    `<span class="badge badge-danger me-1 mb-1">${issue}</span>`
+                ).join('');
+                
+                const businessCard = `
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card business-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">${business.name}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">${business.category}</h6>
+                                <p class="card-text">
+                                    <i class="fas fa-map-marker-alt me-2"></i>${business.address}
+                                </p>
+                                <div class="mb-2">
+                                    ${generateStars(business.rating)} 
+                                    <span class="ms-1">${business.rating}/5 (${business.reviews} reviews)</span>
+                                </div>
+                                <p class="card-text">
+                                    <strong>Website:</strong> ${business.website}
+                                </p>
+                                <div class="mb-3">
+                                    ${issuesHTML}
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span><strong>Potential:</strong> ${business.potential}%</span>
+                                    <button class="btn btn-sm btn-outline-primary">Contact</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                resultsContainer.innerHTML += businessCard;
+            });
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            initMap();
+            displayBusinesses();
+            
+            // Add event listener to search button
+            document.getElementById('searchBtn').addEventListener('click', function() {
+                const resultsContainer = document.getElementById('businessResults');
+                resultsContainer.innerHTML = `
+                    <div class="col-12 text-center py-4">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">Scanning for businesses with poor online presence...</p>
+                    </div>
+                `;
+                
+                setTimeout(() => {
+                    displayBusinesses();
+                }, 1500);
+            });
+            
+            // Demo button
+            document.getElementById('demoBtn').addEventListener('click', function() {
+                document.getElementById('noWebsite').checked = true;
+                document.getElementById('badReviews').checked = true;
+                document.getElementById('poorSEO').checked = true;
+                document.getElementById('categorySelect').value = 'All Categories';
+                
+                const event = new Event('click');
+                document.getElementById('searchBtn').dispatchEvent(event);
+                
+                // Scroll to results
+                document.getElementById('businessResults').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
