@@ -140,7 +140,7 @@
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://www.jacksfamilyrestaurant.ca/images/slider/slide-1.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -209,7 +209,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80') center/cover fixed;
+            background: url('https://www.jacksfamilyrestaurant.ca/images/bg/pattern.jpg') center/cover fixed;
             opacity: 0.1;
             z-index: 0;
         }
@@ -258,7 +258,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80') center/cover fixed;
+            background: url('https://www.jacksfamilyrestaurant.ca/images/bg/pattern.jpg') center/cover fixed;
             opacity: 0.1;
             z-index: 0;
         }
@@ -325,7 +325,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80') center/cover fixed;
+            background: url('https://www.jacksfamilyrestaurant.ca/images/bg/pattern.jpg') center/cover fixed;
             opacity: 0.1;
             z-index: 0;
         }
@@ -374,30 +374,30 @@
             border-bottom: 1px dashed #ccc;
         }
         
-        /* Testimonials */
-        .testimonials {
+        /* Specials */
+        .specials {
             background: linear-gradient(to right, var(--primary), var(--dark));
             color: white;
             position: relative;
             overflow: hidden;
         }
         
-        .testimonials-bg {
+        .specials-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80') center/cover fixed;
+            background: url('https://www.jacksfamilyrestaurant.ca/images/bg/pattern.jpg') center/cover fixed;
             opacity: 0.1;
             z-index: 0;
         }
         
-        .testimonials .section-title h2 {
+        .specials .section-title h2 {
             color: white;
         }
         
-        .testimonial-grid {
+        .specials-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
@@ -405,7 +405,7 @@
             z-index: 1;
         }
         
-        .testimonial {
+        .special-item {
             background: rgba(255, 255, 255, 0.1);
             padding: 30px;
             border-radius: 10px;
@@ -413,21 +413,25 @@
             transition: var(--transition);
             transform: scale(0.9);
             opacity: 0;
+            text-align: center;
         }
         
-        .testimonial.visible {
+        .special-item.visible {
             transform: scale(1);
             opacity: 1;
         }
         
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 20px;
+        .special-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
         }
         
-        .testimonial-author {
-            font-weight: 600;
-            text-align: right;
+        .special-item h3 {
+            color: var(--accent);
+            margin-bottom: 10px;
         }
         
         /* Footer */
@@ -522,6 +526,16 @@
             font-size: 0.9rem;
         }
         
+        /* Mobile Navigation */
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+        }
+        
         /* Responsive */
         @media (max-width: 992px) {
             .about-content {
@@ -542,12 +556,49 @@
                 display: none;
             }
             
+            .mobile-menu-btn {
+                display: block;
+            }
+            
             .hero {
                 height: 80vh;
             }
             
             .hero h1 {
                 font-size: 2.5rem;
+            }
+            
+            .mobile-nav {
+                position: fixed;
+                top: 90px;
+                left: 0;
+                width: 100%;
+                background: white;
+                box-shadow: var(--shadow);
+                padding: 20px;
+                z-index: 999;
+                transform: translateY(-100%);
+                transition: var(--transition);
+            }
+            
+            .mobile-nav.active {
+                transform: translateY(0);
+            }
+            
+            .mobile-nav ul {
+                list-style: none;
+            }
+            
+            .mobile-nav ul li {
+                margin-bottom: 15px;
+            }
+            
+            .mobile-nav ul li a {
+                color: var(--dark);
+                font-weight: 600;
+                display: block;
+                padding: 10px 0;
+                border-bottom: 1px solid #eee;
             }
         }
     </style>
@@ -557,6 +608,7 @@
     <header>
         <div class="container header-container">
             <div class="logo">
+                <img src="https://www.jacksfamilyrestaurant.ca/images/logo.png" alt="Jack's Family Restaurant">
                 <span class="logo-text">Jack's Family Restaurant</span>
             </div>
             <nav>
@@ -564,12 +616,28 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#menu">Menu</a></li>
+                    <li><a href="#specials">Specials</a></li>
                     <li><a href="#hours">Hours</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#specials">Specials</a></li>
+            <li><a href="#hours">Hours</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -595,7 +663,7 @@
                     <a href="#hours" class="btn">Visit Us</a>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1771&q=80" alt="Jack's Restaurant Interior">
+                    <img src="https://www.jacksfamilyrestaurant.ca/images/gallery/restaurant.jpg" alt="Jack's Restaurant Interior">
                 </div>
             </div>
         </div>
@@ -610,32 +678,59 @@
             </div>
             <div class="menu-grid">
                 <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=80" alt="Classic Burger">
+                    <img src="https://www.jacksfamilyrestaurant.ca/images/menu/breakfast.jpg" alt="Breakfast">
                     <div class="menu-item-content">
-                        <h3>Classic Jack's Burger</h3>
-                        <p>1/2 lb beef patty with lettuce, tomato, onion, and our special sauce</p>
-                        <div class="price">$14.99</div>
+                        <h3>Breakfast Favorites</h3>
+                        <p>Start your day right with our hearty breakfast options including pancakes, eggs, bacon, and more</p>
+                        <a href="https://www.jacksfamilyrestaurant.ca/menus/breakfast-menu.pdf" class="btn">View Breakfast Menu</a>
                     </div>
                 </div>
                 <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1527515862127-a3c754b7f36a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Blueberry Pancakes">
+                    <img src="https://www.jacksfamilyrestaurant.ca/images/menu/lunch.jpg" alt="Lunch">
                     <div class="menu-item-content">
-                        <h3>Blueberry Pancakes</h3>
-                        <p>Fluffy buttermilk pancakes loaded with fresh blueberries</p>
-                        <div class="price">$11.99</div>
+                        <h3>Lunch Specials</h3>
+                        <p>Enjoy our delicious lunch options including sandwiches, soups, salads, and daily specials</p>
+                        <a href="https://www.jacksfamilyrestaurant.ca/menus/lunch-menu.pdf" class="btn">View Lunch Menu</a>
                     </div>
                 </div>
                 <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Meatloaf Dinner">
+                    <img src="https://www.jacksfamilyrestaurant.ca/images/menu/dinner.jpg" alt="Dinner">
                     <div class="menu-item-content">
-                        <h3>Homemade Meatloaf</h3>
-                        <p>Grandma's recipe served with mashed potatoes and gravy</p>
-                        <div class="price">$16.99</div>
+                        <h3>Dinner Entrees</h3>
+                        <p>From steak to seafood, pasta to ribs, our dinner menu has something for everyone</p>
+                        <a href="https://www.jacksfamilyrestaurant.ca/menus/dinner-menu.pdf" class="btn">View Dinner Menu</a>
                     </div>
                 </div>
             </div>
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="#" class="btn">View Full Menu</a>
+        </div>
+    </section>
+
+    <!-- Specials Section -->
+    <section class="specials" id="specials">
+        <div class="specials-bg"></div>
+        <div class="container">
+            <div class="section-title">
+                <h2>Weekly Specials</h2>
+            </div>
+            <div class="specials-grid">
+                <div class="special-item">
+                    <img src="https://www.jacksfamilyrestaurant.ca/images/specials/ribs.jpg" alt="BBQ Ribs">
+                    <h3>BB Ribs</h3>
+                    <p>Our famous fall-off-the-bone ribs, slow cooked to perfection and smothered in homemade BBQ sauce. Served with fries and coleslaw.</p>
+                    <div class="price">$18.99</div>
+                </div>
+                <div class="special-item">
+                    <img src="https://www.jacksfamilyrestaurant.ca/images/specials/pasta.jpg" alt="Pasta Special">
+                    <h3>Pasta Night</h3>
+                    <p>Every Thursday enjoy our homemade pasta with your choice of sauce. Includes garlic bread and salad.</p>
+                    <div class="price">$14.99</div>
+                </div>
+                <div class="special-item">
+                    <img src="https://www.jacksfamilyrestaurant.ca/images/specials/fish.jpg" alt="Fish Fry">
+                    <h3>Friday Fish Fry</h3>
+                    <p>Beer-battered haddock with french fries, coleslaw, and tartar sauce. A Friday tradition!</p>
+                    <div class="price">$16.99</div>
+                </div>
             </div>
         </div>
     </section>
@@ -660,38 +755,11 @@
                 <div class="location">
                     <h3>Find Us</h3>
                     <p>123 Main Street<br>Anytown, ON A1B 2C3</p>
-                    <p><strong>Phone:</strong> (123) 456-7890</p>
-                    <p><strong>Email:</strong> info@jacksfamilyrestaurant.ca</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="testimonials">
-        <div class="testimonials-bg"></div>
-        <div class="container">
-            <div class="section-title">
-                <h2>What Our Customers Say</h2>
-            </div>
-            <div class="testimonial-grid">
-                <div class="testimonial">
-                    <div class="testimonial-text">
-                        "Jack's has the best breakfast in town! Their pancakes are fluffy, their bacon is crispy, and the coffee is always fresh. A Saturday morning staple for our family."
+                    <p><strong>Phone:</strong> <a href="tel:1234567890">(123) 456-7890</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:info@jacksfamilyrestaurant.ca">info@jacksfamilyrestaurant.ca</a></p>
+                    <div class="map" style="margin-top: 20px;">
+                        <a href="https://goo.gl/maps/example" class="btn">Get Directions</a>
                     </div>
-                    <div class="testimonial-author">- Sarah M.</div>
-                </div>
-                <div class="testimonial">
-                    <div class="testimonial-text">
-                        "I've been coming to Jack's for over 15 years. The meatloaf reminds me of my mother's cooking. Consistent quality and friendly service every time."
-                    </div>
-                    <div class="testimonial-author">- Robert T.</div>
-                </div>
-                <div class="testimonial">
-                    <div class="testimonial-text">
-                        "The burgers are incredible! Fresh ingredients, perfectly cooked, and the fries are crispy and seasoned just right. My favorite lunch spot!"
-                    </div>
-                    <div class="testimonial-author">- Michael K.</div>
                 </div>
             </div>
         </div>
@@ -705,9 +773,9 @@
                     <a href="#" class="footer-logo">Jack's Family Restaurant</a>
                     <p>Home-style cooking with a warm, friendly atmosphere. Serving breakfast, lunch, and dinner daily.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://facebook.com/jacksfamilyrestaurant"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://instagram.com/jacksfamilyrestaurant"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/jacksfamilyrestaurant"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
                 <div class="footer-links">
@@ -716,6 +784,7 @@
                         <li><a href="#home">Home</a></li>
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#menu">Menu</a></li>
+                        <li><a href="#specials">Specials</a></li>
                         <li><a href="#hours">Hours & Location</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
@@ -724,7 +793,7 @@
                     <h3>Stay Updated</h3>
                     <p>Subscribe to our newsletter for special offers and updates</p>
                     <form class="newsletter-form">
-                        <input type="email" placeholder="Your Email Address">
+                        <input type="email" placeholder="Your Email Address" required>
                         <button type="submit"><i class="fas fa-paper-plane"></i></button>
                     </form>
                 </div>
@@ -741,7 +810,22 @@
             const menuItems = document.querySelectorAll('.menu-item');
             const hours = document.querySelector('.hours');
             const location = document.querySelector('.location');
-            const testimonials = document.querySelectorAll('.testimonial');
+            const specialItems = document.querySelectorAll('.special-item');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileNav = document.querySelector('.mobile-nav');
+            
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileNav.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking on links
+            const mobileLinks = document.querySelectorAll('.mobile-nav a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileNav.classList.remove('active');
+                });
+            });
             
             // Function to check if element is in viewport
             function isInViewport(element) {
@@ -749,7 +833,7 @@
                 return (
                     rect.top >= 0 &&
                     rect.left >= 0 &&
-                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) * 1.2 &&
                     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
                 );
             }
@@ -762,17 +846,17 @@
                     }
                 });
                 
-                if (isInViewport(hours)) {
+                if (hours && isInViewport(hours)) {
                     hours.classList.add('visible');
                 }
                 
-                if (isInViewport(location)) {
+                if (location && isInViewport(location)) {
                     location.classList.add('visible');
                 }
                 
-                testimonials.forEach(testimonial => {
-                    if (isInViewport(testimonial)) {
-                        testimonial.classList.add('visible');
+                specialItems.forEach(item => {
+                    if (isInViewport(item)) {
+                        item.classList.add('visible');
                     }
                 });
             }
@@ -782,6 +866,24 @@
             
             // Listen for scroll events
             window.addEventListener('scroll', handleScroll);
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 90,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
         });
     </script>
 </body>
