@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jack's Family Restaurant - Home Style Cooking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #8B0000;
+            --secondary: #333333;
+            --accent: #FFD700;
+            --light: #F5F5DC;
+            --dark: #222222;
+            --text: #2C3E50;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: var(--accent);
+            color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+        }
+        
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: var(--primary);
+            margin-left: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: var(--dark);
+            font-weight: 600;
+            position: relative;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-top: 90px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        /* About */
+        .about {
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80') center/cover fixed;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transform: perspective(1000px) rotateY(10deg);
+            transition: var(--transition);
+        }
+        
+        .about-image:hover {
+            transform: perspective(1000px) rotateY(0);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            transition: var(--transition);
+        }
+        
+        /* Menu */
+        .menu {
+            background-color: var(--light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .menu-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80') center/cover fixed;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .menu-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            transform: translateY(50px);
+            opacity: 0;
+        }
+        
+        .menu-item.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .menu-item-content {
+            padding: 20px;
+        }
+        
+        .menu-item h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .price {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+        
+        /* Hours & Location */
+        .hours-location {
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hours-location-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80') center/cover fixed;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .info-container {
+            display: flex;
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hours, .location {
+            flex: 1;
+            background: var(--light);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            transform: translateX(-50px);
+            opacity: 0;
+        }
+        
+        .location {
+            transform: translateX(50px);
+        }
+        
+        .hours.visible, .location.visible {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .hours h3, .location h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .hours-list {
+            list-style: none;
+        }
+        
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ccc;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            background: linear-gradient(to right, var(--primary), var(--dark));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonials-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80') center/cover fixed;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .testimonials .section-title h2 {
+            color: white;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            transition: var(--transition);
+            transform: scale(0.9);
+            opacity: 0;
+        }
+        
+        .testimonial.visible {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            text-align: right;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+        }
+        
+        .footer-links h3, .footer-newsletter h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links ul li a {
+            color: #ccc;
+        }
+        
+        .footer-links ul li a:hover {
+            color: var(--accent);
+        }
+        
+        .footer-newsletter p {
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+        
+        .newsletter-form {
+            display: flex;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+        }
+        
+        .newsletter-form button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .info-container {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+            
+            .hero {
+                height: 80vh;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <span class="logo-text">Jack's Family Restaurant</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#hours">Hours</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>Jack's Family Restaurant</h1>
+            <p>Home-style cooking with a warm, friendly atmosphere. Serving breakfast, lunch, and dinner daily with the freshest ingredients.</p>
+            <a href="#menu" class="btn">View Our Menu</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-bg"></div>
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Story</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Since 1985, Jack's Family Restaurant has been serving delicious home-style meals to the community. What started as a small diner with just ten tables has grown into a local favorite, but we've never lost our commitment to quality and friendly service.</p>
+                    <p>Our recipes come from generations of family cooking, with each dish prepared fresh daily. We source locally whenever possible, supporting our community farmers and producers.</p>
+                    <p>At Jack's, we believe that good food brings people together. That's why we've created a warm, welcoming atmosphere where families can gather, friends can catch up, and everyone leaves feeling satisfied.</p>
+                    <a href="#hours" class="btn">Visit Us</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1771&q=80" alt="Jack's Restaurant Interior">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="menu-bg"></div>
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Menu</h2>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=80" alt="Classic Burger">
+                    <div class="menu-item-content">
+                        <h3>Classic Jack's Burger</h3>
+                        <p>1/2 lb beef patty with lettuce, tomato, onion, and our special sauce</p>
+                        <div class="price">$14.99</div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1527515862127-a3c754b7f36a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Blueberry Pancakes">
+                    <div class="menu-item-content">
+                        <h3>Blueberry Pancakes</h3>
+                        <p>Fluffy buttermilk pancakes loaded with fresh blueberries</p>
+                        <div class="price">$11.99</div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Meatloaf Dinner">
+                    <div class="menu-item-content">
+                        <h3>Homemade Meatloaf</h3>
+                        <p>Grandma's recipe served with mashed potatoes and gravy</p>
+                        <div class="price">$16.99</div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#" class="btn">View Full Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Location -->
+    <section class="hours-location" id="hours">
+        <div class="hours-location-bg"></div>
+        <div class="container">
+            <div class="section-title">
+                <h2>Hours & Location</h2>
+            </div>
+            <div class="info-container">
+                <div class="hours">
+                    <h3>Opening Hours</h3>
+                    <ul class="hours-list">
+                        <li><span>Monday - Thursday</span> <span>7:00 AM - 9:00 PM</span></li>
+                        <li><span>Friday</span> <span>7:00 AM - 10:00 PM</span></li>
+                        <li><span>Saturday</span> <span>8:00 AM - 10:00 PM</span></li>
+                        <li><span>Sunday</span> <span>8:00 AM - 8:00 PM</span></li>
+                    </ul>
+                </div>
+                <div class="location">
+                    <h3>Find Us</h3>
+                    <p>123 Main Street<br>Anytown, ON A1B 2C3</p>
+                    <p><strong>Phone:</strong> (123) 456-7890</p>
+                    <p><strong>Email:</strong> info@jacksfamilyrestaurant.ca</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="testimonials-bg"></div>
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Customers Say</h2>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "Jack's has the best breakfast in town! Their pancakes are fluffy, their bacon is crispy, and the coffee is always fresh. A Saturday morning staple for our family."
+                    </div>
+                    <div class="testimonial-author">- Sarah M.</div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "I've been coming to Jack's for over 15 years. The meatloaf reminds me of my mother's cooking. Consistent quality and friendly service every time."
+                    </div>
+                    <div class="testimonial-author">- Robert T.</div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "The burgers are incredible! Fresh ingredients, perfectly cooked, and the fries are crispy and seasoned just right. My favorite lunch spot!"
+                    </div>
+                    <div class="testimonial-author">- Michael K.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <a href="#" class="footer-logo">Jack's Family Restaurant</a>
+                    <p>Home-style cooking with a warm, friendly atmosphere. Serving breakfast, lunch, and dinner daily.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#hours">Hours & Location</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h3>Stay Updated</h3>
+                    <p>Subscribe to our newsletter for special offers and updates</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email Address">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Jack's Family Restaurant. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuItems = document.querySelectorAll('.menu-item');
+            const hours = document.querySelector('.hours');
+            const location = document.querySelector('.location');
+            const testimonials = document.querySelectorAll('.testimonial');
+            
+            // Function to check if element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+            
+            // Function to handle scroll events
+            function handleScroll() {
+                menuItems.forEach(item => {
+                    if (isInViewport(item)) {
+                        item.classList.add('visible');
+                    }
+                });
+                
+                if (isInViewport(hours)) {
+                    hours.classList.add('visible');
+                }
+                
+                if (isInViewport(location)) {
+                    location.classList.add('visible');
+                }
+                
+                testimonials.forEach(testimonial => {
+                    if (isInViewport(testimonial)) {
+                        testimonial.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Initial check
+            handleScroll();
+            
+            // Listen for scroll events
+            window.addEventListener('scroll', handleScroll);
+        });
+    </script>
+</body>
+</html>
