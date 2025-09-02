@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <a href="business-finder.html" class="btn btn-primary">View Business Finder</a>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Made Simple | AI Solutions for Business Growth</title>
@@ -15,7 +14,8 @@
                         primary: '#6366f1',
                         primaryDark: '#4f46e5',
                         secondary: '#10b981',
-                        accent: '#f59e0b'
+                        accent: '#f59e0b',
+                        matrix: '#003300'
                     }
                 }
             }
@@ -27,10 +27,51 @@
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
+            background-color: #f9fafb;
         }
         
-        .gradient-bg {
-            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+        .matrix-bg {
+            position: relative;
+            background-color: #000;
+            overflow: hidden;
+        }
+        
+        .matrix-bg::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(transparent 95%, rgba(0, 80, 0, 0.1) 96%),
+                linear-gradient(90deg, transparent 95%, rgba(0, 80, 0, 0.1) 96%);
+            background-size: 20px 20px;
+            z-index: 1;
+            opacity: 0.3;
+        }
+        
+        .matrix-bg::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 80, 0, 0.2) 0%, rgba(0, 50, 0, 0.4) 100%);
+            z-index: 0;
+        }
+        
+        .matrix-text {
+            color: #00cc00;
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .gradient-overlay {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.9) 0%, rgba(79, 70, 229, 0.9) 100%);
+            position: relative;
+            z-index: 2;
         }
         
         .service-card {
@@ -53,6 +94,7 @@
         .blog-card {
             transition: all 0.3s ease;
             height: 100%;
+            cursor: pointer;
         }
         
         .blog-card:hover {
@@ -108,6 +150,13 @@
             z-index: 100;
             justify-content: center;
             align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.show {
+            display: flex;
+            opacity: 1;
         }
         
         .modal-content {
@@ -119,6 +168,12 @@
             max-height: 80vh;
             overflow-y: auto;
             position: relative;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+        
+        .modal.show .modal-content {
+            transform: translateY(0);
         }
         
         .close-modal {
@@ -158,9 +213,50 @@
             height: 100%;
             border: none;
         }
+        
+        .blog-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .blog-content.show {
+            display: block;
+            opacity: 1;
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid #00cc00;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #00cc00; }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
-<body class="font-sans text-gray-800 bg-gray-50">
+<body class="font-sans text-gray-800">
 
     <!-- Navigation -->
     <nav id="navbar" class="flex justify-between items-center py-5 px-6 md:px-12 fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent">
@@ -204,14 +300,15 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
-    <section class="gradient-bg pt-32 pb-24 px-6 text-center">
-        <div class="max-w-4xl mx-auto">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">Transform Your Business with AI Automation</h1>
-            <p class="text-xl text-indigo-100 mb-10 max-w-2xl mx-auto">
+    <!-- Hero Section with Matrix Background -->
+    <section class="matrix-bg pt-32 pb-24 px-6 text-center">
+        <div class="gradient-overlay absolute top-0 left-0 w-full h-full"></div>
+        <div class="max-w-4xl mx-auto relative z-10">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 typewriter">Transform Your Business with AI Automation</h1>
+            <p class="text-xl text-indigo-100 mb-10 max-w-2xl mx-auto fade-in">
                 Discover how to harness AI to automate tasks, streamline workflows, and accelerate business growth.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <div class="flex flex-col sm:flex-row justify-center gap-4 fade-in" style="transition-delay: 0.3s;">
                 <a href="#community" class="px-8 py-4 bg-accent text-white font-medium rounded-full shadow-lg hover:bg-amber-600 transition">
                     Join Our Community
                 </a>
@@ -229,7 +326,7 @@
                 <h2 class="text-2xl md:text-3xl font-bold text-center mb-4">Free AI Automation Guide</h2>
                 <p class="text-gray-700 text-center mb-6">Download our free guide on "10 AI Tools That Will Save Your Business 10+ Hours Per Week"</p>
                 
-                <form class="space-y-4 max-w-md mx-auto">
+                <form id="subscription-form" class="space-y-4 max-w-md mx-auto">
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                         <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="Your name" required>
@@ -251,19 +348,19 @@
     <section class="py-12 bg-gray-50">
         <div class="max-w-6xl mx-auto px-6">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="stat-card">
+                <div class="stat-card fade-in">
                     <div class="text-3xl font-bold text-indigo-600 mb-2">40%</div>
                     <p class="text-gray-600">Average time savings</p>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card fade-in">
                     <div class="text-3xl font-bold text-indigo-600 mb-2">5-15x</div>
                     <p class="text-gray-600">Return on investment</p>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card fade-in">
                     <div class="text-3xl font-bold text-indigo-600 mb-2">100+</div>
                     <p class="text-gray-600">Processes automated</p>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card fade-in">
                     <div class="text-3xl font-bold text-indigo-600 mb-2">300+</div>
                     <p class="text-gray-600">Community members</p>
                 </div>
@@ -274,13 +371,13 @@
     <!-- Services Section -->
     <section id="services" class="py-20 px-6 bg-white">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">AI-Powered Business Solutions</h2>
-            <p class="text-gray-600 text-center max-w-2xl mx-auto mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 fade-in">AI-Powered Business Solutions</h2>
+            <p class="text-gray-600 text-center max-w-2xl mx-auto mb-16 fade-in">
                 Customized AI implementations designed to streamline your operations and boost efficiency
             </p>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="service-card bg-gray-50 p-8 rounded-xl">
+                <div class="service-card bg-gray-50 p-8 rounded-xl fade-in">
                     <div class="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-5">
                         <i class="fas fa-envelope-open-text text-blue-600 text-2xl"></i>
                     </div>
@@ -288,7 +385,7 @@
                     <p class="text-gray-600">AI-powered email sorting, prioritization, and response drafting to keep your inbox organized and efficient.</p>
                 </div>
                 
-                <div class="service-card bg-gray-50 p-8 rounded-xl">
+                <div class="service-card bg-gray-50 p-8 rounded-xl fade-in">
                     <div class="w-14 h-14 bg-purple-100 rounded-lg flex items-center justify-center mb-5">
                         <i class="fas fa-tasks text-purple-600 text-2xl"></i>
                     </div>
@@ -296,7 +393,7 @@
                     <p class="text-gray-600">Identify and automate repetitive tasks to create seamless workflows that save hours each week.</p>
                 </div>
                 
-                <div class="service-card bg-gray-50 p-8 rounded-xl">
+                <div class="service-card bg-gray-50 p-8 rounded-xl fade-in">
                     <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-5">
                         <i class="fas fa-chart-line text-green-600 text-2xl"></i>
                     </div>
@@ -305,7 +402,7 @@
                 </div>
             </div>
             
-            <div class="text-center mt-12">
+            <div class="text-center mt-12 fade-in">
                 <a href="https://calendar.app.google/DUcaULz2W4Xbzb1S8" class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition">
                     <i class="fas fa-calendar-check mr-2"></i> Book a Consultation
                 </a>
@@ -316,24 +413,24 @@
     <!-- YouTube Section -->
     <section id="youtube" class="py-20 px-6 bg-gray-50">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Check Out These AI Videos</h2>
-            <p class="text-gray-600 text-center max-w-2xl mx-auto mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 fade-in">Check Out These AI Videos</h2>
+            <p class="text-gray-600 text-center max-w-2xl mx-auto mb-16 fade-in">
                 Helpful content from Skylar Girard's YouTube channel
             </p>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
+                <div class="fade-in">
                     <div class="video-container mb-4">
-                        <iframe src="https://www.youtube.com/embed/videoseries?list=UUWZf6aQdJXcQ+RKvjMpmw2g" title="Skylar Girard YouTube videos" allowfullscreen></iframe>
+                        <iframe src="https://www.youtube.com/embed/L_gkOvF-XU4" title="AI Explained for Beginners" allowfullscreen></iframe>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Skylar Girard's YouTube Channel</h3>
-                    <p class="text-gray-600">Check out these informative videos about AI and technology</p>
+                    <h3 class="text-xl font-semibold mb-2">AI Explained for Beginners</h3>
+                    <p class="text-gray-600">A great introduction to artificial intelligence concepts for those just getting started.</p>
                     <a href="https://www.youtube.com/@SkylarGirard/" target="_blank" class="inline-flex items-center mt-3 text-indigo-600 font-semibold">
                         <i class="fab fa-youtube mr-2"></i> Subscribe to Channel
                     </a>
                 </div>
                 
-                <div>
+                <div class="fade-in">
                     <h3 class="text-xl font-semibold mb-4">Why Subscribe?</h3>
                     <ul class="space-y-3">
                         <li class="flex items-start">
@@ -381,6 +478,186 @@
             </div>
         </div>
     </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-20 px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 fade-in">AI Insights & Strategies</h2>
+            <p class="text-gray-600 text-center max-w-2xl mx-auto mb-16 fade-in">
+                Learn how AI can transform your business with our latest articles and guides
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Blog Post 1 -->
+                <div class="blog-card bg-gray-50 rounded-xl shadow-md overflow-hidden fade-in" data-blog="1">
+                    <div class="p-6">
+                        <span class="text-sm text-indigo-600 font-semibold">AI Integration</span>
+                        <h3 class="text-xl font-semibold mt-2 mb-3">Using AI to Identify New Business Opportunities</h3>
+                        <p class="text-gray-600 mb-4">Discover how AI can help you uncover hidden opportunities by analyzing customer behavior and market trends.</p>
+                        <div class="text-indigo-600 font-semibold">Read More →</div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 2 -->
+                <div class="blog-card bg-gray-50 rounded-xl shadow-md overflow-hidden fade-in" data-blog="2">
+                    <div class="p-6">
+                        <span class="text-sm text-indigo-600 font-semibold">Automation</span>
+                        <h3 class="text-xl font-semibold mt-2 mb-3">10 Time-Saving AI Hacks for Entrepreneurs</h3>
+                        <p class="text-gray-600 mb-4">Learn practical AI strategies to reclaim hours in your workweek and boost productivity.</p>
+                        <div class="text-indigo-600 font-semibold">Read More →</div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 3 -->
+                <div class="blog-card bg-gray-50 rounded-xl shadow-md overflow-hidden fade-in" data-blog="3">
+                    <div class="p-6">
+                        <span class="text-sm text-indigo-600 font-semibold">Content Marketing</span>
+                        <h3 class="text-xl font-semibold mt-2 mb-3">How AI Can 10x Your Content Marketing Results</h3>
+                        <p class="text-gray-600 mb-4">Discover how AI can transform your content creation and distribution strategies.</p>
+                        <div class="text-indigo-600 font-semibold">Read More →</div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 4 -->
+                <div class="blog-card bg-gray-50 rounded-xl shadow-md overflow-hidden fade-in" data-blog="4">
+                    <div class="p-6">
+                        <span class="text-sm text-indigo-600 font-semibold">Data Analytics</span>
+                        <h3 class="text-xl font-semibold mt-2 mb-3">Turning Data into Decisions with AI Analytics</h3>
+                        <p class="text-gray-600 mb-4">Learn how AI-driven analytics tools transform raw numbers into actionable strategies.</p>
+                        <div class="text-indigo-600 font-semibold">Read More →</div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 5 -->
+                <div class="blog-card bg-gray-50 rounded-xl shadow-md overflow-hidden fade-in" data-blog="5">
+                    <div class="p-6">
+                        <span class="text-sm text-indigo-600 font-semibold">AI Tools</span>
+                        <h3 class="text-xl font-semibold mt-2 mb-3">5 AI Tools Every Small Business Needs in 2023</h3>
+                        <p class="text-gray-600 mb-4">Discover the essential AI tools that can help small businesses compete with larger enterprises.</p>
+                        <div class="text-indigo-600 font-semibold">Read More →</div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 6 -->
+                <div class="blog-card bg-gray-50 rounded-xl shadow-md overflow-hidden fade-in" data-blog="6">
+                    <div class="p-6">
+                        <span class="text-sm text-indigo-600 font-semibold">Customer Service</span>
+                        <h3 class="text-xl font-semibold mt-2 mb-3">How to Automate Customer Service with AI</h3>
+                        <p class="text-gray-600 mb-4">Learn how AI-powered chatbots and response systems can transform your customer service.</p>
+                        <div class="text-indigo-600 font-semibold">Read More →</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 fade-in">
+                <a href="#" class="inline-flex items-center px-6 py-3 border border-indigo-600 text-indigo-600 rounded-lg hover:bg-indigo-50 transition">
+                    View All Blog Posts
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Detail Modals -->
+    <div id="blog-detail-1" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('blog-detail-1')">×</button>
+            <h2 class="text-2xl font-bold mb-4">Using AI to Identify New Business Opportunities</h2>
+            <div class="text-sm text-indigo-600 font-semibold mb-4">AI Integration</div>
+            <p class="text-gray-600 mb-4">Artificial Intelligence can help businesses uncover hidden opportunities by analyzing customer behavior, market trends, and competitor strategies. From predictive analytics to natural language processing, AI enables entrepreneurs to validate ideas faster and spot areas for growth before the competition.</p>
+            <p class="text-gray-600 mb-6">Whether it's identifying untapped audiences or optimizing existing services, AI tools like ChatGPT, n8n, and machine learning dashboards can reveal patterns that humans often miss.</p>
+            
+            <div class="bg-indigo-50 p-4 rounded-lg mb-6">
+                <h4 class="font-semibold mb-2">Key Benefits:</h4>
+                <ul class="list-disc list-inside text-gray-700">
+                    <li>Identify emerging market trends before competitors</li>
+                    <li>Discover untapped customer segments</li>
+                    <li>Predict customer needs and preferences</li>
+                    <li>Optimize product and service offerings</li>
+                </ul>
+            </div>
+            
+            <div class="flex gap-3">
+                <button onclick="closeModal('blog-detail-1')" class="flex-1 py-2 px-4 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="blog-detail-2" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('blog-detail-2')">×</button>
+            <h2 class="text-2xl font-bold mb-4">10 Time-Saving AI Hacks for Entrepreneurs</h2>
+            <div class="text-sm text-indigo-600 font-semibold mb-4">Automation</div>
+            <p class="text-gray-600 mb-4">Running a business is demanding, but AI can automate the tasks that drain your time. From drafting emails and scheduling social media posts to generating proposals and handling repetitive workflows, AI lets you focus on strategy instead of busywork.</p>
+            <p class="text-gray-600 mb-6">Some practical hacks include using AI for note-taking, customer support chatbots, smart lead generation, and automated reporting.</p>
+            
+            <div class="bg-indigo-50 p-4 rounded-lg mb-6">
+                <h4 class="font-semibold mb-2">Top Time-Saving Hacks:</h4>
+                <ul class="list-disc list-inside text-gray-700">
+                    <li>Automate email responses and follow-ups</li>
+                    <li>Use AI for meeting notes and summaries</li>
+                    <li>Implement chatbots for customer inquiries</li>
+                    <li>Automate social media scheduling and content creation</li>
+                    <li>Use AI for data analysis and report generation</li>
+                </ul>
+            </div>
+            
+            <div class="flex gap-3">
+                <button onclick="closeModal('blog-detail-2')" class="flex-1 py-2 px-4 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="blog-detail-3" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('blog-detail-3')">×</button>
+            <h2 class="text-2xl font-bold mb-4">How AI Can 10x Your Content Marketing Results</h2>
+            <div class="text-sm text-indigo-600 font-semibold mb-4">Content Marketing</div>
+            <p class="text-gray-600 mb-4">AI is a game-changer for content creation and distribution. It can generate blog drafts, suggest headlines, repurpose content across platforms, and even predict what type of content will resonate most with your audience.</p>
+            <p class="text-gray-600 mb-6">Instead of spending hours brainstorming, AI tools can provide topic ideas, optimize SEO, and personalize content to different customer segments, drastically improving engagement and conversion rates.</p>
+            
+            <div class="bg-indigo-50 p-4 rounded-lg mb-6">
+                <h4 class="font-semibold mb-2">Content Marketing AI Applications:</h4>
+                <ul class="list-disc list-inside text-gray-700">
+                    <li>AI-powered content ideation and topic generation</li>
+                    <li>Automated content creation and optimization</li>
+                    <li>Personalized content recommendations</li>
+                    <li>SEO optimization and keyword analysis</li>
+                    <li>Performance prediction and analytics</li>
+                </ul>
+            </div>
+            
+            <div class="flex gap-3">
+                <button onclick="closeModal('blog-detail-3')" class="flex-1 py-2 px-4 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="blog-detail-4" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('blog-detail-4')">×</button>
+            <h2 class="text-2xl font-bold mb-4">Turning Data into Decisions with AI Analytics</h2>
+            <div class="text-sm text-indigo-600 font-semibold mb-4">Data Analytics</div>
+            <p class="text-gray-600 mb-4">Data is useless without insights. AI-driven analytics tools transform raw numbers into actionable strategies. They can identify patterns, predict outcomes, and give entrepreneurs a real-time view of their business performance.</p>
+            <p class="text-gray-600 mb-6">From customer retention to sales forecasting, AI analytics helps leaders make smarter, data-driven decisions quickly and accurately.</p>
+            
+            <div class="bg-indigo-50 p-4 rounded-lg mb-6">
+                <h4 class="font-semibold mb-2">AI Analytics Benefits:</h4>
+                <ul class="list-disc list-inside text-gray-700">
+                    <li>Predict customer behavior and preferences</li>
+                    <li>Identify trends and patterns in large datasets</li>
+                    <li>Automate reporting and data visualization</li>
+                    <li>Provide real-time business insights</li>
+                    <li>Optimize operations based on data-driven decisions</li>
+                </ul>
+            </div>
+            
+            <div class="flex gap-3">
+                <button onclick="closeModal('blog-detail-4')" class="flex-1 py-2 px-4 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional blog modals would go here -->
 
     <!-- Community Section -->
     <section id="community" class="py-20 px-6 bg-gradient-to-br from-indigo-50 to-purple-50">
@@ -550,19 +827,82 @@
             });
         });
 
+        // Blog detail modals
+        document.querySelectorAll('.blog-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const blogId = this.getAttribute('data-blog');
+                openModal(`blog-detail-${blogId}`);
+            });
+        });
+
+        // Open modal function
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal function
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
         // Lead magnet form submission
-        document.querySelector('form')?.addEventListener('submit', function(e) {
+        document.getElementById('subscription-form')?.addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             
-            // In a real implementation, you would send this data to your email service
-            console.log('Lead captured:', { name, email });
+            // Send email using FormSubmit
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('email', email);
+            formData.append('_subject', 'New AI Guide Subscription');
+            formData.append('_template', 'table');
+            formData.append('_autoresponse', 'Thank you for subscribing! Your AI guide is attached.');
             
-            // Show success message (in a real implementation)
-            alert('Thanks for downloading our guide! Check your email for the download link.');
-            this.reset();
+            fetch('https://formsubmit.co/kevin.roy8@icloud.com', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Thanks for downloading our guide! Check your email for the download link.');
+                    this.reset();
+                } else {
+                    alert('There was an error with your submission. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error with your submission. Please try again.');
+            });
         });
+
+        // Fade in elements on scroll
+        function checkFade() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkFade);
+        window.addEventListener('load', checkFade);
     </script>
 
 </body>
