@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Made Simple | Free AI Automation Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        primaryDark: '#4f46e5',
+                        secondary: '#10b981',
+                        accent: '#f59e0b'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-left: 4px solid #6366f1;
+        }
+        
+        .lead-magnet {
+            background: linear-gradient(120deg, #e0e7ff 0%, #c7d2fe 100%);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+        
+        .success-message {
+            display: none;
+            background: #10b981;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-gray-50">
+    <!-- Navigation -->
+    <nav class="flex justify-between items-center py-5 px-6 md:px-12 bg-white shadow-md">
+        <div class="text-2xl font-bold text-indigo-600">AI Made Simple</div>
+        <a href="https://whipper2469.github.io/index.html" class="px-5 py-2.5 bg-indigo-600 text-white font-medium rounded-full shadow-lg hover:bg-indigo-700 transition">
+            Back to Main Site
+        </a>
+    </nav>
+
+    <!-- Lead Magnet Section -->
+    <section class="py-16 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-indigo-600 mb-4">Free AI Automation Guide</h1>
+                <p class="text-xl text-gray-600">Download our exclusive guide on "10 AI Tools That Will Save Your Business 10+ Hours Per Week"</p>
+            </div>
+            
+            <div class="lead-magnet">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/2">
+                        <h2 class="text-2xl font-bold mb-4">What You'll Get:</h2>
+                        <ul class="list-disc list-inside space-y-3 text-gray-700 mb-6">
+                            <li>Curated list of the most effective AI tools for business automation</li>
+                            <li>Step-by-step implementation guides for each tool</li>
+                            <li>Time-saving strategies that deliver immediate results</li>
+                            <li>Tips to avoid common AI implementation mistakes</li>
+                            <li>Exclusive discounts on premium AI tools</li>
+                        </ul>
+                        <div class="bg-indigo-50 p-4 rounded-lg">
+                            <h3 class="font-semibold text-indigo-700 mb-2">Why Download?</h3>
+                            <p class="text-sm text-indigo-600">This guide has helped over 300 businesses save time and increase productivity. Yours could be next!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-xl font-semibold mb-4">Get Your Free Guide Now</h3>
+                            <form id="guide-form" class="space-y-4">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                                    <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="Your name" required>
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                                    <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="your.email@example.com" required>
+                                </div>
+                                <div>
+                                    <label for="business" class="block text-sm font-medium text-gray-700 mb-1">Business Type</label>
+                                    <select id="business" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                                        <option value="">Select your business type</option>
+                                        <option value="small-business">Small Business</option>
+                                        <option value="startup">Startup</option>
+                                        <option value="freelancer">Freelancer</option>
+                                        <option value="enterprise">Enterprise</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="w-full py-3 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition font-semibold">
+                                    Download Free Guide
+                                </button>
+                                <p class="text-xs text-gray-500 text-center">We respect your privacy. Unsubscribe at any time.</p>
+                            </form>
+                            <div id="success-message" class="success-message">
+                                <i class="fas fa-check-circle mr-2"></i> Thank you! Check your email for the download link.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-4 text-center">What Our Readers Say</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-indigo-600 font-semibold">JD</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">John Davis</h4>
+                                <p class="text-sm text-gray-500">Marketing Agency Owner</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">"The guide helped me identify 3 tools that saved me over 12 hours a week. The ROI was immediate!"</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-indigo-600 font-semibold">SM</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Sarah Mitchell</h4>
+                                <p class="text-sm text-gray-500">E-commerce Store Owner</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">"I was overwhelmed by all the AI options until this guide gave me a clear roadmap. Highly recommend!"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 px-6 bg-gray-50">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+            
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2">Is this guide really free?</h3>
+                    <p class="text-gray-600">Yes, absolutely! We believe in providing value first. The guide is completely free with no strings attached.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2">How soon will I receive the guide?</h3>
+                    <p class="text-gray-600">The download link will be sent to your email immediately after submitting the form.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2">Will I be added to a mailing list?</h3>
+                    <p class="text-gray-600">Yes, you'll be subscribed to our newsletter with AI tips and updates, but you can unsubscribe at any time.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2">Is this suitable for beginners?</h3>
+                    <p class="text-gray-600">Absolutely! The guide is designed for both beginners and those with some AI experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12 px-6 text-white">
+        <div class="max-w-6xl mx-auto text-center">
+            <h3 class="text-2xl font-bold mb-4">AI Made Simple</h3>
+            <p class="max-w-md mx-auto text-gray-400 mb-6">Helping businesses harness the power of AI to automate tasks, streamline workflows, and boost productivity.</p>
+            
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="https://whipper2469.github.io/index.html" class="text-gray-400 hover:text-white transition">Home</a>
+                <a href="https://calendar.app.google/DUcaULz2W4Xbzb1S8" class="text-gray-400 hover:text-white transition">Consultation</a>
+                <a href="https://www.youtube.com/@SkylarGirard/" class="text-gray-400 hover:text-white transition">YouTube</a>
+            </div>
+            
+            <p class="text-gray-400">📞 519-589-0620 | 📧 kevin.roy8@icloud.com</p>
+            <p class="text-gray-400 text-sm mt-4">© 2023 AI Made Simple. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('guide-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const business = document.getElementById('business').value;
+            
+            // Using FormSubmit to send the email
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('email', email);
+            formData.append('business', business);
+            formData.append('_subject', 'New AI Guide Download Request');
+            formData.append('_template', 'table');
+            formData.append('_autoresponse', 'Thank you for downloading our AI guide! Your download link is: https://whipper2469.github.io/ai-guide-download.html');
+            
+            fetch('https://formsubmit.co/kevin.roy8@icloud.com', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Show success message
+                    document.getElementById('success-message').style.display = 'block';
+                    document.getElementById('guide-form').reset();
+                    
+                    // Redirect to a thank you page after 3 seconds
+                    setTimeout(() => {
+                        window.location.href = 'https://whipper2469.github.io/thank-you.html';
+                    }, 3000);
+                } else {
+                    alert('There was an error with your submission. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error with your submission. Please try again.');
+            });
+        });
+    </script>
+</body>
+</html>
