@@ -1,802 +1,2399 @@
 <!DOCTYPE html>
+
+
+
 <html lang="en">
+
+
 <head>
+
+
     <meta charset="UTF-8">
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
     <title>The Road to Recovery - Addiction Support Resources</title>
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
     <style>
+
+
         /* Global Styles */
+
+
         :root {
+
+
             --primary: #4a6fa5;
+
+
             --secondary: #166088;
+
+
             --accent: #4cb5ae;
+
+
             --light: #f8f9fa;
+
+
             --dark: #343a40;
+
+
             --success: #28a745;
+
+
         }
+
+
         
+
+
         * {
+
+
             margin: 0;
+
+
             padding: 0;
+
+
             box-sizing: border-box;
+
+
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+
         }
+
+
         
+
+
         body {
+
+
             background-color: #f5f7f9;
+
+
             color: #333;
+
+
             line-height: 1.6;
+
+
         }
+
+
         
+
+
         .container {
+
+
             width: 90%;
+
+
             max-width: 1200px;
+
+
             margin: 0 auto;
+
+
             padding: 0 15px;
+
+
         }
+
+
         
+
+
         section {
+
+
             padding: 60px 0;
+
+
         }
+
+
         
+
+
         .btn {
+
+
             display: inline-block;
+
+
             padding: 12px 24px;
+
+
             background-color: var(--primary);
+
+
             color: white;
+
+
             border: none;
+
+
             border-radius: 4px;
+
+
             cursor: pointer;
+
+
             text-decoration: none;
+
+
             font-weight: 600;
+
+
             transition: all 0.3s ease;
+
+
         }
+
+
         
+
+
         .btn:hover {
+
+
             background-color: var(--secondary);
+
+
             transform: translateY(-2px);
+
+
         }
+
+
         
+
+
         .btn-accent {
+
+
             background-color: var(--accent);
+
+
         }
+
+
         
+
+
         .btn-accent:hover {
+
+
             background-color: #3a9d96;
+
+
         }
+
+
         
+
+
         .section-title {
+
+
             text-align: center;
+
+
             margin-bottom: 40px;
+
+
             color: var(--secondary);
+
+
         }
+
+
         
+
+
         .section-title h2 {
+
+
             font-size: 2.5rem;
+
+
             margin-bottom: 15px;
+
+
         }
+
+
         
+
+
         .section-title p {
+
+
             font-size: 1.1rem;
+
+
             color: #666;
+
+
             max-width: 700px;
+
+
             margin: 0 auto;
+
+
         }
+
+
         
+
+
         /* Header Styles */
+
+
         header {
+
+
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+
+
             color: white;
+
+
             padding: 15px 0;
+
+
             position: sticky;
+
+
             top: 0;
+
+
             z-index: 1000;
+
+
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+
         }
+
+
         
+
+
         .header-container {
+
+
             display: flex;
+
+
             justify-content: space-between;
+
+
             align-items: center;
+
+
         }
+
+
         
+
+
         .logo {
+
+
             font-size: 1.8rem;
+
+
             font-weight: 700;
+
+
             display: flex;
+
+
             align-items: center;
+
+
         }
+
+
         
+
+
         .logo i {
+
+
             margin-right: 10px;
+
+
             color: #ffd166;
+
+
         }
+
+
         
+
+
         nav ul {
+
+
             display: flex;
+
+
             list-style: none;
+
+
         }
+
+
         
+
+
         nav ul li {
+
+
             margin-left: 25px;
+
+
         }
+
+
         
+
+
         nav ul li a {
+
+
             color: white;
+
+
             text-decoration: none;
+
+
             font-weight: 500;
+
+
             transition: color 0.3s ease;
+
+
         }
+
+
         
+
+
         nav ul li a:hover {
+
+
             color: #ffd166;
+
+
         }
+
+
         
+
+
         /* Hero Section */
-     .hero {
-    background: url('images/drag.jpg') no-repeat center center / cover;
-    color: white;
-    text-align: center;
-    height: 100vh; /* Full screen height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+
+
+        .hero {
+
+
+            background: url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') no-repeat center center/cover;
+
+
+            color: white;
+
+
+            text-align: center;
+
+
+            padding: 120px 0;
+
+
+            position: relative;
+
+
+        }
+
+
         
+
+
         .hero::before {
+
+
             content: '';
+
+
             position: absolute;
+
+
             top: 0;
+
+
             left: 0;
+
+
             width: 100%;
+
+
             height: 100%;
+
+
             background: rgba(0, 0, 0, 0.6);
+
+
         }
+
+
         
+
+
         .hero-content {
+
+
             position: relative;
+
+
             max-width: 800px;
+
+
             margin: 0 auto;
+
+
         }
+
+
         
+
+
         .hero h1 {
+
+
             font-size: 3.5rem;
+
+
             margin-bottom: 20px;
+
+
         }
+
+
         
+
+
         .hero p {
+
+
             font-size: 1.2rem;
+
+
             margin-bottom: 30px;
+
+
         }
+
+
         
+
+
         /* About Section */
+
+
         .about-content {
+
+
             display: flex;
+
+
             align-items: center;
+
+
             gap: 40px;
+
+
         }
+
+
         
+
+
         .about-text {
+
+
             flex: 1;
+
+
         }
+
+
         
+
+
         .about-image {
+
+
             flex: 1;
+
+
             border-radius: 10px;
+
+
             overflow: hidden;
+
+
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+
         }
+
+
         
+
+
         .about-image img {
+
+
             width: 100%;
+
+
             height: auto;
+
+
             display: block;
+
+
         }
+
+
         
+
+
         /* Services Section */
+
+
         .services {
+
+
             background-color: var(--light);
+
+
         }
+
+
         
+
+
         .services-grid {
+
+
             display: grid;
+
+
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+
             gap: 30px;
+
+
         }
+
+
         
+
+
         .service-card {
+
+
             background: white;
+
+
             padding: 30px;
+
+
             border-radius: 8px;
+
+
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+
+
             text-align: center;
+
+
             transition: transform 0.3s ease;
+
+
         }
+
+
         
+
+
         .service-card:hover {
+
+
             transform: translateY(-10px);
+
+
         }
+
+
         
+
+
         .service-icon {
+
+
             font-size: 2.5rem;
+
+
             color: var(--primary);
+
+
             margin-bottom: 20px;
+
+
         }
+
+
         
+
+
         .service-card h3 {
+
+
             margin-bottom: 15px;
+
+
             color: var(--secondary);
+
+
         }
+
+
         
+
+
         /* Resources Section */
+
+
         .resources-grid {
+
+
             display: grid;
+
+
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+
             gap: 30px;
+
+
         }
+
+
         
+
+
         .resource-card {
+
+
             background: white;
+
+
             border-radius: 8px;
+
+
             overflow: hidden;
+
+
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+
+
         }
+
+
         
+
+
         .resource-image {
+
+
             height: 200px;
+
+
             overflow: hidden;
+
+
         }
+
+
         
+
+
         .resource-image img {
+
+
             width: 100%;
+
+
             height: 100%;
+
+
             object-fit: cover;
+
+
             transition: transform 0.5s ease;
+
+
         }
+
+
         
+
+
         .resource-card:hover .resource-image img {
+
+
             transform: scale(1.1);
+
+
         }
+
+
         
+
+
         .resource-content {
+
+
             padding: 20px;
+
+
         }
+
+
         
+
+
         .resource-content h3 {
+
+
             margin-bottom: 10px;
+
+
             color: var(--secondary);
+
+
         }
+
+
         
+
+
         /* Contact Section */
+
+
         .contact {
+
+
             background-color: var(--light);
+
+
         }
+
+
         
+
+
         .contact-container {
+
+
             display: flex;
+
+
             gap: 40px;
+
+
         }
+
+
         
+
+
         .contact-info {
+
+
             flex: 1;
+
+
         }
+
+
         
+
+
         .contact-form {
+
+
             flex: 1;
+
+
         }
+
+
         
+
+
         .info-item {
+
+
             display: flex;
+
+
             align-items: center;
+
+
             margin-bottom: 25px;
+
+
         }
+
+
         
+
+
         .info-icon {
+
+
             width: 50px;
+
+
             height: 50px;
+
+
             background-color: var(--primary);
+
+
             border-radius: 50%;
+
+
             display: flex;
+
+
             align-items: center;
+
+
             justify-content: center;
+
+
             color: white;
+
+
             font-size: 1.2rem;
+
+
             margin-right: 15px;
+
+
         }
+
+
         
+
+
         .form-group {
+
+
             margin-bottom: 20px;
+
+
         }
+
+
         
+
+
         .form-group label {
+
+
             display: block;
+
+
             margin-bottom: 5px;
+
+
             font-weight: 500;
+
+
         }
+
+
         
+
+
         .form-group input,
+
+
         .form-group textarea,
+
+
         .form-group select {
+
+
             width: 100%;
+
+
             padding: 12px;
+
+
             border: 1px solid #ddd;
+
+
             border-radius: 4px;
+
+
             font-size: 1rem;
+
+
         }
+
+
         
+
+
         .form-group textarea {
+
+
             min-height: 120px;
+
+
             resize: vertical;
+
+
         }
+
+
         
+
+
         /* Newsletter Section */
+
+
         .newsletter {
+
+
             text-align: center;
+
+
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+
+
             color: white;
+
+
         }
+
+
         
+
+
         .newsletter-form {
+
+
             max-width: 600px;
+
+
             margin: 0 auto;
+
+
             display: flex;
+
+
             gap: 10px;
+
+
         }
+
+
         
+
+
         .newsletter-form input {
+
+
             flex: 1;
+
+
             padding: 12px;
+
+
             border: none;
+
+
             border-radius: 4px;
+
+
             font-size: 1rem;
+
+
         }
+
+
         
+
+
         /* Footer */
+
+
         footer {
+
+
             background-color: var(--dark);
+
+
             color: white;
+
+
             padding: 40px 0 20px;
+
+
         }
+
+
         
+
+
         .footer-container {
+
+
             display: grid;
+
+
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+
             gap: 30px;
+
+
         }
+
+
         
+
+
         .footer-section h3 {
+
+
             font-size: 1.3rem;
+
+
             margin-bottom: 20px;
+
+
             position: relative;
+
+
             padding-bottom: 10px;
+
+
         }
+
+
         
+
+
         .footer-section h3::after {
+
+
             content: '';
+
+
             position: absolute;
+
+
             left: 0;
+
+
             bottom: 0;
+
+
             width: 50px;
+
+
             height: 2px;
+
+
             background-color: var(--accent);
+
+
         }
+
+
         
+
+
         .footer-links {
+
+
             list-style: none;
+
+
         }
+
+
         
+
+
         .footer-links li {
+
+
             margin-bottom: 10px;
+
+
         }
+
+
         
+
+
         .footer-links a {
+
+
             color: #ddd;
+
+
             text-decoration: none;
+
+
             transition: color 0.3s ease;
+
+
         }
+
+
         
+
+
         .footer-links a:hover {
+
+
             color: white;
+
+
         }
+
+
         
+
+
         .social-links {
+
+
             display: flex;
+
+
             gap: 15px;
+
+
             margin-top: 20px;
+
+
         }
+
+
         
+
+
         .social-links a {
+
+
             display: flex;
+
+
             align-items: center;
+
+
             justify-content: center;
+
+
             width: 40px;
+
+
             height: 40px;
+
+
             background-color: rgba(255, 255, 255, 0.1);
+
+
             border-radius: 50%;
+
+
             color: white;
+
+
             transition: all 0.3s ease;
+
+
         }
+
+
         
+
+
         .social-links a:hover {
+
+
             background-color: var(--accent);
+
+
             transform: translateY(-3px);
+
+
         }
+
+
         
+
+
         .copyright {
+
+
             text-align: center;
+
+
             margin-top: 40px;
+
+
             padding-top: 20px;
+
+
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+
         }
+
+
         
+
+
         /* Mobile Responsiveness */
+
+
         @media (max-width: 992px) {
+
+
             .about-content,
+
+
             .contact-container {
+
+
                 flex-direction: column;
+
+
             }
+
+
             
+
+
             .newsletter-form {
+
+
                 flex-direction: column;
+
+
             }
+
+
         }
+
+
         
+
+
         @media (max-width: 768px) {
+
+
             .header-container {
+
+
                 flex-direction: column;
+
+
                 text-align: center;
+
+
             }
+
+
             
+
+
             nav ul {
+
+
                 margin-top: 15px;
+
+
                 justify-content: center;
+
+
             }
+
+
             
+
+
             nav ul li {
+
+
                 margin: 0 10px;
+
+
             }
+
+
             
+
+
             .hero h1 {
+
+
                 font-size: 2.5rem;
+
+
             }
+
+
             
+
+
             .section-title h2 {
+
+
                 font-size: 2rem;
+
+
             }
+
+
         }
+
+
     </style>
+
+
 </head>
+
+
 <body>
+
+
     <!-- Header -->
+
+
     <header>
+
+
         <div class="container header-container">
+
+
             <div class="logo">
+
+
                 <i class="fas fa-hands-helping"></i>
+
+
                 The Road to Recovery
+
+
             </div>
+
+
             <nav>
+
+
                 <ul>
+
+
                     <li><a href="#home">Home</a></li>
+
+
                     <li><a href="#about">About</a></li>
+
+
                     <li><a href="#services">Services</a></li>
+
+
                     <li><a href="#resources">Resources</a></li>
+
+
                     <li><a href="#contact">Contact</a></li>
+
+
                 </ul>
+
+
             </nav>
+
+
         </div>
+
+
     </header>
 
+
+
+
+
     <!-- Hero Section -->
+
+
     <section class="hero" id="home">
+
+
         <div class="container hero-content">
+
+
             <h1>Finding Your Path to Recovery</h1>
+
+
             <p>We provide support, resources, and guidance for those struggling with addiction and their loved ones. You don't have to walk this road alone.</p>
+
+
             <a href="#contact" class="btn btn-accent">Get Help Today</a>
+
+
         </div>
+
+
     </section>
+
+
+
+
 
     <!-- About Section -->
+
+
     <section id="about" class="about">
+
+
         <div class="container">
+
+
             <div class="section-title">
+
+
                 <h2>About The Road to Recovery</h2>
+
+
                 <p>We are a dedicated support system committed to helping individuals overcome addiction and rebuild their lives.</p>
+
+
             </div>
+
+
             <div class="about-content">
+
+
                 <div class="about-text">
-                    <p>Addiction can feel like a lonely journey, but it doesn't have to be. The Road to Recovery was founded by people who have walked this path themselves and understand the challenges involved.</p>
+
+
+                    <p>Addiction can feel like a lonely journey, but it doesn't have to be. The Road to Recovery was founded by people who have walked this path themselves and understand the challenges you face.</p>
+
+
                     <p>Our mission is to provide compassionate support, evidence-based resources, and a community of understanding to help you or your loved one navigate the journey to recovery.</p>
-                    <p>We believe that everyone deserves a second chance and that recovery is possible with the right support system. Our team includes certified addiction counselors, peer supporters, and volunteers.</p>
+
+
+                    <p>We believe that everyone deserves a second chance and that recovery is possible with the right support system. Our team includes certified addiction counselors, peer support specialists, and volunteers who are committed to your success.</p>
+
+
                     <a href="#services" class="btn">Our Services</a>
+
+
                 </div>
+
+
                 <div class="about-image">
+
+
                     <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Support group meeting">
+
+
                 </div>
+
+
             </div>
+
+
         </div>
+
+
     </section>
+
+
+
+
 
     <!-- Services Section -->
+
+
     <section id="services" class="services">
+
+
         <div class="container">
+
+
             <div class="section-title">
+
+
                 <h2>Our Support Services</h2>
+
+
                 <p>We offer multiple ways to connect and get the support you need on your recovery journey.</p>
+
+
             </div>
+
+
             <div class="services-grid">
+
+
                 <div class="service-card">
+
+
                     <div class="service-icon">
+
+
                         <i class="fas fa-phone"></i>
+
+
                     </div>
+
+
                     <h3>One-on-One Calls</h3>
+
+
                     <p>Schedule confidential phone conversations with trained recovery specialists who can provide immediate support and guidance.</p>
+
+
                 </div>
+
+
                 <div class="service-card">
+
+
                     <div class="service-icon">
+
+
                         <i class="fas fa-video"></i>
+
+
                     </div>
+
+
                     <h3>Video Sessions</h3>
+
+
                     <p>Connect face-to-face through secure video conferencing for more personal support sessions from the comfort of your home.</p>
+
+
                 </div>
+
+
                 <div class="service-card">
+
+
                     <div class="service-icon">
+
+
                         <i class="fas fa-users"></i>
+
+
                     </div>
+
+
                     <h3>In-Person Meetings</h3>
+
+
                     <p>Join our local support groups and meet with others who are on similar journeys in safe, welcoming environments.</p>
+
+
                 </div>
+
+
                 <div class="service-card">
+
+
                     <div class="service-icon">
+
+
                         <i class="fas fa-hands-helping"></i>
+
+
                     </div>
+
+
                     <h3>Peer Support</h3>
+
+
                     <p>Connect with others who have personal experience with addiction recovery and can offer empathy and understanding.</p>
+
+
                 </div>
+
+
                 <div class="service-card">
+
+
                     <div class="service-icon">
+
+
                         <i class="fas fa-book"></i>
+
+
                     </div>
+
+
                     <h3>Educational Resources</h3>
+
+
                     <p>Access our library of materials on addiction, recovery strategies, and coping mechanisms.</p>
+
+
                 </div>
+
+
                 <div class="service-card">
+
+
                     <div class="service-icon">
+
+
                         <i class="fas fa-house-user"></i>
+
+
                     </div>
+
+
                     <h3>Treatment Referrals</h3>
+
+
                     <p>Get help finding appropriate treatment facilities and programs that match your specific needs and situation.</p>
+
+
                 </div>
+
+
             </div>
+
+
         </div>
+
+
     </section>
+
+
+
+
 
     <!-- Resources Section -->
+
+
     <section id="resources" class="resources">
+
+
         <div class="container">
+
+
             <div class="section-title">
+
+
                 <h2>Community Resources</h2>
+
+
                 <p>We've curated valuable resources to support your recovery journey.</p>
+
+
             </div>
+
+
             <div class="resources-grid">
+
+
                 <div class="resource-card">
+
+
                     <div class="resource-image">
+
+
                         <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Crisis hotline information">
+
+
                     </div>
+
+
                     <div class="resource-content">
+
+
                         <h3>24/7 Crisis Support</h3>
+
+
                         <p>Immediate help is available through these crisis hotlines and chat services whenever you need someone to talk to.</p>
+
+
                         <a href="#" class="btn">View Resources</a>
+
+
                     </div>
+
+
                 </div>
+
+
                 <div class="resource-card">
+
+
                     <div class="resource-image">
+
+
                         <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Local support groups">
+
+
                     </div>
+
+
                     <div class="resource-content">
+
+
                         <h3>Local Support Groups</h3>
+
+
                         <p>Find meetings in your area including AA, NA, SMART Recovery, and other support groups tailored to specific needs.</p>
+
+
                         <a href="#" class="btn">Find Meetings</a>
+
+
                     </div>
+
+
                 </div>
+
+
                 <div class="resource-card">
+
+
                     <div class="resource-image">
+
+
                         <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Therapy options">
+
+
                     </div>
+
+
                     <div class="resource-content">
+
+
                         <h3>Therapy Options</h3>
+
+
                         <p>Learn about different therapeutic approaches to addiction recovery and find qualified therapists in your area.</p>
+
+
                         <a href="#" class="btn">Explore Options</a>
+
+
                     </div>
+
+
                 </div>
+
+
             </div>
+
+
         </div>
+
+
     </section>
+
+
+
+
 
     <!-- Contact Section -->
+
+
     <section id="contact" class="contact">
+
+
         <div class="container">
+
+
             <div class="section-title">
+
+
                 <h2>Contact Us</h2>
+
+
                 <p>Reach out to us today to start your journey to recovery. All communications are confidential.</p>
+
+
             </div>
+
+
             <div class="contact-container">
+
+
                 <div class="contact-info">
+
+
                     <h3>Get In Touch</h3>
+
+
                     <div class="info-item">
+
+
                         <div class="info-icon">
+
+
                             <i class="fas fa-map-marker-alt"></i>
+
+
                         </div>
+
+
                         <div>
+
+
                             <h4>Location</h4>
+
+
                             <p>123 Recovery Road, Hopeville, CA 94301</p>
+
+
                         </div>
+
+
                     </div>
+
+
                     <div class="info-item">
+
+
                         <div class="info-icon">
+
+
                             <i class="fas fa-phone"></i>
+
+
                         </div>
+
+
                         <div>
+
+
                             <h4>Call Us</h4>
+
+
                             <p>(555) 123-HELP</p>
+
+
                             <p>24/7 Support Line: (555) 999-HELP</p>
+
+
                         </div>
+
+
                     </div>
+
+
                     <div class="info-item">
+
+
                         <div class="info-icon">
+
+
                             <i class="fas fa-envelope"></i>
+
+
                         </div>
+
+
                         <div>
+
+
                             <h4>Email Us</h4>
+
+
                             <p>support@roadtorecovery.org</p>
+
+
                         </div>
+
+
                     </div>
+
+
                     <div class="info-item">
+
+
                         <div class="info-icon">
+
+
                             <i class="fas fa-clock"></i>
+
+
                         </div>
+
+
                         <div>
+
+
                             <h4>Office Hours</h4>
+
+
                             <p>Monday-Friday: 9am - 7pm</p>
+
+
                             <p>Weekends: 10am - 4pm</p>
+
+
                         </div>
+
+
                     </div>
+
+
                 </div>
+
+
                 <div class="contact-form">
+
+
                     <h3>Send Us a Message</h3>
+
+
                     <form id="contactForm">
+
+
                         <div class="form-group">
+
+
                             <label for="name">Your Name</label>
+
+
                             <input type="text" id="name" name="name" required>
+
+
                         </div>
+
+
                         <div class="form-group">
+
+
                             <label for="email">Your Email</label>
+
+
                             <input type="email" id="email" name="email" required>
+
+
                         </div>
+
+
                         <div class="form-group">
+
+
                             <label for="phone">Your Phone (optional)</label>
+
+
                             <input type="tel" id="phone" name="phone">
+
+
                         </div>
+
+
                         <div class="form-group">
+
+
                             <label for="preferred-contact">Preferred Contact Method</label>
+
+
                             <select id="preferred-contact" name="preferred-contact">
+
+
                                 <option value="email">Email</option>
+
+
                                 <option value="phone">Phone Call</option>
+
+
                                 <option value="text">Text Message</option>
+
+
                             </select>
+
+
                         </div>
+
+
                         <div class="form-group">
+
+
                             <label for="message">Your Message</label>
+
+
                             <textarea id="message" name="message" required></textarea>
+
+
                         </div>
+
+
                         <button type="submit" class="btn">Send Message</button>
+
+
                     </form>
+
+
                 </div>
+
+
             </div>
+
+
         </div>
+
+
     </section>
+
+
+
+
 
     <!-- Newsletter Section -->
+
+
     <section class="newsletter">
+
+
         <div class="container">
+
+
             <div class="section-title">
+
+
                 <h2>Stay Connected</h2>
+
+
                 <p>Subscribe to our newsletter for updates, resources, and inspiration on the journey to recovery.</p>
+
+
             </div>
+
+
             <form class="newsletter-form">
+
+
                 <input type="email" placeholder="Enter your email address" required>
+
+
                 <button type="submit" class="btn btn-accent">Subscribe</button>
+
+
             </form>
+
+
         </div>
+
+
     </section>
 
+
+
+
+
     <!-- Footer -->
+
+
     <footer>
+
+
         <div class="container">
+
+
             <div class="footer-container">
+
+
                 <div class="footer-section">
+
+
                     <h3>The Road to Recovery</h3>
+
+
                     <p>Providing support, resources, and hope for those affected by addiction.</p>
+
+
                     <div class="social-links">
+
+
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
+
+
                         <a href="#"><i class="fab fa-twitter"></i></a>
+
+
                         <a href="#"><i class="fab fa-instagram"></i></a>
+
+
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
+
+
                     </div>
+
+
                 </div>
+
+
                 <div class="footer-section">
+
+
                     <h3>Quick Links</h3>
+
+
                     <ul class="footer-links">
+
+
                         <li><a href="#home">Home</a></li>
+
+
                         <li><a href="#about">About Us</a></li>
+
+
                         <li><a href="#services">Services</a></li>
+
+
                         <li><a href="#resources">Resources</a></li>
+
+
                         <li><a href="#contact">Contact</a></li>
+
+
                     </ul>
+
+
                 </div>
+
+
                 <div class="footer-section">
+
+
                     <h3>Resources</h3>
+
+
                     <ul class="footer-links">
+
+
                         <li><a href="#">Crisis Help</a></li>
+
+
                         <li><a href="#">Support Groups</a></li>
+
+
                         <li><a href="#">Treatment Options</a></li>
+
+
                         <li><a href="#">Blog & Articles</a></li>
+
+
                         <li><a href="#">FAQ</a></li>
+
+
                     </ul>
+
+
                 </div>
+
+
                 <div class="footer-section">
+
+
                     <h3>Emergency Contacts</h3>
+
+
                     <p>National Suicide Prevention Lifeline: 988</p>
+
+
                     <p>Substance Abuse Helpline: 1-800-662-HELP (4357)</p>
+
+
                     <p>Crisis Text Line: Text HOME to 741741</p>
+
+
                 </div>
+
+
             </div>
+
+
             <div class="copyright">
+
+
                 <p>&copy; 2023 The Road to Recovery. All rights reserved.</p>
+
+
             </div>
+
+
         </div>
+
+
     </footer>
 
+
+
+
+
     <script>
+
+
         // Simple form validation and submission handling
+
+
         document.addEventListener('DOMContentLoaded', function() {
+
+
             const contactForm = document.getElementById('contactForm');
+
+
             const newsletterForm = document.querySelector('.newsletter-form');
+
+
             
+
+
             if (contactForm) {
+
+
                 contactForm.addEventListener('submit', function(e) {
+
+
                     e.preventDefault();
+
+
                     alert('Thank you for reaching out. We will contact you soon!');
+
+
                     contactForm.reset();
+
+
                 });
+
+
             }
+
+
             
+
+
             if (newsletterForm) {
+
+
                 newsletterForm.addEventListener('submit', function(e) {
+
+
                     e.preventDefault();
+
+
                     alert('Thank you for subscribing to our newsletter!');
+
+
                     newsletterForm.reset();
+
+
                 });
+
+
             }
+
+
             
+
+
             // Smooth scrolling for navigation links
+
+
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+
                 anchor.addEventListener('click', function (e) {
+
+
                     e.preventDefault();
+
+
                     
+
+
                     const targetId = this.getAttribute('href');
+
+
                     if (targetId === '#') return;
+
+
                     
+
+
                     const targetElement = document.querySelector(targetId);
+
+
                     if (targetElement) {
+
+
                         window.scrollTo({
+
+
                             top: targetElement.offsetTop - 80,
+
+
                             behavior: 'smooth'
+
+
                         });
+
+
                     }
+
+
                 });
+
+
             });
+
+
         });
+
+
     </script>
+
+
 </body>
+
+
 </html>
