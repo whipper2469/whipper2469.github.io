@@ -73,6 +73,14 @@
             padding: 0 1.5rem;
         }
         
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
         .hero {
             background: linear-gradient(rgba(26, 42, 108, 0.8), rgba(58, 97, 134, 0.8)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%233a6186"/><path d="M0 0L100 100" stroke="%231a2a6c" stroke-width="2"/><path d="M100 0L0 100" stroke="%231a2a6c" stroke-width="2"/></svg>');
             background-size: cover;
@@ -192,7 +200,7 @@
             font-weight: 500;
         }
         
-        .form-group input {
+        .form-group input, .form-group textarea, .form-group select {
             width: 100%;
             padding: 0.8rem;
             border: 1px solid #ddd;
@@ -220,6 +228,55 @@
             font-size: 2.5rem;
             color: #3a6186;
             margin-bottom: 1rem;
+        }
+        
+        /* Dashboard Styles */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress-container {
+            background: #f1f1f1;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        
+        .progress-bar {
+            height: 20px;
+            background: #3a6186;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+            line-height: 20px;
+            transition: width 0.3s;
+        }
+        
+        .goal-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .goal-list li {
+            padding: 0.5rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .goal-list li.completed {
+            text-decoration: line-through;
+            color: #888;
         }
         
         /* Chatbot */
@@ -363,41 +420,6 @@
             cursor: pointer;
         }
         
-        /* User Dashboard */
-        .dashboard {
-            display: none;
-            background-color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 3rem;
-        }
-        
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-        
-        .user-info {
-            display: flex;
-            align-items: center;
-        }
-        
-        .user-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: #3a6186;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            margin-right: 1rem;
-        }
-        
         /* Responsive Design */
         @media (max-width: 768px) {
             nav ul {
@@ -408,7 +430,7 @@
                 font-size: 2rem;
             }
             
-            .blog-grid {
+            .blog-grid, .dashboard-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -611,39 +633,76 @@
 
         <!-- Dashboard Page -->
         <section id="dashboard-page" class="page">
-            <h2 class="section-title">Your Dashboard</h2>
-            <div class="dashboard" id="user-dashboard">
-                <div class="dashboard-header">
-                    <div class="user-info">
-                        <div class="user-avatar" id="user-avatar">JD</div>
-                        <div>
-                            <h3 id="dashboard-username">John Doe</h3>
-                            <p id="dashboard-email">john@example.com</p>
-                        </div>
+            <h2 class="section-title">Your Recovery Dashboard</h2>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>Recovery Progress</h3>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="recovery-progress" style="width: 30%;">30%</div>
                     </div>
-                    <button class="btn" id="edit-profile">Edit Profile</button>
+                    <p>You're making progress! Keep taking it one day at a time.</p>
+                    <button class="btn" id="update-progress">Update Progress</button>
                 </div>
                 
-                <h3>Your Resources</h3>
-                <div class="resources">
-                    <div class="resource-card">
-                        <i class="fas fa-book"></i>
-                        <h4>Recovery Plan</h4>
-                        <p>Your personalized recovery roadmap</p>
-                        <a href="#" class="btn">View Plan</a>
+                <div class="dashboard-card">
+                    <h3>Gamble-Free Days</h3>
+                    <h2 id="gamble-free-days">7</h2>
+                    <p>Days since your last gambling activity</p>
+                    <button class="btn" id="reset-counter">Reset Counter</button>
+                    <button class="btn" id="increment-counter">+1 Day</button>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3>My Goals</h3>
+                    <ul class="goal-list" id="goal-list">
+                        <li class="completed">Find a support group</li>
+                        <li class="completed">Install gambling blockers</li>
+                        <li>Talk to a financial counselor</li>
+                        <li>30 days gamble-free</li>
+                    </ul>
+                    <div class="form-group">
+                        <input type="text" id="new-goal" placeholder="Add a new goal">
+                        <button class="btn" id="add-goal">Add Goal</button>
                     </div>
-                    <div class="resource-card">
-                        <i class="fas fa-chart-line"></i>
-                        <h4>Progress Tracker</h4>
-                        <p>Track your recovery journey</p>
-                        <a href="#" class="btn">View Progress</a>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3>Next Steps</h3>
+                    <p>Based on your progress, here's what we recommend:</p>
+                    <ul>
+                        <li>Schedule a meeting with a financial advisor</li>
+                        <li>Join our Thursday support group</li>
+                        <li>Read "The First 90 Days of Recovery"</li>
+                    </ul>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3>My Action Plan</h3>
+                    <div class="form-group">
+                        <label for="action-steps">Steps I'm taking this week:</label>
+                        <textarea id="action-steps" rows="4">- Attend 2 support meetings
+- Exercise for 30 minutes daily
+- Call my accountability partner every day</textarea>
                     </div>
-                    <div class="resource-card">
-                        <i class="fas fa-calendar"></i>
-                        <h4>Support Schedule</h4>
-                        <p>Upcoming meetings and sessions</p>
-                        <a href="#" class="btn">View Schedule</a>
+                    <button class="btn" id="save-actions">Save Actions</button>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3>My Profile</h3>
+                    <div class="form-group">
+                        <label for="user-name">Name</label>
+                        <input type="text" id="user-name" value="John Doe">
                     </div>
+                    <div class="form-group">
+                        <label for="user-email">Email</label>
+                        <input type="email" id="user-email" value="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="user-recovery-date">Recovery Start Date</label>
+                        <input type="date" id="user-recovery-date" value="2023-09-01">
+                    </div>
+                    <button class="btn" id="save-profile">Save Profile</button>
                 </div>
             </div>
         </section>
@@ -689,8 +748,6 @@
             <h2>The Financial Ruin of Gambling Addiction</h2>
             <p>Gambling addiction can quickly spiral into financial catastrophe. Many addicts exhaust their savings, max out credit cards, take out predatory loans, and even resort to illegal activities to fund their addiction.</p>
             <p>The average problem gambler accumulates debts between $40,000 and $90,000, often hidden from family members until it's too late. This debt burden creates immense stress and can lead to bankruptcy, home foreclosure, and inability to meet basic living expenses.</p>
-            <p>Online casinos have exacerbated this problem by making gambling accessible 24/7 and implementing deceptive practices that disguise transactions. Many banks are unaware that their customers are gambling because casinos use merchant codes that make purchases appear as regular retail transactions.</p>
-            <p>Recovery involves not only addressing the gambling behavior but also creating a sustainable plan to manage debt and rebuild financial stability. Financial counseling, debt management programs, and transparency with family members are crucial steps in this process.</p>
         </div>
     </div>
 
@@ -700,8 +757,6 @@
             <h2>How Gambling Destroys Families</h2>
             <p>Beyond the financial devastation, gambling addiction fractures family relationships. The secrecy, lies, and broken promises erode trust between partners, parents and children, and among extended family.</p>
             <p>Children of gambling addicts often experience neglect, emotional trauma, and financial instability. They may witness arguments about money, experience frequent moves or housing insecurity, and suffer from the emotional absence of the addicted parent.</p>
-            <p>Partners of gambling addicts report high levels of stress, anxiety, and depression. Many feel betrayed not only by the financial deception but also by the prioritization of gambling over family needs and relationships.</p>
-            <p>Recovery requires rebuilding trust through consistent honesty, attending family therapy, and making amends for past behaviors. Support groups for family members can provide crucial emotional support and coping strategies.</p>
         </div>
     </div>
 
@@ -711,15 +766,6 @@
             <h2>The Tricks Online Casinos Use</h2>
             <p>Online casinos have developed sophisticated methods to bypass banking security measures and deceive financial institutions. Many use disguised merchant codes that make gambling transactions appear as regular retail purchases.</p>
             <p>This manipulation prevents banks from flagging gambling activity and circumvents self-exclusion protocols that customers may have set up with their financial institutions. Some casinos even use multiple merchant names and codes to avoid detection.</p>
-            <p>Other deceptive practices include:</p>
-            <ul>
-                <li>Offering "free play" that requires credit card information</li>
-                <li>Using psychological nudges and personalized incentives to encourage continued play</li>
-                <li>Making it difficult to find information about odds and actual payout rates</li>
-                <li>Creating false urgency with limited-time offers</li>
-                <li>Designing games with near-misses that encourage continued spending</li>
-            </ul>
-            <p>Regulatory bodies are struggling to keep up with these practices, highlighting the need for increased consumer awareness and stronger protections.</p>
         </div>
     </div>
 
@@ -728,10 +774,6 @@
             <span class="close-modal" data-blog="4">×</span>
             <h2>Recovery Stories: Finding Hope</h2>
             <p>Mark had lost everything - his job, his home, and nearly his family. After maxing out seven credit cards and draining his children's college fund, he hit rock bottom. Through our support community and professional counseling, Mark has been gamble-free for 18 months.</p>
-            <p>"The turning point was when my daughter asked if we were going to be homeless for Christmas," Mark shares. "I realized my addiction wasn't just hurting me - it was destroying everyone I loved."</p>
-            <p>Sarah's story began with seemingly harmless online slot games during pandemic lockdowns. Within six months, she had accumulated $65,000 in debt and was contemplating suicide. Today, she leads one of our support groups and helps others navigate the early stages of recovery.</p>
-            <p>"Recovery isn't linear," Sarah notes. "There are good days and challenging days. But having a community that understands the struggle makes all the difference."</p>
-            <p>These stories highlight that recovery is possible with the right support system, professional help, and personal commitment to change.</p>
         </div>
     </div>
 
@@ -741,14 +783,11 @@
             <h2>Protecting Your Finances from Gambling</h2>
             <p>If you or a loved one struggles with gambling addiction, implementing financial safeguards is crucial. Consider these strategies:</p>
             <ol>
-                <li>Set up accountability with your bank: Many financial institutions now offer gambling blocking services or can set up alerts for suspicious transactions.</li>
-                <li>Use prepaid cards instead of credit cards: Limit access to large sums of money by using reloadable cards with predetermined limits.</li>
-                <li>Implement dual authorization: Require two people to approve large withdrawals or transfers.</li>
-                <li>Direct deposit allocation: Have your paycheck automatically distributed to necessary accounts before you can access it for discretionary spending.</li>
-                <li>Freeze your credit: This prevents applying for new credit cards or loans without lifting the freeze.</li>
+                <li>Set up accountability with your bank</li>
+                <li>Use prepaid cards instead of credit cards</li>
+                <li>Implement dual authorization for large transactions</li>
+                <li>Direct deposit allocation to limit accessible funds</li>
             </ol>
-            <p>Additionally, consider working with a financial counselor who specializes in addiction recovery. They can help create a debt management plan, negotiate with creditors, and establish a sustainable budget.</p>
-            <p>Transparency with a trusted family member or friend about your financial situation can provide accountability and support during vulnerable moments.</p>
         </div>
     </div>
 
@@ -757,20 +796,14 @@
             <span class="close-modal" data-blog="6">×</span>
             <h2>Legal Actions Against Predatory Casinos</h2>
             <p>There's a growing movement to hold online casinos accountable for their deceptive practices. Class action lawsuits are being filed against operators who disguise gambling transactions and target vulnerable populations.</p>
-            <p>Several countries have tightened regulations, but offshore casinos continue to exploit loopholes. Recent legal actions have focused on:</p>
-            <ul>
-                <li>False advertising regarding odds and potential winnings</li>
-                <li>Targeting individuals who have self-excluded from gambling</li>
-                <li>Disguising transactions to circumvent banking protections</li>
-                <li>Failure to implement responsible gambling safeguards</li>
-                <li>Accessing markets where online gambling is prohibited</li>
-            </ul>
-            <p>These legal challenges have resulted in significant settlements and increased scrutiny of industry practices. However, enforcement remains challenging due to the international nature of online gambling and varying regulatory frameworks across jurisdictions.</p>
-            <p>Consumer advocacy groups are pushing for stronger regulations, including standardized merchant codes for gambling transactions, mandatory spending limits, and clearer disclosure of odds and risks.</p>
         </div>
     </div>
 
     <script>
+        // User Management System
+        let currentUser = null;
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        
         // Page Navigation
         document.querySelectorAll('a[data-page]').forEach(link => {
             link.addEventListener('click', function(e) {
@@ -792,30 +825,130 @@
             });
         });
 
-        // Blog Modals
-        document.querySelectorAll('.read-more[data-blog]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const blogId = this.getAttribute('data-blog');
-                document.getElementById(`blog-modal-${blogId}`).style.display = 'flex';
+        // Initialize page navigation
+        function initNavigation() {
+            // Set up page navigation
+            document.querySelectorAll('a[data-page]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    showPage(pageId);
+                });
             });
-        });
+            
+            // Set up blog modal navigation
+            document.querySelectorAll('.read-more[data-blog]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const blogId = this.getAttribute('data-blog');
+                    document.getElementById(`blog-modal-${blogId}`).style.display = 'flex';
+                });
+            });
+            
+            // Close modals
+            document.querySelectorAll('.close-modal').forEach(button => {
+                button.addEventListener('click', function() {
+                    const blogId = this.getAttribute('data-blog');
+                    document.getElementById(`blog-modal-${blogId}`).style.display = 'none';
+                });
+            });
+            
+            // Close modal when clicking outside content
+            window.addEventListener('click', function(e) {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            });
+        }
 
-        document.querySelectorAll('.close-modal').forEach(button => {
-            button.addEventListener('click', function() {
-                const blogId = this.getAttribute('data-blog');
-                document.getElementById(`blog-modal-${blogId}`).style.display = 'none';
+        // Show specific page
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
             });
-        });
+            
+            // Show selected page
+            document.getElementById(`${pageId}-page`).classList.add('active');
+        }
 
-        // Close modal when clicking outside content
-        window.addEventListener('click', function(e) {
-            document.querySelectorAll('.modal').forEach(modal => {
-                if (e.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
-        });
+        // Update UI based on authentication status
+        function updateUIForAuth() {
+            if (currentUser) {
+                // User is logged in
+                document.getElementById('signup-link').style.display = 'none';
+                document.getElementById('login-link').style.display = 'none';
+                document.getElementById('dashboard-link').style.display = 'block';
+                document.getElementById('logout-link').style.display = 'block';
+                
+                // Load user data into dashboard
+                loadUserDashboard();
+            } else {
+                // User is not logged in
+                document.getElementById('signup-link').style.display = 'block';
+                document.getElementById('login-link').style.display = 'block';
+                document.getElementById('dashboard-link').style.display = 'none';
+                document.getElementById('logout-link').style.display = 'none';
+            }
+        }
+
+        // Load user data into dashboard
+        function loadUserDashboard() {
+            if (!currentUser) return;
+            
+            // Load user profile data
+            document.getElementById('user-name').value = currentUser.name || '';
+            document.getElementById('user-email').value = currentUser.email || '';
+            document.getElementById('user-recovery-date').value = currentUser.recoveryDate || '';
+            
+            // Load gamble-free days
+            if (currentUser.recoveryDate) {
+                const startDate = new Date(currentUser.recoveryDate);
+                const today = new Date();
+                const diffTime = Math.abs(today - startDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                document.getElementById('gamble-free-days').textContent = diffDays;
+            }
+            
+            // Load goals
+            if (currentUser.goals) {
+                const goalList = document.getElementById('goal-list');
+                goalList.innerHTML = '';
+                currentUser.goals.forEach(goal => {
+                    const li = document.createElement('li');
+                    li.textContent = goal.text;
+                    if (goal.completed) {
+                        li.classList.add('completed');
+                    }
+                    goalList.appendChild(li);
+                });
+            }
+            
+            // Load action steps
+            if (currentUser.actionSteps) {
+                document.getElementById('action-steps').value = currentUser.actionSteps;
+            }
+            
+            // Load progress
+            if (currentUser.progress) {
+                document.getElementById('recovery-progress').style.width = `${currentUser.progress}%`;
+                document.getElementById('recovery-progress').textContent = `${currentUser.progress}%`;
+            }
+        }
+
+        // Save user data to localStorage
+        function saveUserData() {
+            if (!currentUser) return;
+            
+            // Find user in array and update
+            const index = users.findIndex(u => u.email === currentUser.email);
+            if (index !== -1) {
+                users[index] = currentUser;
+                localStorage.setItem('users', JSON.stringify(users));
+            }
+        }
 
         // Forms
         document.getElementById('newsletter-form').addEventListener('submit', function(e) {
@@ -825,10 +958,7 @@
             this.reset();
         });
 
-        // User Authentication
-        let currentUser = null;
-        const users = JSON.parse(localStorage.getItem('users')) || [];
-
+        // Signup form
         document.getElementById('signup-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('signup-name').value;
@@ -842,8 +972,23 @@
                 return;
             }
 
-            // Create new user
-            const newUser = { name, email, password, phone };
+            // Create new user with default data
+            const newUser = { 
+                name, 
+                email, 
+                password, 
+                phone,
+                recoveryDate: new Date().toISOString().split('T')[0],
+                progress: 30,
+                goals: [
+                    { text: "Find a support group", completed: true },
+                    { text: "Install gambling blockers", completed: true },
+                    { text: "Talk to a financial counselor", completed: false },
+                    { text: "30 days gamble-free", completed: false }
+                ],
+                actionSteps: "- Attend 2 support meetings\n- Exercise for 30 minutes daily\n- Call my accountability partner every day"
+            };
+            
             users.push(newUser);
             localStorage.setItem('users', JSON.stringify(users));
             
@@ -855,10 +1000,10 @@
             this.reset();
             
             // Show dashboard
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.getElementById('dashboard-page').classList.add('active');
+            showPage('dashboard');
         });
 
+        // Login form
         document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const email = document.getElementById('login-email').value;
@@ -874,8 +1019,7 @@
                 this.reset();
                 
                 // Show dashboard
-                document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-                document.getElementById('dashboard-page').classList.add('active');
+                showPage('dashboard');
             } else {
                 alert('Invalid email or password. Please try again.');
             }
@@ -889,38 +1033,91 @@
             alert('You have been logged out successfully.');
             
             // Show home page
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.getElementById('home-page').classList.add('active');
+            showPage('home');
         });
 
-        function updateUIForAuth() {
-            if (currentUser) {
-                // User is logged in
-                document.getElementById('signup-link').style.display = 'none';
-                document.getElementById('login-link').style.display = 'none';
-                document.getElementById('dashboard-link').style.display = 'block';
-                document.getElementById('logout-link').style.display = 'block';
-                
-                // Update dashboard
-                document.getElementById('dashboard-username').textContent = currentUser.name;
-                document.getElementById('dashboard-email').textContent = currentUser.email;
-                document.getElementById('user-avatar').textContent = currentUser.name.split(' ').map(n => n[0]).join('').toUpperCase();
-                document.getElementById('user-dashboard').style.display = 'block';
-            } else {
-                // User is not logged in
-                document.getElementById('signup-link').style.display = 'block';
-                document.getElementById('login-link').style.display = 'block';
-                document.getElementById('dashboard-link').style.display = 'none';
-                document.getElementById('logout-link').style.display = 'none';
-                document.getElementById('user-dashboard').style.display = 'none';
-            }
-        }
+        // Dashboard functionality
+        document.getElementById('save-profile').addEventListener('click', function() {
+            if (!currentUser) return;
+            
+            currentUser.name = document.getElementById('user-name').value;
+            currentUser.email = document.getElementById('user-email').value;
+            currentUser.recoveryDate = document.getElementById('user-recovery-date').value;
+            
+            saveUserData();
+            alert('Profile updated successfully!');
+        });
 
-        // Check if user is already logged in on page load
-        window.addEventListener('DOMContentLoaded', function() {
-            // For demo purposes, we're not persisting login state
-            // In a real application, you would check for a stored token or session
-            updateUIForAuth();
+        document.getElementById('add-goal').addEventListener('click', function() {
+            if (!currentUser) return;
+            
+            const newGoalText = document.getElementById('new-goal').value;
+            if (!newGoalText) return;
+            
+            if (!currentUser.goals) currentUser.goals = [];
+            currentUser.goals.push({ text: newGoalText, completed: false });
+            
+            saveUserData();
+            loadUserDashboard();
+            document.getElementById('new-goal').value = '';
+        });
+
+        document.getElementById('save-actions').addEventListener('click', function() {
+            if (!currentUser) return;
+            
+            currentUser.actionSteps = document.getElementById('action-steps').value;
+            saveUserData();
+            alert('Action steps saved successfully!');
+        });
+
+        document.getElementById('update-progress').addEventListener('click', function() {
+            if (!currentUser) return;
+            
+            const newProgress = prompt('Enter your recovery progress (0-100%):', currentUser.progress || '30');
+            if (newProgress !== null) {
+                const progressValue = parseInt(newProgress);
+                if (!isNaN(progressValue) && progressValue >= 0 && progressValue <= 100) {
+                    currentUser.progress = progressValue;
+                    saveUserData();
+                    loadUserDashboard();
+                } else {
+                    alert('Please enter a valid number between 0 and 100.');
+                }
+            }
+        });
+
+        document.getElementById('reset-counter').addEventListener('click', function() {
+            if (!currentUser) return;
+            
+            if (confirm('Reset your gamble-free days counter to 0?')) {
+                currentUser.recoveryDate = new Date().toISOString().split('T')[0];
+                saveUserData();
+                loadUserDashboard();
+            }
+        });
+
+        document.getElementById('increment-counter').addEventListener('click', function() {
+            if (!currentUser || !currentUser.recoveryDate) return;
+            
+            const recoveryDate = new Date(currentUser.recoveryDate);
+            recoveryDate.setDate(recoveryDate.getDate() - 1);
+            currentUser.recoveryDate = recoveryDate.toISOString().split('T')[0];
+            saveUserData();
+            loadUserDashboard();
+        });
+
+        // Toggle goal completion
+        document.getElementById('goal-list').addEventListener('click', function(e) {
+            if (e.target.tagName === 'LI' && currentUser && currentUser.goals) {
+                const goalText = e.target.textContent;
+                const goalIndex = currentUser.goals.findIndex(g => g.text === goalText);
+                
+                if (goalIndex !== -1) {
+                    currentUser.goals[goalIndex].completed = !currentUser.goals[goalIndex].completed;
+                    saveUserData();
+                    loadUserDashboard();
+                }
+            }
         });
 
         // Chatbot functionality
@@ -999,9 +1196,25 @@
             }
         });
 
-        // Initialize with no user logged in
-        currentUser = null;
-        updateUIForAuth();
+        // Initialize the application
+        function initApp() {
+            initNavigation();
+            updateUIForAuth();
+            
+            // Check if user was previously logged in (for demo purposes)
+            // In a real application, you would use more secure methods
+            const lastUserEmail = localStorage.getItem('lastUserEmail');
+            if (lastUserEmail) {
+                const user = users.find(u => u.email === lastUserEmail);
+                if (user) {
+                    currentUser = user;
+                    updateUIForAuth();
+                }
+            }
+        }
+
+        // Start the application
+        initApp();
     </script>
 </body>
 </html>
