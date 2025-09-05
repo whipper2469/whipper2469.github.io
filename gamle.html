@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recovery Path - Gambling Addiction Support</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #1a2a6c, #3a6186);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ffcc00;
+        }
+        
+        /* Main Content Styles */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(26, 42, 108, 0.8), rgba(58, 97, 134, 0.8)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%233a6186"/><path d="M0 0L100 100" stroke="%231a2a6c" stroke-width="2"/><path d="M100 0L0 100" stroke="%231a2a6c" stroke-width="2"/></svg>');
+            background-size: cover;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #ffcc00;
+            color: #1a2a6c;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #ffd633;
+            transform: translateY(-3px);
+        }
+        
+        /* Section Styles */
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1a2a6c;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: #ffcc00;
+            border-radius: 2px;
+        }
+        
+        /* Blog Section */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .blog-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .blog-content {
+            padding: 1.5rem;
+        }
+        
+        .blog-content h3 {
+            color: #1a2a6c;
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-content p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .read-more {
+            color: #3a6186;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        /* Forms */
+        .form-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        /* Resources Section */
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .resource-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .resource-card i {
+            font-size: 2.5rem;
+            color: #3a6186;
+            margin-bottom: 1rem;
+        }
+        
+        /* Chatbot */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .chatbot-header {
+            background-color: #1a2a6c;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chatbot-messages {
+            padding: 1rem;
+            height: 300px;
+            overflow-y: auto;
+        }
+        
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+        
+        .bot-message {
+            background-color: #f1f1f1;
+            align-self: flex-start;
+        }
+        
+        .user-message {
+            background-color: #3a6186;
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        
+        .chatbot-input {
+            display: flex;
+            padding: 0.5rem;
+            border-top: 1px solid #ddd;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            margin-right: 0.5rem;
+        }
+        
+        .chatbot-btn {
+            background-color: #1a2a6c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+        
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #1a2a6c;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #1a2a6c;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .contact-info {
+            margin: 1rem 0;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .close-modal {
+            float: right;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chatbot-container {
+                width: 90%;
+                right: 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">Recovery Path</a>
+            <nav>
+                <ul>
+                    <li><a href="#" data-page="home">Home</a></li>
+                    <li><a href="#" data-page="blog">Blog</a></li>
+                    <li><a href="#" data-page="resources">Resources</a></li>
+                    <li><a href="#" data-page="signup">Sign Up</a></li>
+                    <li><a href="#" data-page="login">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Home Page -->
+        <section id="home-page" class="page active">
+            <div class="hero">
+                <h1>Breaking Free From Gambling Addiction</h1>
+                <p>Gambling doesn't just hurt you - it devastates families, destroys finances, and exploits vulnerable people. Together, we can fight back against predatory online casinos.</p>
+                <a href="#" class="btn" data-page="signup">Join Our Community</a>
+            </div>
+
+            <h2 class="section-title">How Gambling Hurts Families and Finances</h2>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-content">
+                        <h3>The Financial Ruin</h3>
+                        <p>Gambling addiction can lead to catastrophic financial losses, debt, bankruptcy, and even loss of homes and livelihoods.</p>
+                        <a href="#" class="read-more" data-page="blog">Read More</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-content">
+                        <h3>Family Strain</h3>
+                        <p>Relationships suffer as trust is broken, leading to conflict, separation, and sometimes divorce.</p>
+                        <a href="#" class="read-more" data-page="blog">Read More</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-content">
+                        <h3>Emotional Toll</h3>
+                        <p>The constant stress and anxiety take a severe toll on mental health for both the gambler and their loved ones.</p>
+                        <a href="#" class="read-more" data-page="blog">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Newsletter Signup</h2>
+            <div class="form-container">
+                <form id="newsletter-form">
+                    <div class="form-group">
+                        <label for="newsletter-email">Email Address</label>
+                        <input type="email" id="newsletter-email" required placeholder="Enter your email">
+                    </div>
+                    <button type="submit" class="btn">Subscribe</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Blog Page -->
+        <section id="blog-page" class="page">
+            <h2 class="section-title">Blog Posts</h2>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-content">
+                        <h3>The Financial Ruin of Gambling Addiction</h3>
+                        <p>Gambling addiction can quickly spiral into financial catastrophe. Many addicts exhaust their savings, max out credit cards, take out predatory loans, and even resort to illegal activities to fund their addiction. The average problem gambler accumulates debts between $40,000 and $90,000...</p>
+                        <a href="#" class="read-more" data-blog="1">Read Full Article</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-content">
+                        <h3>How Gambling Destroys Families</h3>
+                        <p>Beyond the financial devastation, gambling addiction fractures family relationships. The secrecy, lies, and broken promises erode trust between partners, parents and children, and among extended family. Children of gambling addicts often experience neglect, emotional trauma, and financial instability...</p>
+                        <a href="#" class="read-more" data-blog="2">Read Full Article</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-content">
+                        <h3>The Tricks Online Casinos Use</h3>
+                        <p>Online casinos have developed sophisticated methods to bypass banking security measures and deceive financial institutions. Many use disguised merchant codes that make gambling transactions appear as regular retail purchases. This manipulation prevents banks from flagging gambling activity and circumvents self-exclusion protocols...</p>
+                        <a href="#" class="read-more" data-blog="3">Read Full Article</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-content">
+                        <h3>Recovery Stories: Finding Hope</h3>
+                        <p>Mark had lost everything - his job, his home, and nearly his family. After maxing out seven credit cards and draining his children's college fund, he hit rock bottom. Through our support community and professional counseling, Mark has been gamble-free for 18 months...</p>
+                        <a href="#" class="read-more" data-blog="4">Read Full Article</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-content">
+                        <h3>Protecting Your Finances from Gambling</h3>
+                        <p>If you or a loved one struggles with gambling addiction, implementing financial safeguards is crucial. Consider setting up accountability with your bank, using prepaid cards instead of credit cards, and limiting access to large sums of money. Many banks now offer gambling blocking services...</p>
+                        <a href="#" class="read-more" data-blog="5">Read Full Article</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-content">
+                        <h3>Legal Actions Against Predatory Casinos</h3>
+                        <p>There's a growing movement to hold online casinos accountable for their deceptive practices. Class action lawsuits are being filed against operators who disguise gambling transactions and target vulnerable populations. Several countries have tightened regulations, but offshore casinos continue to exploit loopholes...</p>
+                        <a href="#" class="read-more" data-blog="6">Read Full Article</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Page -->
+        <section id="resources-page" class="page">
+            <h2 class="section-title">Helpful Resources</h2>
+            <div class="resources">
+                <div class="resource-card">
+                    <h3>Crisis Helplines</h3>
+                    <p>24/7 support from trained counselors specializing in gambling addiction</p>
+                    <a href="#" class="btn">View Numbers</a>
+                </div>
+                <div class="resource-card">
+                    <h3>Therapy Options</h3>
+                    <p>Find certified therapists specializing in gambling addiction treatment</p>
+                    <a href="#" class="btn">Find Help</a>
+                </div>
+                <div class="resource-card">
+                    <h3>Financial Counseling</h3>
+                    <p>Professional help to manage debt and rebuild your finances</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+                <div class="resource-card">
+                    <h3>Support Groups</h3>
+                    <p>Local and online meetings for those affected by gambling addiction</p>
+                    <a href="#" class="btn">Find Meetings</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Signup Page -->
+        <section id="signup-page" class="page">
+            <h2 class="section-title">Create an Account</h2>
+            <div class="form-container">
+                <form id="signup-form">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email Address</label>
+                        <input type="email" id="signup-email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" required placeholder="Create a password">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-phone">Phone Number (Optional)</label>
+                        <input type="tel" id="signup-phone" placeholder="Enter your phone number">
+                    </div>
+                    <button type="submit" class="btn">Create Account</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Login Page -->
+        <section id="login-page" class="page">
+            <h2 class="section-title">Login to Your Account</h2>
+            <div class="form-container">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" id="login-email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required placeholder="Enter your password">
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Chatbot -->
+    <div class="chatbot-toggle" id="chatbot-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+    </div>
+
+    <div class="chatbot-container" id="chatbot-container">
+        <div class="chatbot-header">
+            <h3>Support Chat</h3>
+            <span id="close-chatbot">×</span>
+        </div>
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="message bot-message">Hello! I'm here to help with questions about gambling addiction support. How can I assist you today?</div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbot-input" placeholder="Type your message here...">
+            <button class="chatbot-btn" id="send-message">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>Recovery Path - Gambling Addiction Support</p>
+            <div class="contact-info">
+                <p>Email: <a href="mailto:kevin.roy8@icloud.com" style="color: #ffcc00;">kevin.roy8@icloud.com</a></p>
+                <p>Phone: <a href="tel:1-519-589-0620" style="color: #ffcc00;">1-519-589-0620</a></p>
+            </div>
+            <p>&copy; 2023 Recovery Path. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Blog Modals -->
+    <div class="modal" id="blog-modal-1">
+        <div class="modal-content">
+            <span class="close-modal" data-blog="1">×</span>
+            <h2>The Financial Ruin of Gambling Addiction</h2>
+            <p>Gambling addiction can quickly spiral into financial catastrophe. Many addicts exhaust their savings, max out credit cards, take out predatory loans, and even resort to illegal activities to fund their addiction.</p>
+            <p>The average problem gambler accumulates debts between $40,000 and $90,000, often hidden from family members until it's too late. This debt burden creates immense stress and can lead to bankruptcy, home foreclosure, and inability to meet basic living expenses.</p>
+            <p>Online casinos have exacerbated this problem by making gambling accessible 24/7 and implementing deceptive practices that disguise transactions. Many banks are unaware that their customers are gambling because casinos use merchant codes that make purchases appear as regular retail transactions.</p>
+            <p>Recovery involves not only addressing the gambling behavior but also creating a sustainable plan to manage debt and rebuild financial stability. Financial counseling, debt management programs, and transparency with family members are crucial steps in this process.</p>
+        </div>
+    </div>
+
+    <div class="modal" id="blog-modal-2">
+        <div class="modal-content">
+            <span class="close-modal" data-blog="2">×</span>
+            <h2>How Gambling Destroys Families</h2>
+            <p>Beyond the financial devastation, gambling addiction fractures family relationships. The secrecy, lies, and broken promises erode trust between partners, parents and children, and among extended family.</p>
+            <p>Children of gambling addicts often experience neglect, emotional trauma, and financial instability. They may witness arguments about money, experience frequent moves or housing insecurity, and suffer from the emotional absence of the addicted parent.</p>
+            <p>Partners of gambling addicts report high levels of stress, anxiety, and depression. Many feel betrayed not only by the financial deception but also by the prioritization of gambling over family needs and relationships.</p>
+            <p>Recovery requires rebuilding trust through consistent honesty, attending family therapy, and making amends for past behaviors. Support groups for family members can provide crucial emotional support and coping strategies.</p>
+        </div>
+    </div>
+
+    <div class="modal" id="blog-modal-3">
+        <div class="modal-content">
+            <span class="close-modal" data-blog="3">×</span>
+            <h2>The Tricks Online Casinos Use</h2>
+            <p>Online casinos have developed sophisticated methods to bypass banking security measures and deceive financial institutions. Many use disguised merchant codes that make gambling transactions appear as regular retail purchases.</p>
+            <p>This manipulation prevents banks from flagging gambling activity and circumvents self-exclusion protocols that customers may have set up with their financial institutions. Some casinos even use multiple merchant names and codes to avoid detection.</p>
+            <p>Other deceptive practices include:</p>
+            <ul>
+                <li>Offering "free play" that requires credit card information</li>
+                <li>Using psychological nudges and personalized incentives to encourage continued play</li>
+                <li>Making it difficult to find information about odds and actual payout rates</li>
+                <li>Creating false urgency with limited-time offers</li>
+                <li>Designing games with near-misses that encourage continued spending</li>
+            </ul>
+            <p>Regulatory bodies are struggling to keep up with these practices, highlighting the need for increased consumer awareness and stronger protections.</p>
+        </div>
+    </div>
+
+    <div class="modal" id="blog-modal-4">
+        <div class="modal-content">
+            <span class="close-modal" data-blog="4">×</span>
+            <h2>Recovery Stories: Finding Hope</h2>
+            <p>Mark had lost everything - his job, his home, and nearly his family. After maxing out seven credit cards and draining his children's college fund, he hit rock bottom. Through our support community and professional counseling, Mark has been gamble-free for 18 months.</p>
+            <p>"The turning point was when my daughter asked if we were going to be homeless for Christmas," Mark shares. "I realized my addiction wasn't just hurting me - it was destroying everyone I loved."</p>
+            <p>Sarah's story began with seemingly harmless online slot games during pandemic lockdowns. Within six months, she had accumulated $65,000 in debt and was contemplating suicide. Today, she leads one of our support groups and helps others navigate the early stages of recovery.</p>
+            <p>"Recovery isn't linear," Sarah notes. "There are good days and challenging days. But having a community that understands the struggle makes all the difference."</p>
+            <p>These stories highlight that recovery is possible with the right support system, professional help, and personal commitment to change.</p>
+        </div>
+    </div>
+
+    <div class="modal" id="blog-modal-5">
+        <div class="modal-content">
+            <span class="close-modal" data-blog="5">×</span>
+            <h2>Protecting Your Finances from Gambling</h2>
+            <p>If you or a loved one struggles with gambling addiction, implementing financial safeguards is crucial. Consider these strategies:</p>
+            <ol>
+                <li>Set up accountability with your bank: Many financial institutions now offer gambling blocking services or can set up alerts for suspicious transactions.</li>
+                <li>Use prepaid cards instead of credit cards: Limit access to large sums of money by using reloadable cards with predetermined limits.</li>
+                <li>Implement dual authorization: Require two people to approve large withdrawals or transfers.</li>
+                <li>Direct deposit allocation: Have your paycheck automatically distributed to necessary accounts before you can access it for discretionary spending.</li>
+                <li>Freeze your credit: This prevents applying for new credit cards or loans without lifting the freeze.</li>
+            </ol>
+            <p>Additionally, consider working with a financial counselor who specializes in addiction recovery. They can help create a debt management plan, negotiate with creditors, and establish a sustainable budget.</p>
+            <p>Transparency with a trusted family member or friend about your financial situation can provide accountability and support during vulnerable moments.</p>
+        </div>
+    </div>
+
+    <div class="modal" id="blog-modal-6">
+        <div class="modal-content">
+            <span class="close-modal" data-blog="6">×</span>
+            <h2>Legal Actions Against Predatory Casinos</h2>
+            <p>There's a growing movement to hold online casinos accountable for their deceptive practices. Class action lawsuits are being filed against operators who disguise gambling transactions and target vulnerable populations.</p>
+            <p>Several countries have tightened regulations, but offshore casinos continue to exploit loopholes. Recent legal actions have focused on:</p>
+            <ul>
+                <li>False advertising regarding odds and potential winnings</li>
+                <li>Targeting individuals who have self-excluded from gambling</li>
+                <li>Disguising transactions to circumvent banking protections</li>
+                <li>Failure to implement responsible gambling safeguards</li>
+                <li>Accessing markets where online gambling is prohibited</li>
+            </ul>
+            <p>These legal challenges have resulted in significant settlements and increased scrutiny of industry practices. However, enforcement remains challenging due to the international nature of online gambling and varying regulatory frameworks across jurisdictions.</p>
+            <p>Consumer advocacy groups are pushing for stronger regulations, including standardized merchant codes for gambling transactions, mandatory spending limits, and clearer disclosure of odds and risks.</p>
+        </div>
+    </div>
+
+    <script>
+        // Page Navigation
+        document.querySelectorAll('a[data-page]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const pageId = this.getAttribute('data-page');
+                
+                // Hide all pages
+                document.querySelectorAll('.page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Show selected page
+                document.getElementById(`${pageId}-page`).classList.add('active');
+                
+                // Close any open modals
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.style.display = 'none';
+                });
+            });
+        });
+
+        // Blog Modals
+        document.querySelectorAll('.read-more[data-blog]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const blogId = this.getAttribute('data-blog');
+                document.getElementById(`blog-modal-${blogId}`).style.display = 'flex';
+            });
+        });
+
+        document.querySelectorAll('.close-modal').forEach(button => {
+            button.addEventListener('click', function() {
+                const blogId = this.getAttribute('data-blog');
+                document.getElementById(`blog-modal-${blogId}`).style.display = 'none';
+            });
+        });
+
+        // Close modal when clicking outside content
+        window.addEventListener('click', function(e) {
+            document.querySelectorAll('.modal').forEach(modal => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+
+        // Forms
+        document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletter-email').value;
+            alert(`Thank you for subscribing with ${email}! You'll receive our support newsletter soon.`);
+            this.reset();
+        });
+
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            alert(`Thank you ${name} for creating an account! A confirmation has been sent to ${email}.`);
+            this.reset();
+            
+            // Simulate adding to database
+            console.log('New user signup:', { name, email });
+        });
+
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            alert(`Welcome back! You've successfully logged in as ${email}.`);
+            this.reset();
+        });
+
+        // Chatbot functionality
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatbotContainer = document.getElementById('chatbot-container');
+        const closeChatbot = document.getElementById('close-chatbot');
+        const chatMessages = document.getElementById('chatbot-messages');
+        const chatInput = document.getElementById('chatbot-input');
+        const sendMessageBtn = document.getElementById('send-message');
+
+        chatbotToggle.addEventListener('click', function() {
+            chatbotContainer.style.display = 'flex';
+        });
+
+        closeChatbot.addEventListener('click', function() {
+            chatbotContainer.style.display = 'none';
+        });
+
+        function addMessage(text, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function handleChatbotResponse() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            addMessage(message, true);
+            chatInput.value = '';
+
+            // Simulate bot thinking
+            setTimeout(() => {
+                let response = '';
+                
+                if (message.toLowerCase().includes('help') || message.toLowerCase().includes('support')) {
+                    response = "I can help connect you with resources. Would you like information about crisis hotlines, support groups, or financial counseling?";
+                } else if (message.toLowerCase().includes('stop') || message.toLowerCase().includes('quit')) {
+                    response = "Quitting gambling is a brave decision. Have you considered self-exclusion programs? They can help block access to gambling sites.";
+                } else if (message.toLowerCase().includes('debt') || message.toLowerCase().includes('money')) {
+                    response = "Financial difficulties are common with gambling addiction. We can connect you with debt counseling services. Would you like more information?";
+                } else if (message.toLowerCase().includes('family') || message.toLowerCase().includes('relationship')) {
+                    response = "Gambling often strains relationships. Family counseling and support groups for loved ones can help. Should I send you information about these resources?";
+                } else {
+                    response = "I understand this is difficult. Would you like to speak with a human support specialist? I can connect you with someone who can help.";
+                }
+                
+                addMessage(response);
+                
+                // If the user seems to need more help, offer human connection after a delay
+                if (message.length > 10 || message.toLowerCase().includes('help')) {
+                    setTimeout(() => {
+                        addMessage("It seems like you might benefit from speaking with one of our support specialists. Would you like me to connect you now?");
+                    }, 30000); // 30 seconds delay
+                }
+            }, 1000);
+        }
+
+        sendMessageBtn.addEventListener('click', handleChatbotResponse);
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleChatbotResponse();
+            }
+        });
+
+        // Simulate database for user management (in a real application, this would be server-side)
+        const userDatabase = [];
+    </script>
+</body>
+</html>
