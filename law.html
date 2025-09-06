@@ -3,461 +3,504 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mackesysmye - Technology Solutions</title>
+    <title>Mackesy Smye | Hamilton Personal Injury & Disability Lawyers</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Global Styles */
-        :root {
-            --primary: #1a4f8c;
-            --secondary: #3a7cbd;
-            --accent: #f8a31b;
-            --light: #f5f7fa;
-            --dark: #2c3e50;
-            --text: #333333;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
+        /* Reset and base styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         
+        :root {
+            --primary: #1a3e6a;
+            --secondary: #9e832f;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: var(--text);
-            background-color: var(--light);
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        h1, h2, h3, h4 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        p {
-            margin-bottom: 1rem;
+            color: var(--dark);
+            background-color: #fff;
         }
         
         a {
-            color: var(--secondary);
             text-decoration: none;
-            transition: color 0.3s ease;
+            color: inherit;
         }
         
-        a:hover {
-            color: var(--accent);
+        ul {
+            list-style: none;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
         
         .btn {
             display: inline-block;
-            padding: 12px 24px;
-            background-color: var(--primary);
+            padding: 12px 28px;
+            background-color: var(--secondary);
             color: white;
+            border: none;
             border-radius: 4px;
             font-weight: 600;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
         
         .btn:hover {
-            background-color: var(--secondary);
-            color: white;
+            background-color: #867025;
             transform: translateY(-2px);
         }
         
-        .btn-accent {
-            background-color: var(--accent);
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
         }
         
-        .btn-accent:hover {
-            background-color: #e5940e;
+        .btn-outline:hover {
+            background-color: var(--secondary);
+            color: white;
         }
         
-        section {
-            padding: 5rem 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-        
-        .section-title:after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: var(--accent);
-            margin: 15px auto;
-        }
-        
-        /* Header Styles */
+        /* Header styles */
         header {
             background-color: white;
-            box-shadow: var(--shadow);
-            position: fixed;
-            width: 100%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
         }
         
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
+            padding: 15px 0;
         }
         
         .logo img {
-            height: 50px;
+            height: 60px;
         }
         
-        .nav-menu {
+        nav ul {
             display: flex;
-            list-style: none;
+            gap: 30px;
         }
         
-        .nav-menu li {
-            margin-left: 2rem;
-        }
-        
-        .nav-menu a {
-            color: var(--dark);
+        nav a {
             font-weight: 500;
+            color: var(--dark);
+            transition: color 0.3s;
         }
         
-        .nav-menu a:hover {
+        nav a:hover {
+            color: var(--secondary);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+        }
+        
+        .phone {
+            font-size: 1.2rem;
+            font-weight: 700;
             color: var(--primary);
         }
         
-        .mobile-menu-btn {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
+        .emergency {
+            color: #dc3545;
+            font-weight: 600;
+            font-size: 0.9rem;
         }
         
-        /* Hero Section */
+        /* Hero section */
         .hero {
-            background: linear-gradient(rgba(26, 79, 140, 0.8), rgba(26, 79, 140, 0.8)), url('https://mackesysmye.com/wp-content/uploads/2023/01/hero.jpg');
-            background-size: cover;
-            background-position: center;
+            background: linear-gradient(rgba(26, 62, 106, 0.8), rgba(26, 62, 106, 0.8)), url('https://mackesysmye.com/wp-content/uploads/2022/03/home-hero-1.jpg') no-repeat center center/cover;
             color: white;
+            padding: 100px 0;
             text-align: center;
-            padding: 10rem 0 6rem;
-            margin-top: 72px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         .hero h1 {
-            font-size: 3rem;
-            color: white;
-            margin-bottom: 1.5rem;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
         }
         
         .hero p {
             font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        /* Practice areas */
+        .practice-areas {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .section-title p {
+            color: var(--gray);
             max-width: 700px;
-            margin: 0 auto 2rem;
+            margin: 0 auto;
         }
         
-        /* Services Section */
-        .services-grid {
+        .areas-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
         
-        .service-card {
-            background: white;
+        .area-card {
+            background-color: white;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .service-card:hover {
-            transform: translateY(-10px);
+        .area-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         
-        .service-img {
+        .area-img {
             height: 200px;
             overflow: hidden;
         }
         
-        .service-img img {
+        .area-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
         
-        .service-card:hover .service-img img {
-            transform: scale(1.1);
+        .area-card:hover .area-img img {
+            transform: scale(1.05);
         }
         
-        .service-content {
-            padding: 1.5rem;
+        .area-content {
+            padding: 25px;
         }
         
-        .service-content h3 {
+        .area-content h3 {
             color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
         }
         
-        /* About Section */
+        .area-content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        /* About section */
         .about {
-            background-color: white;
+            padding: 80px 0;
         }
         
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 50px;
             align-items: center;
         }
         
-        .about-img {
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
+        .about-text h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 2.2rem;
         }
         
-        .about-img img {
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+        
+        .about-image img {
             width: 100%;
-            height: auto;
-            display: block;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
         /* Testimonials */
         .testimonials {
-            background: linear-gradient(rgba(26, 79, 140, 0.9), rgba(26, 79, 140, 0.9)), url('https://mackesysmye.com/wp-content/uploads/2023/01/testimonial-bg.jpg');
-            background-size: cover;
-            background-position: center;
-            color: white;
+            padding: 80px 0;
+            background-color: var(--light);
+            text-align: center;
         }
         
-        .testimonials .section-title {
-            color: white;
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .testimonial-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
+        .testimonial {
+            background-color: white;
+            padding: 40px;
             border-radius: 8px;
-            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
         
         .testimonial-text {
             font-style: italic;
-            margin-bottom: 1.5rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
         }
         
         .testimonial-author {
-            display: flex;
-            align-items: center;
+            font-weight: 600;
+            color: var(--primary);
         }
         
-        .author-img {
-            width: 50px;
-            height: 50px;
+        /* Team section */
+        .team {
+            padding: 80px 0;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-member {
+            text-align: center;
+        }
+        
+        .team-img {
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             overflow: hidden;
-            margin-right: 1rem;
+            margin: 0 auto 20px;
+            border: 5px solid var(--light);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        .author-img img {
+        .team-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
         
-        /* Contact Section */
-        .contact-content {
+        .team-member h3 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .team-member p {
+            color: var(--secondary);
+            font-weight: 500;
+        }
+        
+        /* Contact section */
+        .contact {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+        
+        .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 50px;
         }
         
         .contact-info {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 25px;
         }
         
         .contact-item {
             display: flex;
             align-items: flex-start;
-            gap: 1rem;
+            gap: 15px;
         }
         
         .contact-icon {
+            color: var(--secondary);
             font-size: 1.5rem;
+            min-width: 30px;
+        }
+        
+        .contact-details h3 {
             color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .contact-details p {
+            color: var(--gray);
         }
         
         .contact-form {
-            background: white;
-            padding: 2rem;
+            background-color: white;
+            padding: 30px;
             border-radius: 8px;
-            box-shadow: var(--shadow);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
         
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 20px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 8px;
+            color: var(--dark);
             font-weight: 500;
         }
         
-        .form-control {
+        .form-group input,
+        .form-group textarea {
             width: 100%;
-            padding: 12px;
+            padding: 12px 15px;
             border: 1px solid #ddd;
             border-radius: 4px;
             font-family: inherit;
+            font-size: 1rem;
         }
         
-        textarea.form-control {
-            min-height: 150px;
+        .form-group textarea {
+            min-height: 120px;
             resize: vertical;
         }
         
         /* Footer */
         footer {
-            background-color: var(--dark);
+            background-color: var(--primary);
             color: white;
-            padding: 4rem 0 2rem;
+            padding: 60px 0 30px;
         }
         
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 2rem;
+            gap: 40px;
+            margin-bottom: 40px;
         }
         
         .footer-logo img {
             height: 50px;
-            margin-bottom: 1rem;
+            margin-bottom: 15px;
         }
         
-        .footer-links h4 {
-            color: white;
-            margin-bottom: 1.5rem;
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
         }
         
-        .footer-links ul {
-            list-style: none;
+        .footer-heading {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary);
         }
         
         .footer-links li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 12px;
         }
         
         .footer-links a {
-            color: #ccc;
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.3s;
         }
         
         .footer-links a:hover {
             color: white;
         }
         
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            transition: all 0.3s ease;
-        }
-        
-        .social-links a:hover {
-            background: var(--accent);
-            transform: translateY(-3px);
-        }
-        
-        .copyright {
+        .footer-bottom {
             text-align: center;
-            padding-top: 2rem;
+            padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
         }
         
-        /* Responsive Styles */
+        /* Responsive styles */
         @media (max-width: 992px) {
             .about-content,
-            .contact-content {
+            .contact-grid {
                 grid-template-columns: 1fr;
             }
             
-            .hero h1 {
-                font-size: 2.5rem;
+            .about-image {
+                order: -1;
             }
         }
         
         @media (max-width: 768px) {
-            .nav-menu {
-                position: fixed;
-                top: 72px;
-                left: -100%;
+            .header-container {
                 flex-direction: column;
-                background-color: white;
-                width: 80%;
-                height: 100vh;
-                padding: 2rem;
-                box-shadow: var(--shadow);
-                transition: 0.3s;
+                gap: 15px;
             }
             
-            .nav-menu.active {
-                left: 0;
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
             }
             
-            .nav-menu li {
-                margin: 1.5rem 0;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .hero {
-                padding: 8rem 0 4rem;
+            .contact-info {
+                align-items: center;
             }
             
             .hero h1 {
-                font-size: 2rem;
-            }
-            
-            section {
-                padding: 3rem 0;
+                font-size: 2.2rem;
             }
         }
     </style>
@@ -467,67 +510,77 @@
     <header>
         <div class="container header-container">
             <div class="logo">
-                <img src="https://mackesysmye.com/wp-content/uploads/2023/01/logo.png" alt="Mackesysmye Logo">
+                <a href="#">
+                    <img src="https://mackesysmye.com/wp-content/uploads/2022/03/ms-lawyers-logo.png" alt="Mackesy Smye Lawyers">
+                </a>
             </div>
             
-            <div class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Practice Areas</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
             
-            <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#testimonials">Testimonials</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <div class="contact-info">
+                <div class="phone"><i class="fas fa-phone"></i> (905) 525-2341</div>
+                <div class="emergency">24/7 Emergency Line Available</div>
+            </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <h1>Technology Solutions for Your Business</h1>
-            <p>We provide innovative IT solutions to help businesses grow and thrive in the digital age.</p>
-            <a href="#contact" class="btn btn-accent">Get Started</a>
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Hamilton's Trusted Personal Injury & Disability Lawyers</h1>
+            <p>With over 30 years of experience, we fight for the compensation and justice you deserve.</p>
+            <a href="#" class="btn">Free Case Evaluation</a>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services">
+    <!-- Practice Areas -->
+    <section class="practice-areas">
         <div class="container">
-            <h2 class="section-title">Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://mackesysmye.com/wp-content/uploads/2023/01/it-consulting.jpg" alt="IT Consulting">
+            <div class="section-title">
+                <h2>Our Practice Areas</h2>
+                <p>We specialize in personal injury and disability law, providing expert legal representation for various cases.</p>
+            </div>
+            
+            <div class="areas-grid">
+                <div class="area-card">
+                    <div class="area-img">
+                        <img src="https://mackesysmye.com/wp-content/uploads/2022/03/brain-injury-1.jpg" alt="Brain Injury">
                     </div>
-                    <div class="service-content">
-                        <h3>IT Consulting</h3>
-                        <p>Our expert consultants provide strategic guidance to optimize your IT infrastructure and align technology with your business goals.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://mackesysmye.com/wp-content/uploads/2023/01/cloud-services.jpg" alt="Cloud Services">
-                    </div>
-                    <div class="service-content">
-                        <h3>Cloud Services</h3>
-                        <p>We help businesses migrate to the cloud, ensuring scalability, security, and cost-efficiency in their operations.</p>
-                        <a href="#" class="btn">Learn More</a>
+                    <div class="area-content">
+                        <h3>Brain Injury</h3>
+                        <p>Experienced representation for traumatic brain injuries resulting from accidents.</p>
+                        <a href="#" class="btn btn-outline">Learn More</a>
                     </div>
                 </div>
                 
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://mackesysmye.com/wp-content/uploads/2023/01/cybersecurity.jpg" alt="Cybersecurity">
+                <div class="area-card">
+                    <div class="area-img">
+                        <img src="https://mackesysmye.com/wp-content/uploads/2022/03/spinal-cord-injury-1.jpg" alt="Spinal Cord Injury">
                     </div>
-                    <div class="service-content">
-                        <h3>Cybersecurity</h3>
-                        <p>Protect your business from cyber threats with our comprehensive security solutions and proactive monitoring.</p>
-                        <a href="#" class="btn">Learn More</a>
+                    <div class="area-content">
+                        <h3>Spinal Cord Injury</h3>
+                        <p>Compassionate legal support for life-changing spinal cord injuries.</p>
+                        <a href="#" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="area-card">
+                    <div class="area-img">
+                        <img src="https://mackesysmye.com/wp-content/uploads/2022/03/disability-insurance-1.jpg" alt="Disability Insurance">
+                    </div>
+                    <div class="area-content">
+                        <h3>Disability Insurance</h3>
+                        <p>Fighting for your rightful disability benefits when you need them most.</p>
+                        <a href="#" class="btn btn-outline">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -535,90 +588,101 @@
     </section>
 
     <!-- About Section -->
-    <section class="about" id="about">
+    <section class="about">
         <div class="container">
-            <h2 class="section-title">About Us</h2>
             <div class="about-content">
-                <div class="about-img">
-                    <img src="https://mackesysmye.com/wp-content/uploads/2023/01/about-us.jpg" alt="About Mackesysmye">
-                </div>
                 <div class="about-text">
-                    <h3>Your Trusted Technology Partner</h3>
-                    <p>Mackesysmye has been providing innovative technology solutions to businesses of all sizes for over a decade. Our team of experienced professionals is dedicated to helping you leverage technology to achieve your business objectives.</p>
-                    <p>We understand that every business is unique, which is why we take the time to understand your specific needs and challenges before developing customized solutions that deliver real results.</p>
-                    <a href="#contact" class="btn">Get In Touch</a>
+                    <h2>About Mackesy Smye</h2>
+                    <p>Mackesy Smye is a leading Hamilton-based law firm specializing in personal injury and disability law. With over three decades of experience, our team of dedicated lawyers has successfully represented thousands of clients.</p>
+                    <p>We understand the physical, emotional, and financial challenges that come with personal injuries, and we're committed to fighting for the compensation and justice our clients deserve.</p>
+                    <a href="#" class="btn">Learn More About Us</a>
+                </div>
+                
+                <div class="about-image">
+                    <img src="https://mackesysmye.com/wp-content/uploads/2022/03/office-building-1.jpg" alt="Mackesy Smye Office">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
+    <!-- Testimonials -->
+    <section class="testimonials">
         <div class="container">
-            <h2 class="section-title">What Our Clients Say</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        <p>"Mackesysmye transformed our IT infrastructure, resulting in increased efficiency and significant cost savings. Their team is knowledgeable and professional."</p>
+            <div class="section-title">
+                <h2>Client Testimonials</h2>
+                <p>Hear what our clients have to say about their experience with our firm.</p>
+            </div>
+            
+            <div class="testimonial-slider">
+                <div class="testimonial">
+                    <p class="testimonial-text">"The team at Mackesy Smye was incredibly supportive throughout my entire case. They fought tirelessly to ensure I received the compensation I deserved after my accident."</p>
+                    <p class="testimonial-author">- John D., Hamilton</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Legal Team</h2>
+                <p>Meet our experienced lawyers dedicated to fighting for your rights.</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-img">
+                        <img src="https://mackesysmye.com/wp-content/uploads/2022/03/team-member-1.jpg" alt="Lawyer Name">
                     </div>
-                    <div class="testimonial-author">
-                        <div class="author-img">
-                            <img src="https://mackesysmye.com/wp-content/uploads/2023/01/client1.jpg" alt="Client">
-                        </div>
-                        <div class="author-info">
-                            <h4>John Smith</h4>
-                            <p>CEO, TechCorp</p>
-                        </div>
-                    </div>
+                    <h3>David Mackesy</h3>
+                    <p>Senior Partner</p>
                 </div>
                 
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        <p>"The cloud migration service was seamless. We experienced zero downtime and our team was up and running on the new system with minimal training."</p>
+                <div class="team-member">
+                    <div class="team-img">
+                        <img src="https://mackesysmye.com/wp-content/uploads/2022/03/team-member-2.jpg" alt="Lawyer Name">
                     </div>
-                    <div class="testimonial-author">
-                        <div class="author-img">
-                            <img src="https://mackesysmye.com/wp-content/uploads/2023/01/client2.jpg" alt="Client">
-                        </div>
-                        <div class="author-info">
-                            <h4>Sarah Johnson</h4>
-                            <p>Operations Director, FinServe</p>
-                        </div>
-                    </div>
+                    <h3>Michael Smye</h3>
+                    <p>Senior Partner</p>
                 </div>
                 
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        <p>"Their cybersecurity solutions have given us peace of mind. We know our data is protected against evolving threats in today's digital landscape."</p>
+                <div class="team-member">
+                    <div class="team-img">
+                        <img src="https://mackesysmye.com/wp-content/uploads/2022/03/team-member-3.jpg" alt="Lawyer Name">
                     </div>
-                    <div class="testimonial-author">
-                        <div class="author-img">
-                            <img src="https://mackesysmye.com/wp-content/uploads/2023/01/client3.jpg" alt="Client">
-                        </div>
-                        <div class="author-info">
-                            <h4>Michael Brown</h4>
-                            <p>IT Manager, HealthPlus</p>
-                        </div>
+                    <h3>Sarah Johnson</h3>
+                    <p>Associate Lawyer</p>
+                </div>
+                
+                <div class="team-member">
+                    <div class="team-img">
+                        <img src="https://mackesysmye.com/wp-content/uploads/2022/03/team-member-4.jpg" alt="Lawyer Name">
                     </div>
+                    <h3>Robert Williams</h3>
+                    <p>Associate Lawyer</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact">
+    <section class="contact">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Get in touch with our team for a free consultation.</p>
+            </div>
+            
+            <div class="contact-grid">
                 <div class="contact-info">
-                    <h3>Contact Information</h3>
                     <div class="contact-item">
                         <div class="contact-icon">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <div>
-                            <h4>Address</h4>
-                            <p>123 Tech Street, Innovation City, IC 12345</p>
+                        <div class="contact-details">
+                            <h3>Office Address</h3>
+                            <p>123 Main Street West,<br>Hamilton, ON L8P 1H1</p>
                         </div>
                     </div>
                     
@@ -626,9 +690,9 @@
                         <div class="contact-icon">
                             <i class="fas fa-phone"></i>
                         </div>
-                        <div>
-                            <h4>Phone</h4>
-                            <p>(123) 456-7890</p>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p>(905) 525-2341<br>Emergency: (905) 525-EMER</p>
                         </div>
                     </div>
                     
@@ -636,9 +700,9 @@
                         <div class="contact-icon">
                             <i class="fas fa-envelope"></i>
                         </div>
-                        <div>
-                            <h4>Email</h4>
-                            <p>info@mackesysmye.com</p>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>info@mackesysmye.com<br>cases@mackesysmye.com</p>
                         </div>
                     </div>
                     
@@ -646,10 +710,9 @@
                         <div class="contact-icon">
                             <i class="fas fa-clock"></i>
                         </div>
-                        <div>
-                            <h4>Business Hours</h4>
-                            <p>Monday-Friday: 9am - 5pm</p>
-                            <p>Saturday-Sunday: Closed</p>
+                        <div class="contact-details">
+                            <h3>Office Hours</h3>
+                            <p>Monday-Friday: 8:30am - 5:00pm<br>Weekends: By appointment only</p>
                         </div>
                     </div>
                 </div>
@@ -658,23 +721,23 @@
                     <h3>Send Us a Message</h3>
                     <form>
                         <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" class="form-control" required>
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" required>
                         </div>
                         
                         <div class="form-group">
-                            <label for="email">Your Email</label>
-                            <input type="email" id="email" class="form-control" required>
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" required>
                         </div>
                         
                         <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" class="form-control" required>
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone">
                         </div>
                         
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea id="message" class="form-control" required></textarea>
+                            <textarea id="message" required></textarea>
                         </div>
                         
                         <button type="submit" class="btn">Send Message</button>
@@ -690,83 +753,46 @@
             <div class="footer-content">
                 <div class="footer-about">
                     <div class="footer-logo">
-                        <img src="https://mackesysmye.com/wp-content/uploads/2023/01/logo.png" alt="Mackesysmye Logo">
+                        <img src="https://mackesysmye.com/wp-content/uploads/2022/03/ms-lawyers-logo-white.png" alt="Mackesy Smye">
                     </div>
-                    <p>Providing innovative technology solutions to help businesses thrive in the digital age.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
+                    <p>Mackesy Smye is a Hamilton-based law firm specializing in personal injury and disability cases. We are dedicated to fighting for our clients' rights and securing the compensation they deserve.</p>
                 </div>
                 
                 <div class="footer-links">
-                    <h4>Quick Links</h4>
+                    <h3 class="footer-heading">Quick Links</h3>
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Practice Areas</a></li>
+                        <li><a href="#">Our Team</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#">Contact</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-links">
-                    <h4>Services</h4>
+                    <h3 class="footer-heading">Practice Areas</h3>
                     <ul>
-                        <li><a href="#">IT Consulting</a></li>
-                        <li><a href="#">Cloud Services</a></li>
-                        <li><a href="#">Cybersecurity</a></li>
-                        <li><a href="#">Network Solutions</a></li>
-                        <li><a href="#">Software Development</a></li>
+                        <li><a href="#">Brain Injury</a></li>
+                        <li><a href="#">Spinal Cord Injury</a></li>
+                        <li><a href="#">Disability Insurance</a></li>
+                        <li><a href="#">Car Accidents</a></li>
+                        <li><a href="#">Slip & Fall</a></li>
+                        <li><a href="#">Wrongful Death</a></li>
                     </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3 class="footer-heading">Contact Info</h3>
+                    <p>123 Main Street West<br>Hamilton, ON L8P 1H1</p>
+                    <p>Phone: (905) 525-2341<br>Email: info@mackesysmye.com</p>
                 </div>
             </div>
             
-            <div class="copyright">
-                <p>&copy; 2023 Mackesysmye. All Rights Reserved.</p>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Mackesy Smye Lawyers. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
-
-    <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('.nav-menu');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            mobileMenuBtn.querySelector('i').classList.toggle('fa-bars');
-            mobileMenuBtn.querySelector('i').classList.toggle('fa-times');
-        });
-        
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
-                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
-            });
-        });
-        
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
 </body>
 </html>
