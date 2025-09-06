@@ -14,6 +14,7 @@
             --light: #f8f9fa;
             --dark: #343a40;
             --success: #28a745;
+            --gambling: #8a2be2; /* Purple color for gambling section */
         }
         
         * {
@@ -64,6 +65,14 @@
         
         .btn-accent:hover {
             background-color: #3a9d96;
+        }
+
+        .btn-gambling {
+            background-color: var(--gambling);
+        }
+
+        .btn-gambling:hover {
+            background-color: #7936c5;
         }
         
         .section-title {
@@ -135,14 +144,12 @@
         
         /* Hero Section */
         .hero {
-   .hero {
-    background: url('images/drag.png') no-repeat center center;
-    background-size: cover;
-    color: white;
-    text-align: center;
-    padding: 120px 0;
-    position: relative;
-}
+            background: url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 120px 0;
+            position: relative;
+        }
         
         .hero::before {
             content: '';
@@ -266,6 +273,28 @@
         .resource-content h3 {
             margin-bottom: 10px;
             color: var(--secondary);
+        }
+        
+        /* Gambling Help Section */
+        .gambling-help {
+            background: linear-gradient(135deg, var(--gambling) 0%, #6a11cb 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .gambling-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .gambling-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .gambling-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
         }
         
         /* Contact Section */
@@ -481,6 +510,7 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#resources">Resources</a></li>
+                    <li><a href="#gambling-help">Gambling Help</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -613,6 +643,21 @@
         </div>
     </section>
 
+    <!-- Gambling Help Section -->
+    <section id="gambling-help" class="gambling-help">
+        <div class="container">
+            <div class="gambling-content">
+                <h2>Specialized Help for Gambling Addiction</h2>
+                <p>Gambling addiction can be just as destructive as substance abuse. We offer specialized resources and support for those struggling with gambling addiction.</p>
+                <p>Visit our dedicated gambling addiction resource page for targeted help, or explore our general addiction recovery resources.</p>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://whipper2469.github.io/gamble.html" class="btn btn-gambling">Gambling Help Resources</a>
+                    <a href="#resources" class="btn">General Addiction Resources</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
@@ -731,6 +776,7 @@
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#services">Services</a></li>
                         <li><a href="#resources">Resources</a></li>
+                        <li><a href="#gambling-help">Gambling Help</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
@@ -739,6 +785,7 @@
                     <ul class="footer-links">
                         <li><a href="#">Crisis Help</a></li>
                         <li><a href="#">Support Groups</a></li>
+                        <li><a href="https://whipper2469.github.io/gamble.html">Gambling Addiction</a></li>
                         <li><a href="#">Treatment Options</a></li>
                         <li><a href="#">Blog & Articles</a></li>
                         <li><a href="#">FAQ</a></li>
@@ -749,6 +796,7 @@
                     <p>National Suicide Prevention Lifeline: 988</p>
                     <p>Substance Abuse Helpline: 1-800-662-HELP (4357)</p>
                     <p>Crisis Text Line: Text HOME to 741741</p>
+                    <p>Problem Gambling Helpline: 1-800-522-4700</p>
                 </div>
             </div>
             <div class="copyright">
