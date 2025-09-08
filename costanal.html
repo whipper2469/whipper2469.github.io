@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimiTEAbo - Cambridge Ontario</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #8e44ad;
+            --secondary: #f39c12;
+            --accent: #e74c3c;
+            --light: #f9f9f9;
+            --dark: #2c3e50;
+            --text: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #6c3483 100%);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        /* Profitability Section */
+        .profitability-section {
+            padding: 4rem 0;
+            background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+        }
+        
+        .profit-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profit-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+        
+        .profit-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .profit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .profit-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .profit-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .profit-card-header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .profit-card-body {
+            padding: 1.5rem;
+        }
+        
+        .profit-card-body ul {
+            list-style-type: none;
+            padding-left: 1rem;
+        }
+        
+        .profit-card-body li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .profit-card-body li:before {
+            content: "•";
+            color: var(--secondary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .positive {
+            color: #28a745;
+            font-weight: 600;
+        }
+        
+        .negative {
+            color: #dc3545;
+            font-weight: 600;
+        }
+        
+        .consideration {
+            color: #ffc107;
+            font-weight: 600;
+        }
+        
+        .conclusion {
+            background: var(--secondary);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .conclusion h3 {
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .profit-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .profit-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://via.placeholder.com/60x60/8e44ad/ffffff?text=PT" alt="PrimiTEAbo Logo">
+                    <h1>PrimiTEAbo</h1>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#profitability">Profitability</a></li>
+                        <li><a href="#market">Market Analysis</a></li>
+                        <li><a href="#strategy">Business Strategy</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Profitability Section -->
+    <section class="profitability-section" id="profitability">
+        <div class="container">
+            <div class="profit-header">
+                <h2>Profitability Analysis: PrimiTEAbo in Cambridge, ON</h2>
+                <p>Assessing the potential of bringing Filipino bubble tea and snacks to Cambridge, Ontario</p>
+            </div>
+            
+            <div class="profit-container">
+                <div class="profit-grid">
+                    <div class="profit-card">
+                        <div class="profit-card-header">
+                            Market Advantages
+                        </div>
+                        <div class="profit-card-body">
+                            <ul>
+                                <li><span class="positive">Growing Filipino community</span> in Cambridge and surrounding areas</li>
+                                <li><span class="positive">Bubble tea market</span> continues to expand in Canada</li>
+                                <li><span class="positive">Unique differentiation</span> with authentic Filipino flavors</li>
+                                <li><span class="positive">Delivery service</span> meets growing demand for food delivery</li>
+                                <li><span class="positive">University population</span> from Conestoga College and University of Waterloo</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="profit-card">
+                        <div class="profit-card-header">
+                            Financial Considerations
+                        </div>
+                        <div class="profit-card-body">
+                            <ul>
+                                <li><span class="negative">Initial investment</span> estimated at $80,000-$120,000</li>
+                                <li><span class="negative">Monthly overhead</span> approximately $8,000-$12,000</li>
+                                <li><span class="positive">Average bubble tea price</span> $5.50-$7.50 in Ontario</li>
+                                <li><span class="positive">Food cost percentage</span> target of 28-32% achievable</li>
+                                <li><span class="consideration">Break-even point</span> estimated at 6-9 months</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="profit-card">
+                        <div class="profit-card-header">
+                            Cambridge Demographics
+                        </div>
+                        <div class="profit-card-body">
+                            <ul>
+                                <li><span class="positive">Population:</span> 138,000+ with steady growth</li>
+                                <li><span class="positive">Median age:</span> 38.5 years (prime consumer demographic)</li>
+                                <li><span class="positive">Average household income:</span> $95,000 (disposable income available)</li>
+                                <li><span class="positive">Ethnic diversity:</span> Growing Asian population, including Filipinos</li>
+                                <li><span class="positive">Education:</span> Higher than provincial average for post-secondary education</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="profit-card">
+                        <div class="profit-card-header">
+                            Competitive Landscape
+                        </div>
+                        <div class="profit-card-body">
+                            <ul>
+                                <li><span class="positive">Limited direct competition</span> for Filipino bubble tea concept</li>
+                                <li><span class="consideration">Established bubble tea chains</span> (Chatime, CoCo) in nearby areas</li>
+                                <li><span class="positive">Differentiation opportunity</span> with authentic Filipino snacks and drinks</li>
+                                <li><span class="positive">Delivery advantage</span> with specialized Filipino offerings</li>
+                                <li><span class="consideration">Need to educate market</span> about Filipino bubble tea variations</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="profit-card">
+                        <div class="profit-card-header">
+                            Revenue Streams
+                        </div>
+                        <div class="profit-card-body">
+                            <ul>
+                                <li><span class="positive">In-store sales</span> of drinks and snacks</li>
+                                <li><span class="positive">Delivery orders</span> through app and third-party platforms</li>
+                                <li><span class="positive">Catering services</span> for local events and businesses</li>
+                                <li><span class="positive">Merchandise sales</span> (cups, straws, Filipino products)</li>
+                                <li><span class="positive">Loyalty program</span> to encourage repeat business</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="profit-card">
+                        <div class="profit-card-header">
+                            Potential Challenges
+                        </div>
+                        <div class="profit-card-body">
+                            <ul>
+                                <li><span class="negative">Seasonality</span> with colder months affecting cold drink sales</li>
+                                <li><span class="negative">Staffing challenges</span> in current service industry climate</li>
+                                <li><span class="negative">Food delivery commission fees</span> (20-30% on third-party platforms)</li>
+                                <li><span class="consideration">Need for marketing</span> to introduce Filipino flavors to wider audience</li>
+                                <li><span class="consideration">Supply chain considerations</span> for authentic ingredients</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="conclusion">
+                    <h3>Profitability Conclusion</h3>
+                    <p>Bringing PrimiTEAbo to Cambridge, Ontario has <strong>strong profitability potential</strong> with estimated annual revenue of $300,000-$450,000 and net profit margins of 10-15% after the first year.</p>
+                    <p>Success will depend on strategic location selection, effective marketing to both Filipino community and broader market, and efficient operations management.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Simple JavaScript for mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const nav = document.querySelector('nav ul');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+            });
+        });
+    </script>
+</body>
+</html>
