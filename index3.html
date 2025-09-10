@@ -5,16 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Whipper - My Story</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .nav-link {
+      transition: all 0.3s ease;
+    }
+    .nav-link:hover {
+      transform: translateY(-2px);
+      color: #93c5fd;
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
 <body class="bg-gray-900 text-gray-200 font-sans">
+  <!-- Navigation -->
+  <nav class="bg-gray-800 py-4 px-6 sticky top-0 z-10">
+    <div class="max-w-3xl mx-auto flex justify-center space-x-8">
+      <a href="#" class="nav-link text-gray-300 hover:text-white">Home</a>
+      <a href="#welcome" class="nav-link text-gray-300 hover:text-white">Welcome</a>
+      <a href="#story" class="nav-link text-gray-300 hover:text-white">My Story</a>
+      <a href="#community" class="nav-link text-gray-300 hover:text-white">Community</a>
+      <a href="https://whipper2469.github.io/index2.html" class="nav-link text-blue-400 hover:text-blue-300 font-medium">Whipper</a>
+    </div>
+  </nav>
+
   <!-- Hero Section -->
   <section class="text-center py-20 bg-gradient-to-b from-gray-800 to-gray-900">
     <h1 class="text-4xl font-bold mb-4">Whipper</h1>
     <p class="text-lg">A space for recovery, support, and growth.</p>
   </section>
 
-  <!-- Existing Content Section -->
-  <section class="py-16 px-6 max-w-3xl mx-auto">
+  <!-- Welcome Section -->
+  <section id="welcome" class="py-16 px-6 max-w-3xl mx-auto fade-in">
     <h2 class="text-3xl font-bold mb-6 text-center">Welcome</h2>
     <p class="text-lg leading-relaxed">
       Whipper is a safe space to share experiences, learn, and grow. Here you will find tools, stories, and resources that bring hope and healing.
@@ -22,7 +51,7 @@
   </section>
 
   <!-- My Story Section -->
-  <section class="py-16 px-6 max-w-3xl mx-auto text-gray-200">
+  <section id="story" class="py-16 px-6 max-w-3xl mx-auto text-gray-200 fade-in">
     <h2 class="text-3xl font-bold mb-6 text-center">My Story</h2>
     <p class="mb-4">
       My name is Kevin, and like many others, I never expected my life to take the turns that it did. For years, I struggled with addiction and mental health challenges that seemed impossible to overcome. Drugs and alcohol became my escape, but they also became my prison.
@@ -41,17 +70,62 @@
     </p>
   </section>
 
-  <!-- Another Existing Section -->
-  <section class="py-16 px-6 max-w-3xl mx-auto">
+  <!-- Community Section -->
+  <section id="community" class="py-16 px-6 max-w-3xl mx-auto fade-in">
     <h2 class="text-3xl font-bold mb-6 text-center">Community</h2>
     <p class="text-lg leading-relaxed">
       Join others on the same journey. Share your experiences, find encouragement, and be part of a community built on support and understanding.
     </p>
   </section>
 
+  <!-- Call to Action Section -->
+  <section class="py-16 px-6 max-w-3xl mx-auto text-center fade-in">
+    <h2 class="text-3xl font-bold mb-6">Join Us Today</h2>
+    <p class="text-lg mb-8">
+      Become part of the Whipper community and continue your journey with support from people who understand.
+    </p>
+    <a href="https://whipper2469.github.io/index2.html" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transition-all duration-300 transform hover:-translate-y-1">
+      Visit Whipper
+    </a>
+  </section>
+
   <!-- Footer -->
   <footer class="text-center py-6 bg-gray-900 border-t border-gray-700 text-gray-500">
-    © 2025 Whipper. All rights reserved.
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="mb-4">
+        <a href="#" class="text-gray-400 hover:text-white mx-3">Home</a>
+        <a href="#welcome" class="text-gray-400 hover:text-white mx-3">Welcome</a>
+        <a href="#story" class="text-gray-400 hover:text-white mx-3">My Story</a>
+        <a href="#community" class="text-gray-400 hover:text-white mx-3">Community</a>
+        <a href="https://whipper2469.github.io/index2.html" class="text-blue-400 hover:text-blue-300 mx-3 font-medium">Whipper</a>
+      </div>
+      <p>© 2025 Whipper. All rights reserved.</p>
+    </div>
   </footer>
+
+  <script>
+    // Simple animation for elements with fade-in class
+    document.addEventListener('DOMContentLoaded', function() {
+      const fadeElements = document.querySelectorAll('.fade-in');
+      
+      const fadeInOptions = {
+        threshold: 0.3,
+        rootMargin: '0px 0px -50px 0px'
+      };
+      
+      const fadeInObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, fadeInOptions);
+      
+      fadeElements.forEach(element => {
+        fadeInObserver.observe(element);
+      });
+    });
+  </script>
 </body>
 </html>
