@@ -1,4 +1,6 @@
-/* Base reset */
+/* =========================
+   Base + Theme Variables
+   ========================= */
 * {
   margin: 0;
   padding: 0;
@@ -6,17 +8,23 @@
 }
 
 :root {
-  /* Update these to match Babydoll’s exact brand palette */
-  --bg-main: #111111;           /* dark background */
-  --color-text: #FFFFFF;        /* white text */
-  --color-accent: #00E6E6;      /* example accent cyan/turquoise */
+  /* Babydoll-style palette */
+  --bg-main: #000000;           /* main background (black) */
+  --bg-alt: #111111;            /* card/background panels */
+  --border-subtle: #222222;
+
+  --color-text: #ffffff;        /* main text (white) */
+  --color-text-muted: #cccccc;  /* softer text */
+  --color-accent: #00e6e6;      /* teal/cyan accent */
   --color-link: var(--color-accent);
-  
-  --font-heading: 'Poppins', sans-serif; /* example heading font */
-  --font-body: 'Lato', sans-serif;        /* example body font */
-  
+
+  /* Fonts – swap these to match exact Babydoll fonts if needed */
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Lato', sans-serif;
+
   --radius-lg: 18px;
-  --shadow-soft: 0 18px 45px rgba(0,0,0,0.4);
+  --radius-md: 10px;
+  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.4);
 }
 
 html {
@@ -30,116 +38,644 @@ body {
   line-height: 1.6;
 }
 
-/* Headings */
-h1, h2, h3, h4, h5 {
+/* =========================
+   Layout helpers
+   ========================= */
+.container {
+  width: 92%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section {
+  padding: 100px 0;
+  background-color: var(--bg-main);
+}
+
+.section-title {
   font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 2.2rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-text);
+  margin-bottom: 12px;
+}
+
+.section-intro {
+  max-width: 620px;
+  margin: 0 auto 40px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.98rem;
+}
+
+/* =========================
+   Header & Navigation
+   ========================= */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  background: rgba(0, 0, 0, 0.92);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 1000;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #000;
+  box-shadow: 0 0 20px rgba(0, 230, 230, 0.6);
+}
+
+.logo-text h1 {
+  font-family: var(--font-heading);
+  font-size: 1.28rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   color: var(--color-text);
 }
 
-/* Links */
+.logo-text p {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Nav links */
+.site-nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.site-nav a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.site-nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent);
+  transition: width 0.18s ease-out;
+}
+
+.site-nav a:hover::after {
+  width: 100%;
+}
+
+/* Mobile nav toggle */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  width: 22px;
+  height: 2px;
+  background: #f8fafc;
+  border-radius: 999px;
+}
+
+/* =========================
+   Buttons & Links
+   ========================= */
 a {
   color: var(--color-link);
   text-decoration: none;
 }
+
 a:hover {
   text-decoration: underline;
 }
 
-/* Buttons */
-.btn-cta {
-  background: var(--color-accent);
-  color: var(--bg-main);
+.btn-cta,
+.btn-secondary,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 11px 22px;
   border-radius: 999px;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   font-weight: 700;
+  transition: transform 0.16s ease-out, box-shadow 0.16s ease-out,
+    background 0.16s ease-out, color 0.16s ease-out;
 }
+
+/* primary button */
+.btn-cta {
+  background: var(--color-accent);
+  color: #000;
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.7);
+}
+
+.btn-cta:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+}
+
+/* outline / secondary */
 .btn-secondary {
-  background: none;
+  background: transparent;
   border: 2px solid var(--color-accent);
   color: var(--color-accent);
 }
 
-/* Header / Navigation */
-.site-header {
-  background: var(--bg-main);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-.site-nav a {
-  color: var(--color-text);
-  font-family: var(--font-body);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-}
-.site-nav a:hover {
-  color: var(--color-accent);
+.btn-secondary:hover {
+  transform: translateY(-1px) scale(1.02);
+  background: rgba(0, 230, 230, 0.08);
 }
 
-/* Hero Section */
+/* ghost */
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* =========================
+   Hero
+   ========================= */
 .hero {
+  height: 92vh;
+  min-height: 540px;
   background: url('images/hero.jpg') center / cover no-repeat;
   position: relative;
   display: flex;
   align-items: center;
-  justify-center: center;
-  min-height: 80vh;
+  justify-content: center;
 }
+
 .hero-overlay {
-  background: rgba(0,0,0,0.75);
+  background: rgba(0, 0, 0, 0.75);
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
-  justify-center: center;
+  justify-content: center;
   text-align: center;
-  padding: 40px 20px;
+  padding: 80px 20px 40px;
 }
+
+.hero-content {
+  max-width: 620px;
+  color: var(--color-text);
+}
+
+.hero-tagline {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.78rem;
+  color: var(--color-accent);
+  margin-bottom: 16px;
+}
+
 .hero h2 {
+  font-family: var(--font-heading);
   font-size: clamp(2.4rem, 4vw, 3.2rem);
-  margin-bottom: 20px;
-  color: var(--color-text);
+  line-height: 1.15;
+  margin-bottom: 16px;
 }
-.hero p {
+
+.hero-subtext {
   max-width: 520px;
-  margin: 0 auto 30px;
-  color: rgba(255,255,255,0.85);
+  font-size: 0.98rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 auto 24px;
 }
-.hero-actions a.btn-ghost {
-  border: 2px solid var(--color-accent);
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+/* =========================
+   Services
+   ========================= */
+.services {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.services-grid {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 26px;
+}
+
+.service-item {
+  background: var(--bg-alt);
+  border-radius: var(--radius-lg);
+  padding: 16px 16px 18px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+.service-image {
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.service-image img {
+  width: 100%;
+  display: block;
+  transition: transform 0.3s ease-out;
+}
+
+.service-item:hover .service-image img {
+  transform: scale(1.05);
+}
+
+.service-item h3 {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
   color: var(--color-text);
-  background: transparent;
-  padding: 11px 22px;
+  margin-bottom: 6px;
 }
 
-/* Other Sections – Services, Portfolio, About, etc. */
-/* ... you can keep the same structure but ensure backgrounds, cards, text use the brand colours */
-
-.section {
-  padding: 80px 0;
+.service-item p {
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
 }
-.section-title {
-  font-size: 2.2rem;
+
+/* =========================
+   Portfolio
+   ========================= */
+.portfolio {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.portfolio-grid {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.portfolio-item {
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  background: #111;
+  cursor: pointer;
+}
+
+.portfolio-item img {
+  width: 100%;
+  display: block;
+  transition: transform 0.28s ease-out, opacity 0.28s ease-out;
+}
+
+.portfolio-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, transparent 40%, rgba(0, 0, 0, 0.8));
+  opacity: 0;
+  transition: opacity 0.25s ease-out;
+}
+
+.portfolio-item:hover img {
+  transform: scale(1.08);
+}
+
+.portfolio-item:hover::after {
+  opacity: 1;
+}
+
+.portfolio-cta {
+  text-align: center;
+  margin-top: 26px;
+}
+
+/* =========================
+   About
+   ========================= */
+.about {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.about-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.about-image {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-subtle);
+}
+
+.about-image img {
+  width: 100%;
+  display: block;
+}
+
+.about-text {
+  color: var(--color-text);
+}
+
+.about-text p {
+  margin-bottom: 14px;
+  font-size: 0.98rem;
+  color: var(--color-text-muted);
+}
+
+.about-quote {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+/* =========================
+   Book / Inquiry Section
+   ========================= */
+.book-section {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.book-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+  gap: 32px;
+  align-items: stretch;
+}
+
+.book-text {
+  color: var(--color-text);
+}
+
+.book-text p {
+  margin-bottom: 14px;
+  font-size: 0.96rem;
+  color: var(--color-text-muted);
+}
+
+.book-details {
+  list-style: none;
+  margin-bottom: 22px;
+  font-size: 0.96rem;
+}
+
+.book-details li {
+  margin-bottom: 6px;
+}
+
+.book-card {
+  background: var(--bg-alt);
+  border-radius: 20px;
+  padding: 22px 20px 24px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+.book-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
   color: var(--color-text);
   margin-bottom: 12px;
 }
-.section-intro {
-  color: rgba(255,255,255,0.8);
-  margin-0 auto 40px;
-  max-width: 620px;
-  text-align: center;
+
+.book-card label {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-text-muted);
+  margin-top: 12px;
+  margin-bottom: 4px;
 }
 
-/* Footer */
+.book-card input,
+.book-card select,
+.book-card textarea {
+  width: 100%;
+  padding: 10px 11px;
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  background: #000000;
+  color: var(--color-text);
+  font-size: 0.9rem;
+}
+
+.book-card textarea {
+  resize: vertical;
+}
+
+.book-card input:focus,
+.book-card select:focus,
+.book-card textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 1px rgba(0, 230, 230, 0.5);
+}
+
+.book-card button {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.form-note {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+/* =========================
+   Contact
+   ========================= */
+.contact {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.contact-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.contact-info {
+  color: var(--color-text);
+}
+
+.contact-info p {
+  font-size: 0.96rem;
+  color: var(--color-text-muted);
+  margin-bottom: 12px;
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.contact-links a {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-text);
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  text-decoration: none;
+}
+
+.contact-links a:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.contact-map iframe {
+  border-radius: 18px;
+  box-shadow: var(--shadow-soft);
+}
+
+/* =========================
+   Footer
+   ========================= */
 .site-footer {
+  padding: 26px 0 32px;
   background: var(--bg-main);
-  color: rgba(255,255,255,0.6);
-  text-align: center;
-  padding: 40px 0;
-}
-.site-footer .social a {
-  color: var(--color-accent);
-  margin: 0 10px;
+  border-top: 1px solid var(--border-subtle);
 }
 
-/* Responsive tweaks etc. */
-/* ... keep your existing @media rules but adjust colours where needed */
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+}
+
+.footer-inner .social {
+  display: flex;
+  gap: 16px;
+}
+
+.footer-inner .social a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-size: 0.86rem;
+}
+
+.footer-inner .social a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   Responsive
+   ========================= */
+@media (max-width: 880px) {
+  .site-nav {
+    position: absolute;
+    inset: 60px 16px auto 16px;
+    background: #000000;
+    border-radius: 18px;
+    padding: 14px 16px;
+    border: 1px solid var(--border-subtle);
+    display: none;
+  }
+
+  .site-nav.open {
+    display: block;
+  }
+
+  .site-nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .hero-overlay {
+    padding-top: 90px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .about-inner,
+  .book-inner,
+  .contact-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 80px 0;
+  }
+
+  .hero-content {
+    padding-top: 10px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
