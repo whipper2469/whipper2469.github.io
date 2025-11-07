@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Babydoll Tattoos & Piercing</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Page-specific CSS -->
+  <link rel="stylesheet" href="tattoo.css" />
 </head>
 <body>
 
   <header class="site-header">
-    <div class="container">
+    <div class="container header-inner">
       <div class="logo">
-        <h1>Babydoll Tattoos & Piercing</h1>
+        <span class="logo-mark">BD</span>
+        <div class="logo-text">
+          <h1>Babydoll</h1>
+          <p>Tattoos &amp; Piercing</p>
+        </div>
       </div>
-      <nav class="site-nav">
+      <nav class="site-nav" id="siteNav">
         <ul>
           <li><a href="#home">Home</a></li>
           <li><a href="#services">Services</a></li>
@@ -24,109 +32,200 @@
           <li><a class="btn-cta" href="#book">Book Now</a></li>
         </ul>
       </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
   <section id="home" class="hero">
     <div class="hero-overlay">
-      <div class="container">
-        <h2>Your journey into body art & piercing begins here!</h2>
-        <a class="btn-cta" href="#book">Book Now</a>
+      <div class="container hero-content">
+        <p class="hero-tagline">Inclusive • Safe • Professional</p>
+        <h2>Bold body art for every body.</h2>
+        <p class="hero-subtext">
+          From delicate linework to full custom pieces and safe, expert piercings — Babydoll is your space to express who you are.
+        </p>
+        <div class="hero-actions">
+          <a class="btn-cta" href="#book">Book Now</a>
+          <a class="btn-ghost" href="#portfolio">View Work</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="services" class="services">
+  <section id="services" class="section services">
     <div class="container">
-      <h2>Our Services</h2>
+      <h2 class="section-title">Services</h2>
+      <p class="section-intro">
+        Whether it's your first tattoo or your tenth piercing, we focus on comfort, consent, and clean, beautiful results.
+      </p>
       <div class="services-grid">
         <div class="service-item">
-          <img src="images/tattoo.jpg" alt="Tattoo Service">
+          <div class="service-image">
+            <img src="images/tattoo.jpg" alt="Custom tattoo being done" />
+          </div>
           <h3>Custom Tattoos</h3>
-          <p>From micro tattoos to full sleeves, we bring your vision to life.</p>
+          <p>
+            Fine line, colour, blackwork, floral, illustrative and more. Bring your idea, reference art, or let us design from scratch.
+          </p>
         </div>
         <div class="service-item">
-          <img src="images/piercing.jpg" alt="Piercing Service">
+          <div class="service-image">
+            <img src="images/piercing.jpg" alt="Ear piercing with jewellery" />
+          </div>
           <h3>Piercings</h3>
-          <p>Ear, body, facial — safe, expert-led, hygienic piercing services.</p>
+          <p>
+            Ears, nose, facial and body piercings in a calm, supportive environment with high quality jewellery options.
+          </p>
         </div>
         <div class="service-item">
-          <img src="images/coverup.jpg" alt="Scar Coverup">
-          <h3>Scar & Trauma Cover-ups</h3>
-          <p>Experienced in helping you transform scars into works of art.</p>
+          <div class="service-image">
+            <img src="images/coverup.jpg" alt="Tattoo cover-up in progress" />
+          </div>
+          <h3>Cover-ups & Scar Work</h3>
+          <p>
+            Trauma-aware cover-ups and scar work, always at your pace and with full respect for your story and boundaries.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="portfolio" class="portfolio">
+  <section id="portfolio" class="section portfolio">
     <div class="container">
-      <h2>Portfolio</h2>
+      <h2 class="section-title">Portfolio</h2>
+      <p class="section-intro">
+        A small look at some of the pieces created in our studio. Visit our socials for the latest healed work and flash.
+      </p>
       <div class="portfolio-grid">
-        <img src="images/portfolio1.jpg" alt="Tattoo work 1">
-        <img src="images/portfolio2.jpg" alt="Tattoo work 2">
-        <img src="images/portfolio3.jpg" alt="Tattoo work 3">
-        <img src="images/portfolio4.jpg" alt="Tattoo work 4">
-      </div>
-      <a class="btn-secondary" href="/portfolios">View Full Portfolio</a>
-    </div>
-  </section>
-
-  <section id="about" class="about">
-    <div class="container">
-      <h2>About Us</h2>
-      <div class="about-content">
-        <div class="about-image">
-          <img src="images/team.jpg" alt="Babydoll Team">
+        <div class="portfolio-item">
+          <img src="images/portfolio1.jpg" alt="Tattoo example 1" />
         </div>
-        <div class="about-text">
-          <p>Founded with a passion for artistic self-expression, Babydoll Tattoos & Piercing is your home for bold body art and safe, professional piercings. Our team of expert artists and piercers are here to make you feel welcome, unique, and empowered.</p>
-          <p>“Your skin may be green, your skin may be blue. We're the ones they call different — but here? We're alien too.” – Babydoll Team</p>
+        <div class="portfolio-item">
+          <img src="images/portfolio2.jpg" alt="Tattoo example 2" />
+        </div>
+        <div class="portfolio-item">
+          <img src="images/portfolio3.jpg" alt="Tattoo example 3" />
+        </div>
+        <div class="portfolio-item">
+          <img src="images/portfolio4.jpg" alt="Tattoo example 4" />
+        </div>
+        <div class="portfolio-item">
+          <img src="images/portfolio5.jpg" alt="Tattoo example 5" />
+        </div>
+        <div class="portfolio-item">
+          <img src="images/portfolio6.jpg" alt="Tattoo example 6" />
         </div>
       </div>
+      <div class="portfolio-cta">
+        <a class="btn-secondary" href="#" target="_blank" rel="noopener">See More on Instagram</a>
+      </div>
     </div>
   </section>
 
-  <section id="book" class="book-section">
-    <div class="container">
-      <h2>Ready to get started?</h2>
-      <a class="btn-cta" href="/appointments">Book Your Appointment</a>
+  <section id="about" class="section about">
+    <div class="container about-inner">
+      <div class="about-image">
+        <img src="images/studio.jpg" alt="Inside Babydoll tattoo studio" />
+      </div>
+      <div class="about-text">
+        <h2 class="section-title">About Babydoll</h2>
+        <p>
+          Babydoll Tattoos &amp; Piercing is a queer-friendly, body-positive studio that believes every person deserves to feel at home in their skin.
+        </p>
+        <p>
+          Our artists specialize in working collaboratively with you — explaining every step, respecting your boundaries, and making sure you leave feeling seen, safe, and excited about your new piece.
+        </p>
+        <p class="about-quote">
+          “Your skin may be green, your skin may be blue. We're the ones they call different — but here? We're alien too.”
+        </p>
+      </div>
     </div>
   </section>
 
-  <section id="contact" class="contact">
-    <div class="container">
-      <h2>Contact Us</h2>
-      <div class="contact-grid">
-        <div class="contact-info">
-          <p><strong>Phone:</strong> 604-565-7871</p>
-          <p><strong>Text (best):</strong> 778-288-4833</p>
-          <p><strong>Address:</strong> [Studio Address Goes Here]</p>
+  <section id="book" class="section book-section">
+    <div class="container book-inner">
+      <div class="book-text">
+        <h2 class="section-title">Ready to book?</h2>
+        <p>
+          For the fastest response, please text the studio with your name, idea, placement, approximate size, and reference photos if you have them.
+        </p>
+        <ul class="book-details">
+          <li><strong>Call:</strong> 604-565-7871</li>
+          <li><strong>Text (best):</strong> 778-288-4833</li>
+          <li><strong>Email:</strong> hello@babydolltattoos.com</li>
+        </ul>
+        <a href="#contact" class="btn-cta">Send a Message</a>
+      </div>
+      <div class="book-card">
+        <h3>Quick Inquiry Form</h3>
+        <form action="#" method="post">
+          <label for="bname">Name</label>
+          <input type="text" id="bname" name="name" required />
+
+          <label for="bemail">Email</label>
+          <input type="email" id="bemail" name="email" required />
+
+          <label for="btype">Tattoo or Piercing?</label>
+          <select id="btype" name="type" required>
+            <option value="">Select one</option>
+            <option value="tattoo">Tattoo</option>
+            <option value="piercing">Piercing</option>
+            <option value="both">Both</option>
+          </select>
+
+          <label for="bmessage">Tell us about your idea</label>
+          <textarea id="bmessage" name="message" rows="4" required></textarea>
+
+          <button type="submit" class="btn-secondary">Send Inquiry</button>
+        </form>
+        <p class="form-note">* Demo only — connect this to your booking system or email handler.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact">
+    <div class="container contact-inner">
+      <div class="contact-info">
+        <h2 class="section-title">Visit the Studio</h2>
+        <p class="section-intro">
+          Located in the heart of New Westminster, steps away from transit, coffee, and good food.
+        </p>
+        <p><strong>Address:</strong><br />123 Example Street, New Westminster, BC</p>
+        <p><strong>Studio Hours:</strong><br />By appointment. Walk-ins posted on Instagram.</p>
+        <div class="contact-links">
+          <a href="tel:16045657871">Call Studio</a>
+          <a href="sms:17782884833">Text for Booking</a>
         </div>
-        <div class="contact-form">
-          <form action="#" method="post">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-            <button type="submit" class="btn-secondary">Send Message</button>
-          </form>
-        </div>
+      </div>
+      <div class="contact-map">
+        <iframe
+          title="Babydoll Tattoos Location"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2605.358071!2d-122.910956!3d49.205717!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDnCsDEyJzIxLjYiTiAxMjLCsDU0JzM2LjQiVw!5e0!3m2!1sen!2sca!4v0000000000"
+          width="100%"
+          height="260"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
       </div>
     </div>
   </section>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>© 2025 Babydoll Tattoos & Piercing. All Rights Reserved.</p>
+    <div class="container footer-inner">
+      <p>© 2025 Babydoll Tattoos &amp; Piercing. All Rights Reserved.</p>
       <div class="social">
-        <a href="https://www.instagram.com/" target="_blank">Instagram</a>
-        <a href="https://www.facebook.com/" target="_blank">Facebook</a>
+        <a href="#" target="_blank" rel="noopener">Instagram</a>
+        <a href="#" target="_blank" rel="noopener">Facebook</a>
+        <a href="#" target="_blank" rel="noopener">TikTok</a>
       </div>
     </div>
   </footer>
 
+  <!-- Page-specific JS -->
+  <script src="tattoo.js"></script>
 </body>
 </html>
