@@ -1,1 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SnapFix — Home Repair, Simplified</title>
+  <meta name="description" content="SnapFix connects homeowners with trusted local contractors. Snap a photo, get an AI diagnosis, and book a repair — fast." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --bg:        #1a1c20;
+      --bg2:       #22252b;
+      --bg3:       #2a2d34;
+      --orange:    #f5820a;
+      --orange2:   #e07008;
+      --text:      #f0f0f0;
+      --muted:     #8a8f9a;
+      --radius:    14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 64px;
+      background: rgba(26,28,32,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.3rem; font-weight: 700; color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo img {
+      width: 36px; height: 36px; border-radius: 8px;
+    }
+    .nav-logo span { color: var(--orange); }
+    .nav-cta {
+      background: var(--orange); color: #fff;
+      padding: 9px 20px; border-radius: 22px;
+      font-weight: 600; font-size: 0.9rem;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--orange2); }
+
+    /* ── HERO ── */
+    .hero {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center;
+      padding: 100px 5% 80px;
+      background: radial-gradient(ellipse 70% 50% at 50% -10%, rgba(245,130,10,0.18) 0%, transparent 70%);
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(245,130,10,0.15); border: 1px solid rgba(245,130,10,0.3);
+      color: var(--orange); border-radius: 20px;
+      padding: 5px 14px; font-size: 0.82rem; font-weight: 600;
+      margin-bottom: 28px; letter-spacing: 0.03em;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800; line-height: 1.15;
+      max-width: 720px;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 span { color: var(--orange); }
+    .hero p {
+      color: var(--muted); font-size: 1.15rem;
+      max-width: 520px; margin: 20px auto 40px;
+    }
+    .hero-buttons {
+      display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--orange); color: #fff;
+      padding: 14px 28px; border-radius: 28px;
+      font-weight: 700; font-size: 1rem;
+      text-decoration: none; transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--orange2); transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--bg3); color: var(--text);
+      padding: 14px 28px; border-radius: 28px;
+      font-weight: 600; font-size: 1rem;
+      text-decoration: none; border: 1px solid rgba(255,255,255,0.1);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-secondary:hover { background: var(--bg2); transform: translateY(-1px); }
+
+    /* app icon hero */
+    .hero-icon {
+      margin-top: 60px;
+      width: 120px; height: 120px;
+      border-radius: 26px;
+      box-shadow: 0 24px 60px rgba(245,130,10,0.25), 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 80px 5%; }
+    .section-label {
+      text-align: center;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--orange);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800; letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--muted); font-size: 1.05rem;
+      max-width: 560px; margin: 0 auto 56px;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 28px; max-width: 960px; margin: 0 auto;
+    }
+    .step {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      position: relative;
+    }
+    .step-num {
+      width: 40px; height: 40px;
+      background: rgba(245,130,10,0.15);
+      border: 1px solid rgba(245,130,10,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; font-weight: 700; color: var(--orange);
+      margin-bottom: 18px;
+    }
+    .step h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+    .step p  { color: var(--muted); font-size: 0.92rem; }
+
+    /* ── FEATURES ── */
+    #features { background: var(--bg2); }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px; max-width: 1060px; margin: 0 auto;
+    }
+    .feature-card {
+      background: var(--bg3);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(245,130,10,0.3);
+    }
+    .feature-icon {
+      font-size: 1.8rem; margin-bottom: 14px;
+    }
+    .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p  { color: var(--muted); font-size: 0.9rem; }
+
+    /* ── FOR CONTRACTORS ── */
+    .contractor-section {
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .contractor-box {
+      background: linear-gradient(135deg, rgba(245,130,10,0.12), rgba(245,130,10,0.04));
+      border: 1px solid rgba(245,130,10,0.25);
+      border-radius: 20px;
+      padding: 48px 40px;
+      max-width: 720px; width: 100%;
+      text-align: center;
+    }
+    .contractor-box h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 800; margin-bottom: 14px;
+    }
+    .contractor-box p {
+      color: var(--muted); font-size: 1rem; margin-bottom: 32px;
+    }
+    .contractor-perks {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      justify-content: center; margin-bottom: 36px;
+    }
+    .perk {
+      background: rgba(245,130,10,0.1);
+      border: 1px solid rgba(245,130,10,0.2);
+      color: var(--text);
+      padding: 7px 16px; border-radius: 20px;
+      font-size: 0.88rem; font-weight: 600;
+    }
+
+    /* ── PRICING ── */
+    .pricing-cards {
+      display: flex; flex-wrap: wrap; gap: 24px;
+      justify-content: center; max-width: 800px; margin: 0 auto;
+    }
+    .pricing-card {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px; padding: 36px 32px;
+      flex: 1; min-width: 260px; max-width: 340px;
+      text-align: center;
+    }
+    .pricing-card.featured {
+      border-color: var(--orange);
+      background: linear-gradient(160deg, rgba(245,130,10,0.1), var(--bg2));
+      position: relative;
+    }
+    .featured-badge {
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: var(--orange); color: #fff;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 14px; border-radius: 10px;
+    }
+    .pricing-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+    .price {
+      font-size: 2.4rem; font-weight: 800;
+      color: var(--orange); margin: 14px 0 4px;
+    }
+    .price span { font-size: 1rem; color: var(--muted); font-weight: 400; }
+    .pricing-card p { color: var(--muted); font-size: 0.9rem; margin-bottom: 24px; }
+    .pricing-features {
+      list-style: none; text-align: left;
+      display: flex; flex-direction: column; gap: 10px;
+      margin-bottom: 28px;
+    }
+    .pricing-features li {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.9rem; color: var(--text);
+    }
+    .pricing-features li::before {
+      content: "✓";
+      color: var(--orange); font-weight: 700; flex-shrink: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 40px 5%;
+      display: flex; flex-wrap: wrap;
+      align-items: center; justify-content: space-between;
+      gap: 20px;
+    }
+    .footer-logo {
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--text); text-decoration: none;
+    }
+    .footer-logo span { color: var(--orange); }
+    .footer-links {
+      display: flex; gap: 24px; flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.9rem; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy {
+      color: var(--muted); font-size: 0.82rem; width: 100%;
+      text-align: center; margin-top: 10px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero { padding: 70px 5% 60px; }
+      .contractor-box { padding: 32px 20px; }
+      footer { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="icon.png" alt="SnapFix icon" />
+    Snap<span>Fix</span>
+  </a>
+  <a class="nav-cta" href="#download">Download</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🔧 Now Available on iOS</div>
+  <h1>Home repair,<br><span>snapped &amp; fixed.</span></h1>
+  <p>Snap a photo of any home issue, get an instant AI diagnosis, and connect with a trusted local contractor — all in one app.</p>
+  <div class="hero-buttons">
+    <a href="#download" class="btn-primary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      App Store
+    </a>
+    <a href="#how-it-works" class="btn-secondary">See how it works</a>
+  </div>
+  <img class="hero-icon" src="icon.png" alt="SnapFix app icon" />
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="section-label">How it works</div>
+  <h2 class="section-title">Fixed in three steps</h2>
+  <p class="section-sub">From problem to repair in minutes, not days.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Snap a photo</h3>
+      <p>Take a photo of the issue — leaky pipe, broken outlet, cracked wall — and let our AI identify what's wrong.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Get a diagnosis</h3>
+      <p>Receive an instant AI-powered assessment with estimated cost, urgency level, and recommended next steps.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Book a contractor</h3>
+      <p>Connect with verified local contractors in your area who are ready to take the job — no cold calling required.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h3>Track the repair</h3>
+      <p>Follow the job through every stage — submitted, accepted, scheduled, in progress, and completed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-label">Features</div>
+  <h2 class="section-title">Everything you need</h2>
+  <p class="section-sub">Built for homeowners, tenants, landlords, and contractors.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">📸</div>
+      <h3>AI Photo Diagnosis</h3>
+      <p>Upload up to 3 photos and get an intelligent assessment of your home issue with cost estimates.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔨</div>
+      <h3>Verified Contractors</h3>
+      <p>Browse local contractors by specialty. They're real people you can call, email, or book directly in the app.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📋</div>
+      <h3>Landlord Tools</h3>
+      <p>Landlords can manage tenant repair requests, track jobs across multiple properties, and stay organized.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💬</div>
+      <h3>AI Home Assistant</h3>
+      <p>Chat with our built-in AI for DIY guidance, safety warnings, tool lists, and repair cost estimates.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📍</div>
+      <h3>Local-First</h3>
+      <p>Contractors are matched by your location and specialty. No out-of-town quotes wasting your time.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔔</div>
+      <h3>Real-Time Updates</h3>
+      <p>Get notified when a contractor accepts, schedules, or completes your job — no chasing required.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOR CONTRACTORS -->
+<section id="contractors">
+  <div class="contractor-section">
+    <div class="section-label">For contractors</div>
+    <h2 class="section-title">Grow your business with SnapFix</h2>
+    <p class="section-sub">Join the network and get matched with homeowners who need your skills right now.</p>
+    <div class="contractor-box">
+      <h2>Start receiving jobs today</h2>
+      <p>Register as a contractor, set your specialty, and new repair requests in your area will land directly in your queue.</p>
+      <div class="contractor-perks">
+        <span class="perk">No subscription fee to start</span>
+        <span class="perk">Set your own specialty</span>
+        <span class="perk">Accept or pass on any job</span>
+        <span class="perk">Customer contact included</span>
+        <span class="perk">Job tracking dashboard</span>
+        <span class="perk">Invoice &amp; commission tracking</span>
+      </div>
+      <a href="#download" class="btn-primary">Register as a Contractor</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="background: var(--bg2);">
+  <div class="section-label">Pricing</div>
+  <h2 class="section-title">Simple, transparent pricing</h2>
+  <p class="section-sub">Start free. Upgrade when you need more.</p>
+  <div class="pricing-cards">
+    <div class="pricing-card">
+      <h3>Free</h3>
+      <div class="price">$0<span>/mo</span></div>
+      <p>For homeowners getting started</p>
+      <ul class="pricing-features">
+        <li>3 free AI diagnoses per day</li>
+        <li>Browse local contractors</li>
+        <li>Submit repair requests</li>
+        <li>AI home assistant chat</li>
+      </ul>
+      <a href="#download" class="btn-secondary" style="display:block; text-align:center;">Get Started</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="featured-badge">Most Popular</div>
+      <h3>Pro</h3>
+      <div class="price">$9<span>/mo</span></div>
+      <p>For active homeowners &amp; landlords</p>
+      <ul class="pricing-features">
+        <li>Unlimited AI diagnoses</li>
+        <li>Priority contractor matching</li>
+        <li>Landlord inbox &amp; multi-property</li>
+        <li>Job history &amp; reports</li>
+        <li>Email notifications</li>
+      </ul>
+      <a href="#download" class="btn-primary" style="display:block; text-align:center;">Start Pro</a>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section id="download" style="text-align:center; padding: 100px 5%;">
+  <div class="section-label">Download</div>
+  <h2 class="section-title">Get SnapFix on iOS</h2>
+  <p class="section-sub">Available now on the App Store. Free to download.</p>
+  <a href="#" class="btn-primary" style="display:inline-flex; font-size:1.05rem; padding: 16px 36px;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+    Download on the App Store
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="#">Snap<span>Fix</span></a>
+  <div class="footer-links">
+    <a href="#how-it-works">How it works</a>
+    <a href="#features">Features</a>
+    <a href="#contractors">Contractors</a>
+    <a href="#pricing">Pricing</a>
+    <a href="mailto:support@snapfix.app">Contact</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 SnapFix. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
