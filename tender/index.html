@@ -1,43 +1,39 @@
 <!-- =========================
-FILE: index.html
+PIXEL-PERFECT HERO CLONE
+FILES: index.html + styles.css
 ========================= -->
+
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tender Love Sync</title>
+  <title>Tender</title>
+
+  <!-- FONT (matches screenshot style) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="app">
-    <header>
-      <h1>Tender</h1>
-      <button onclick="showMatches()">Matches (<span id="count">0</span>)</button>
-    </header>
 
-    <main id="main">
-      <div class="card" id="card">
-        <h2 id="name"></h2>
-        <p id="bio"></p>
-      </div>
+  <section class="hero">
+    <div class="pill">❤️ For your better half</div>
 
-      <div class="actions">
-        <button onclick="swipe('no')">❌</button>
-        <button class="like" onclick="swipe('like')">❤️</button>
-        <button onclick="swipe('super')">⭐</button>
-      </div>
+    <h1>Tender</h1>
 
-      <p class="upgrade">Upgrade to Premium ($9.99/mo)</p>
-    </main>
+    <p class="subtitle">
+      The thoughtful partner app that helps you remember, plan,<br />
+      and show up for the one you love — every single day.
+    </p>
 
-    <section id="matches" class="hidden">
-      <h2>Your Matches</h2>
-      <div id="matchesList"></div>
-      <button onclick="goBack()">Back</button>
-    </section>
-  </div>
+    <div class="buttons">
+      <button class="primary">Get Started — It's Free</button>
+      <button class="secondary">See How It Works</button>
+    </div>
+  </section>
 
-  <script src="script.js"></script>
 </body>
 </html>
+
