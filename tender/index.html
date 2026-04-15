@@ -1,12 +1,43 @@
+<!-- =========================
+FILE: index.html
+========================= -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tender</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tender Love Sync</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <h1>Welcome to Tender</h1>
-    <p>This is the index page for the Tender directory.</p>
+  <div class="app">
+    <header>
+      <h1>Tender</h1>
+      <button onclick="showMatches()">Matches (<span id="count">0</span>)</button>
+    </header>
+
+    <main id="main">
+      <div class="card" id="card">
+        <h2 id="name"></h2>
+        <p id="bio"></p>
+      </div>
+
+      <div class="actions">
+        <button onclick="swipe('no')">❌</button>
+        <button class="like" onclick="swipe('like')">❤️</button>
+        <button onclick="swipe('super')">⭐</button>
+      </div>
+
+      <p class="upgrade">Upgrade to Premium ($9.99/mo)</p>
+    </main>
+
+    <section id="matches" class="hidden">
+      <h2>Your Matches</h2>
+      <div id="matchesList"></div>
+      <button onclick="goBack()">Back</button>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
