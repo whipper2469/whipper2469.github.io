@@ -1,1 +1,75 @@
+<!-- styles.css -->
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
 
+/* pill badge */
+.pill {
+  background: #f3dede;
+  color: #c94b5e;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+/* title */
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 72px;
+  margin: 0 0 20px;
+  letter-spacing: -1px;
+}
+
+/* subtitle */
+.subtitle {
+  font-size: 20px;
+  color: #7a6d6a;
+  max-width: 700px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+/* buttons */
+.buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+button {
+  font-size: 16px;
+  padding: 14px 28px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+}
+
+.primary {
+  background: #d45563;
+  color: white;
+  box-shadow: 0 6px 14px rgba(212, 85, 99, 0.3);
+}
+
+.secondary {
+  background: #eee6e3;
+  color: #3a2f2c;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* responsive tweak */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 48px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+}
