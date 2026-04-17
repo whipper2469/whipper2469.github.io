@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SnapFix — Home Repair, Simplified</title>
-  <meta name="description" content="SnapFix connects homeowners with trusted local contractors. Snap a photo, get a diagnosis, and book a repair — fast." />
+  <title>HomeHelper — Home Repair, Simplified</title>
+  <meta name="description" content="HomeHelper connects homeowners with trusted local contractors. Snap a photo, get a diagnosis, and book a repair — fast." />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -323,8 +323,8 @@
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#">
-    <img src="icon.png" alt="SnapFix icon" />
-    Snap<span>Fix</span>
+    <img src="icon.png" alt="HomeHelper icon" />
+    Home<span>Helper</span>
   </a>
   <div class="nav-links">
     <a href="#how-it-works">How it works</a>
@@ -338,13 +338,13 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-badge">🔧 Coming Soon to iOS</div>
-  <h1>Home repair,<br><span>snapped &amp; fixed.</span></h1>
+  <h1>Home repair,<br><span>helped &amp; fixed.</span></h1>
   <p>Snap a photo of any home issue, get an instant diagnosis, and connect with a trusted local contractor — all in one app.</p>
   <div class="hero-buttons">
     <a href="#waitlist" class="btn-primary">Join the Waitlist</a>
     <a href="#how-it-works" class="btn-secondary">See how it works</a>
   </div>
-  <img class="hero-icon" src="icon.png" alt="SnapFix app icon" />
+  <img class="hero-icon" src="icon.png" alt="HomeHelper app icon" />
 </section>
 
 <!-- HOW IT WORKS -->
@@ -419,7 +419,7 @@
 <section id="contractors">
   <div class="contractor-section">
     <div class="section-label">For contractors</div>
-    <h2 class="section-title">Grow your business with SnapFix</h2>
+    <h2 class="section-title">Grow your business with HomeHelper</h2>
     <p class="section-sub">Join the network and get matched with homeowners who need your skills right now.</p>
     <div class="contractor-box">
       <h2>Start receiving jobs today</h2>
@@ -513,7 +513,7 @@
 <section id="waitlist">
   <div class="section-label">Early Access</div>
   <h2 class="section-title">Be first to know</h2>
-  <p class="section-sub">Sign up now and we'll email you a download link the moment SnapFix launches on the App Store.</p>
+  <p class="section-sub">Sign up now and we'll email you a download link the moment HomeHelper launches on the App Store.</p>
 
   <div class="waitlist-box">
     <div class="counter-bar">
@@ -552,18 +552,18 @@
 
 <!-- FOOTER -->
 <footer>
-  <a class="footer-logo" href="#">Snap<span>Fix</span></a>
+  <a class="footer-logo" href="#">Home<span>Helper</span></a>
   <div class="footer-links">
     <a href="#how-it-works">How it works</a>
     <a href="#features">Features</a>
     <a href="#contractors">Contractors</a>
     <a href="#pricing">Pricing</a>
     <a href="#waitlist">Join Waitlist</a>
-    <a href="mailto:support@snapfix.app">Contact</a>
-    <a href="/snapfix/privacy.html">Privacy Policy</a>
-    <a href="/snapfix/terms.html">Terms</a>
+    <a href="mailto:support@homerepairai.ca">Contact</a>
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/terms.html">Terms</a>
   </div>
-  <p class="footer-copy">&copy; 2026 SnapFix. All rights reserved.</p>
+  <p class="footer-copy">&copy; 2026 HomeHelper. All rights reserved.</p>
 </footer>
 
 <script>
@@ -613,7 +613,6 @@
     btn.textContent = 'Saving…';
 
     try {
-      // 1. Insert into waitlist table
       var res = await fetch(SUPABASE_URL + '/rest/v1/waitlist', {
         method: 'POST',
         headers: {
@@ -632,7 +631,6 @@
         throw new Error('Server error ' + res.status + ': ' + body);
       }
 
-      // 2. Send role-specific welcome email via Edge Function (fire-and-forget)
       fetch(SUPABASE_URL + '/functions/v1/send-waitlist-email', {
         method: 'POST',
         headers: {
@@ -643,7 +641,6 @@
         body: JSON.stringify({ name: name, email: email, role: role })
       }).catch(function(err) { console.warn('Email send failed (non-fatal):', err); });
 
-      // 3. Show success state
       document.getElementById('waitlist-form-wrap').style.display = 'none';
       document.querySelector('.privacy-note') && (document.querySelector('.privacy-note').style.display = 'none');
       document.getElementById('success-email').textContent = email;
@@ -651,7 +648,7 @@
       document.querySelector('.counter-bar').style.display = 'none';
 
     } catch (err) {
-      errEl.textContent = 'Something went wrong. Please try again or email support@snapfix.app';
+      errEl.textContent = 'Something went wrong. Please try again or email support@homerepairai.ca';
       errEl.style.display = 'block';
       btn.disabled = false;
       btn.textContent = 'Notify Me at Launch';
