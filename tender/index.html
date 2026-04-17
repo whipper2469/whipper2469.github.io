@@ -1,40 +1,207 @@
-<!-- =========================
-PIXEL-PERFECT HERO CLONE
-FILES: index.html + styles.css
-========================= -->
-
-<!-- index.html -->
+<!-- FINAL POLISHED VERSION WITH ANIMATIONS -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tender</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tender</title>
 
-  <!-- FONT (matches screenshot style) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css" />
+<style>
+body {
+  margin: 0;
+  background: #f5efed;
+  font-family: 'Inter', sans-serif;
+  color: #2d2422;
+}
+
+section {
+  padding: 100px 20px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero {
+  text-align: center;
+  padding-top: 120px;
+  opacity: 1;
+  transform: none;
+}
+
+.pill {
+  background: #f2dede;
+  color: #c94b5e;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  margin-bottom: 30px;
+  display: inline-block;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 72px;
+  margin: 0 0 20px;
+}
+
+.subtitle {
+  font-size: 20px;
+  color: #7a6d6a;
+  max-width: 720px;
+  margin: auto;
+  line-height: 1.6;
+}
+
+.buttons {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+button {
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s ease;
+}
+
+.primary {
+  background: #d45563;
+  color: white;
+  box-shadow: 0 8px 20px rgba(212,85,99,0.3);
+}
+
+.primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(212,85,99,0.4);
+}
+
+.secondary {
+  background: #eee6e3;
+}
+
+.secondary:hover {
+  transform: translateY(-2px);
+  background: #e6ddda;
+}
+
+.features {
+  text-align: center;
+}
+
+.features h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+}
+
+.features-sub {
+  color: #7a6d6a;
+  margin-bottom: 50px;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 1000px;
+  margin: auto;
+  text-align: left;
+}
+
+.feature-grid h3 {
+  font-weight: 600;
+}
+
+.feature-grid p {
+  color: #6f6461;
+}
+
+.text-block {
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+.text-block h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+}
+
+.text-block p {
+  color: #6f6461;
+  line-height: 1.7;
+}
+
+.cta {
+  display: flex;
+  justify-content: center;
+}
+
+.cta-box {
+  background: #f2e4e1;
+  padding: 70px 50px;
+  border-radius: 32px;
+  text-align: center;
+  max-width: 900px;
+  width: 100%;
+  border: 1px solid #e5cfc9;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.cta-box h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+}
+
+.cta-box p {
+  color: #7a6d6a;
+}
+
+.heart {
+  font-size: 28px;
+}
+
+footer {
+  text-align: center;
+  padding: 60px 20px;
+  color: #7a6d6a;
+}
+
+@media (max-width: 900px) {
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
 </head>
+
 <body>
 
-  <section class="hero">
-    <div class="pill">❤️ For your better half</div>
+<section class="hero">
+  <div class="pill">❤️ For your better half</div>
+  <h1>Tender</h1>
+  <p class="subtitle">The thoughtful partner app that helps you remember, plan, and show up for the one you love — every single day.</p>
+  <div class="buttons">
+    <button class="primary">Get Started — It's Free</button>
+    <button class="secondary">See How It Works</button>
+  </div>
+</section>
 
-    <h1>Tender</h1>
-
-    <p class="subtitle">
-      The thoughtful partner app that helps you remember, plan,<br />
-      and show up for the one you love — every single day.
-    </p>
-
-    <div class="buttons">
-      <button class="primary">Get Started — It's Free</button>
-      <button class="secondary">See How It Works</button>
-    </div>
-  </section>
-
-<!-- FEATURES SECTION -->
 <section class="features">
   <h2>Everything you need to be a better partner</h2>
   <p class="features-sub">Simple tools designed with love to strengthen your relationship.</p>
@@ -43,38 +210,53 @@ FILES: index.html + styles.css
     <div><h3>Partner Profile</h3><p>Remember every detail that matters — from their favorite flowers to their love language.</p></div>
     <div><h3>Date Night Ideas</h3><p>Curated suggestions for every budget, from cozy nights in to unforgettable adventures.</p></div>
     <div><h3>Smart Reminders</h3><p>Never forget an anniversary, a thoughtful gesture, or a chance to show you care.</p></div>
-    <div><h3>Cooling Off Mode</h3><p>A mindful pause when emotions run high, with tools to reconnect with love.</p></div>
-    <div><h3>100% Private</h3><p>All your data stays on your device. No servers, no tracking, no compromise.</p></div>
-    <div><h3>Reconnection Tools</h3><p>Pre-written messages and prompts to help you express what's in your heart.</p></div>
+    <div><h3>Cooling Off Mode</h3><p>A mindful pause when emotions run high.</p></div>
+    <div><h3>100% Private</h3><p>All your data stays on your device.</p></div>
+    <div><h3>Reconnection Tools</h3><p>Prompts to help you express what's in your heart.</p></div>
   </div>
 </section>
 
-<!-- LOVE SECTION -->
 <section class="text-block">
   <h2>Love takes intention</h2>
-  <p>
-    Tender is the relationship companion that sits quietly in your pocket, helping you be the partner you've always wanted to be. It remembers the details you might forget, suggests ideas when you're stuck, and gives you space to cool down when things get heated.
-  </p>
-  <p>
-    No social feeds. No judgment. No data leaving your device. Just a thoughtful nudge to show up with love, every day.
-  </p>
+  <p>Tender is the relationship companion that sits quietly in your pocket, helping you be the partner you've always wanted to be.</p>
 </section>
 
-<!-- WHY SECTION -->
 <section class="text-block">
   <h2>Why Tender?</h2>
-  <p>
-    Relationships thrive on the small things — remembering how they take their coffee, surprising them with flowers on a random Tuesday, or knowing exactly when to say "I'm sorry, let's talk about this."
-  </p>
-  <p>
-    But life gets busy. Calendars fill up, routines take over, and those small acts of love start slipping through the cracks. That's where Tender comes in.
-  </p>
-  <p>
-    Tender is not a dating app. It's not social media. It's a private, personal tool designed for people already in love who want to keep showing up. From organized partner profiles and curated date night ideas to smart reminders and a unique "Cooling Off" mode for those tough moments — Tender is your secret weapon for a stronger relationship.
-  </p>
-  <p>
-    Everything stays on your device. Your partner's birthday, their favorite restaurant, that inside joke only you two understand — it's all private, always. Because trust is the foundation of love.
-  </p>
+  <p>Relationships thrive on the small things — remembering, caring, showing up.</p>
 </section>
 
-<!-- CTA SECTION -->
+<section class="cta">
+  <div class="cta-box">
+    <div class="heart">❤️</div>
+    <h2>Start being more tender today</h2>
+    <p>It takes less than a minute to set up.</p>
+    <button class="primary">Create Your Profile</button>
+  </div>
+</section>
+
+<footer>
+  <h3>Tender</h3>
+  <p>Made with love. Your data stays with you, always.</p>
+</footer>
+
+<script>
+const sections = document.querySelectorAll("section");
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    }
+  });
+}, { threshold: 0.15 });
+
+sections.forEach(section => {
+  if (!section.classList.contains("hero")) {
+    observer.observe(section);
+  }
+});
+</script>
+
+</body>
+</html>
