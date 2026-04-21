@@ -674,7 +674,6 @@
 
             addMessage(message, 'user');
             chatInput.value = '';
-            if (chatInput.placeholder.includes('e.g.')) chatInput.placeholder = 'Type your message...';
 
             // Clear typing indicator
             await supabaseClient
