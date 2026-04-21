@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnapFix Admin - Live Chat</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: #1B2B5E;
+            color: white;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            padding: 8px 16px;
+            background: #FF6535;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .sessions-list {
+            width: 320px;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            overflow-y: auto;
+        }
+
+        .session-item {
+            padding: 16px;
+            border-bottom: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .session-item:hover {
+            background: #f9fafb;
+        }
+
+        .session-item.active {
+            background: #eff6ff;
+            border-left: 3px solid #FF6535;
+        }
+
+        .session-item.unread {
+            background: #fef3c7;
+        }
+
+        .session-id {
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 4px;
+        }
+
+        .session-preview {
+            font-size: 14px;
+            color: #1f2937;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .session-time {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-top: 4px;
+        }
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: white;
+        }
+
+        .chat-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid #e5e7eb;
+            background: #f9fafb;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+            background: #f9fafb;
+        }
+
+        .message {
+            margin-bottom: 16px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-bubble {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .message.user .message-bubble {
+            background: #FF6535;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.bot .message-bubble,
+        .message.admin .message-bubble {
+            background: white;
+            border: 1px solid #e5e7eb;
+            color: #1f2937;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.admin .message-bubble {
+            background: #1B2B5E;
+            color: white;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-top: 4px;
+        }
+
+        .chat-input-area {
+            padding: 16px 24px;
+            border-top: 1px solid #e5e7eb;
+            background: white;
+        }
+
+        .chat-input-form {
+            display: flex;
+            gap: 12px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .chat-input:focus {
+            border-color: #FF6535;
+        }
+
+        .send-btn {
+            padding: 12px 24px;
+            background: #FF6535;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .send-btn:hover {
+            background: #ff7d5c;
+        }
+
+        .empty-state {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #1B2B5E;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-box h2 {
+            margin-bottom: 24px;
+            color: #1B2B5E;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: #FF6535;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .error {
+            color: #ef4444;
+            font-size: 12px;
+            margin-top: -8px;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginScreen" class="login-container">
+        <div class="login-box">
+            <h2>SnapFix Admin</h2>
+            <input type="password" id="passwordInput" class="login-input" placeholder="Enter admin password" />
+            <div id="loginError" class="error"></div>
+            <button onclick="login()" class="login-btn">Login</button>
+        </div>
+    </div>
+
+    <div id="adminPanel" style="display: none; height: 100vh; display: flex; flex-direction: column;">
+        <div class="header">
+            <h1>SnapFix Live Chat Admin</h1>
+            <button onclick="logout()" class="logout-btn">Logout</button>
+        </div>
+        
+        <div class="container">
+            <div class="sessions-list" id="sessionsList">
+                <div class="empty-state">No active chats</div>
+            </div>
+
+            <div class="chat-container">
+                <div id="chatArea" class="empty-state">
+                    Select a conversation to view messages
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SUPABASE_URL = 'https://japlrtlpopefvgkecpif.supabase.co'
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImphcGxydGxwb3BlZnZna2VjcGlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ2OTU5MjAsImV4cCI6MjA2MDI3MTkyMH0.rk5fLyhvidF_6K6B1tte9GjSxRhhk2NV8rUs' // You'll need to add this
+        const ADMIN_PASSWORD = 'snapfix2026' // Change this!
+
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+        let currentSession = null
+        let sessionsData = {}
+
+        function login() {
+            const password = document.getElementById('passwordInput').value
+            if (password === ADMIN_PASSWORD) {
+                document.getElementById('loginScreen').style.display = 'none'
+                document.getElementById('adminPanel').style.display = 'flex'
+                loadSessions()
+                subscribeToMessages()
+            } else {
+                document.getElementById('loginError').textContent = 'Incorrect password'
+            }
+        }
+
+        function logout() {
+            document.getElementById('loginScreen').style.display = 'flex'
+            document.getElementById('adminPanel').style.display = 'none'
+            document.getElementById('passwordInput').value = ''
+        }
+
+        async function loadSessions() {
+            const { data, error } = await supabase
+                .from('chat_messages')
+                .select('*')
+                .order('created_at', { ascending: false })
+
+            if (error) {
+                console.error('Error loading sessions:', error)
+                return
+            }
+
+            // Group by session
+            const sessions = {}
+            data.forEach(msg => {
+                if (!sessions[msg.session_id]) {
+                    sessions[msg.session_id] = []
+                }
+                sessions[msg.session_id].push(msg)
+            })
+
+            sessionsData = sessions
+            renderSessions()
+        }
+
+        function renderSessions() {
+            const list = document.getElementById('sessionsList')
+            const sessionIds = Object.keys(sessionsData)
+
+            if (sessionIds.length === 0) {
+                list.innerHTML = '<div class="empty-state">No active chats</div>'
+                return
+            }
+
+            list.innerHTML = sessionIds.map(sessionId => {
+                const messages = sessionsData[sessionId]
+                const lastMsg = messages[messages.length - 1]
+                const hasUnread = messages.some(m => m.sender === 'user' && !m.read_by_admin)
+
+                return `
+                    <div class="session-item ${currentSession === sessionId ? 'active' : ''} ${hasUnread ? 'unread' : ''}" 
+                         onclick="selectSession('${sessionId}')">
+                        <div class="session-id">Session: ${sessionId.substring(0, 12)}...</div>
+                        <div class="session-preview">${lastMsg.message}</div>
+                        <div class="session-time">${new Date(lastMsg.created_at).toLocaleTimeString()}</div>
+                    </div>
+                `
+            }).join('')
+        }
+
+        async function selectSession(sessionId) {
+            currentSession = sessionId
+            renderSessions()
+            renderChat()
+
+            // Mark as read
+            await supabase
+                .from('chat_messages')
+                .update({ read_by_admin: true })
+                .eq('session_id', sessionId)
+                .eq('sender', 'user')
+        }
+
+        function renderChat() {
+            const chatArea = document.getElementById('chatArea')
+            
+            if (!currentSession) {
+                chatArea.innerHTML = '<div class="empty-state">Select a conversation to view messages</div>'
+                return
+            }
+
+            const messages = sessionsData[currentSession] || []
+
+            chatArea.innerHTML = `
+                <div class="chat-header">
+                    <strong>Session:</strong> ${currentSession}
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    ${messages.map(msg => `
+                        <div class="message ${msg.sender}">
+                            <div>
+                                <div class="message-bubble">${escapeHtml(msg.message)}</div>
+                                <div class="message-time">${new Date(msg.created_at).toLocaleTimeString()}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="chat-input-area">
+                    <form class="chat-input-form" onsubmit="sendMessage(event)">
+                        <input type="text" class="chat-input" id="replyInput" placeholder="Type your reply..." />
+                        <button type="submit" class="send-btn">Send</button>
+                    </form>
+                </div>
+            `
+
+            // Scroll to bottom
+            const messagesContainer = document.getElementById('chatMessages')
+            messagesContainer.scrollTop = messagesContainer.scrollHeight
+        }
+
+        async function sendMessage(e) {
+            e.preventDefault()
+            const input = document.getElementById('replyInput')
+            const message = input.value.trim()
+            
+            if (!message || !currentSession) return
+
+            // Save to database
+            const { error } = await supabase
+                .from('chat_messages')
+                .insert({
+                    session_id: currentSession,
+                    message: message,
+                    sender: 'admin'
+                })
+
+            if (error) {
+                console.error('Error sending message:', error)
+                return
+            }
+
+            input.value = ''
+            loadSessions()
+        }
+
+        function subscribeToMessages() {
+            supabase
+                .channel('chat_messages')
+                .on('postgres_changes', { 
+                    event: 'INSERT', 
+                    schema: 'public', 
+                    table: 'chat_messages' 
+                }, payload => {
+                    console.log('New message:', payload)
+                    loadSessions()
+                })
+                .subscribe()
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div')
+            div.textContent = text
+            return div.innerHTML
+        }
+
+        // Auto-refresh every 10 seconds
+        setInterval(loadSessions, 10000)
+    </script>
+</body>
+</html>
