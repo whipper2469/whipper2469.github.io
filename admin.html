@@ -57,13 +57,78 @@
     </div>
     <script>
         const c=window.supabase.createClient("https://japlrtlpopefvgkecpif.supabase.co","sb_publishable_9OnHkGpoUUG5dj7FDsnI-g_zwsjgpqG");
-        let cur=null,sess={};
-        document.getElementById("loginBtn").onclick=()=>{if(document.getElementById("passwordInput").value==="snapfix2026"){document.getElementById("loginScreen").style.display="none";document.getElementById("adminPanel").style.display="block";load()}};
-        async function load(){const {data}=await c.from("chat_messages").select("*").order("created_at");sess={};data?.forEach(m=>{if(!sess[m.session_id])sess[m.session_id]=[];sess[m.session_id].push(m)});render();if(cur)sel(cur)}
-        function render(){document.getElementById("sessionsList").innerHTML=Object.keys(sess).map(id=>`<div class="session-item ${cur===id?"active":""}" onclick="sel('${id}')"><div style="font-size:12px">${id.substring(0,12)}...</div><div style="font-size:14px;margin-top:4px">${sess[id][sess[id].length-1].message.substring(0,50)}</div></div>`).join("")||'<div class="empty-state">No chats</div>'}
-        function sel(id){cur=id;render();const msgs=sess[id]||[];document.getElementById("chatArea").innerHTML=`<div class="chat-header">Session: ${id}</div><div class="chat-messages" id="msgs">${msgs.map(m=>`<div class="message ${m.sender}"><div class="message-bubble">${esc(m.message)}</div></div>`).join("")}</div><div class="chat-input-area"><form class="chat-input-form" onsubmit="send(event)"><input class="chat-input" id="rep" placeholder="Reply..."/><button class="send-btn" type="submit">Send</button></form></div>`;document.getElementById("msgs").scrollTop=999999}
-        async function send(e){e.preventDefault();const msg=document.getElementById("rep").value.trim();if(!msg)return;await c.from("chat_messages").insert({session_id:cur,message:msg,sender:"admin"});document.getElementById("rep").value="";await load()}
-        function esc(t){const d=document.createElement("div");d.textContent=t;return d.innerHTML}
+        let cur=null,sess={},lastMsgCount={};
+        
+        document.getElementById("loginBtn").onclick=()=>{
+            if(document.getElementById("passwordInput").value==="snapfix2026"){
+                document.getElementById("loginScreen").style.display="none";
+                document.getElementById("adminPanel").style.display="block";
+                load();
+            }
+        };
+        
+        async function load(){
+            const {data}=await c.from("chat_messages").select("*").order("created_at");
+            sess={};
+            data?.forEach(m=>{
+                if(!sess[m.session_id])sess[m.session_id]=[];
+                sess[m.session_id].push(m);
+            });
+            render();
+            // Only reload current chat if new messages appeared
+            if(cur && lastMsgCount[cur] !== sess[cur]?.length){
+                lastMsgCount[cur] = sess[cur]?.length;
+                updateCurrentChat();
+            }
+        }
+        
+        function render(){
+            document.getElementById("sessionsList").innerHTML=Object.keys(sess).map(id=>
+                `<div class="session-item ${cur===id?"active":""}" onclick="sel('${id}')">
+                    <div style="font-size:12px">${id.substring(0,12)}...</div>
+                    <div style="font-size:14px;margin-top:4px">${sess[id][sess[id].length-1].message.substring(0,50)}</div>
+                </div>`
+            ).join("")||'<div class="empty-state">No chats</div>';
+        }
+        
+        function sel(id){
+            cur=id;
+            lastMsgCount[cur] = sess[cur]?.length;
+            render();
+            updateCurrentChat();
+        }
+        
+        function updateCurrentChat(){
+            const msgs=sess[cur]||[];
+            const msgsHtml = msgs.map(m=>`<div class="message ${m.sender}"><div class="message-bubble">${esc(m.message)}</div></div>`).join("");
+            
+            document.getElementById("chatArea").innerHTML=`
+                <div class="chat-header">Session: ${cur}</div>
+                <div class="chat-messages" id="msgs">${msgsHtml}</div>
+                <div class="chat-input-area">
+                    <form class="chat-input-form" onsubmit="send(event)">
+                        <input class="chat-input" id="rep" placeholder="Reply..." />
+                        <button class="send-btn" type="submit">Send</button>
+                    </form>
+                </div>
+            `;
+            document.getElementById("msgs").scrollTop=999999;
+        }
+        
+        async function send(e){
+            e.preventDefault();
+            const msg=document.getElementById("rep").value.trim();
+            if(!msg)return;
+            await c.from("chat_messages").insert({session_id:cur,message:msg,sender:"admin"});
+            await load();
+        }
+        
+        function esc(t){
+            const d=document.createElement("div");
+            d.textContent=t;
+            return d.innerHTML;
+        }
+        
         setInterval(load,5000);
     </script>
 </body>
