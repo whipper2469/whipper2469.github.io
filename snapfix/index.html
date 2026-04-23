@@ -722,6 +722,9 @@
             addMessage(message, 'user');
             chatInput.value = '';
 
+            // Store user message so it appears in snapfix.homes/admin
+            storeMsg(sessionId, message, 'user');
+
             const typingIndicator = addTypingIndicator();
 
             try {
@@ -735,14 +738,55 @@
                 typingIndicator.remove();
                 addMessage(data.reply, 'bot');
 
+                // Store bot reply so it appears in snapfix.homes/admin
+                storeMsg(sessionId, data.reply, 'bot');
+
                 if (data.requestHuman) {
-                    addMessage("I've notified Kevin. He'll be with you shortly! To help him reach you faster, can you leave your name and email or phone?", 'bot');
+                    // ── Immediately notify admin in iOS app (no form required) ──
+                    notifyAdminNow(message);
+                    addMessage("I've notified Kevin. He'll be with you shortly! To speed things up, leave your contact info below:", 'bot');
                     showContactForm(message);
                 }
             } catch (error) {
                 typingIndicator.remove();
                 addMessage("Sorry, I'm having trouble connecting. Please try again.", 'bot');
             }
+        }
+
+        // Store a message in chat_messages so snapfix.homes/admin can see it
+        function storeMsg(sid, msg, sender) {
+            var ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImphcGxydGxwb3BlZnZna2VjcGlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3Njc1NTcsImV4cCI6MjA4NzM0MzU1N30.q0JVwQJdJcpNUcyt2opxE-yRlhBnWdO3oq4IUMk6L5M';
+            fetch('https://japlrtlpopefvgkecpif.supabase.co/rest/v1/chat_messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': ANON_KEY,
+                    'Authorization': 'Bearer ' + ANON_KEY,
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify({ session_id: sid, message: msg, sender: sender })
+            }).catch(function() {});
+        }
+
+        // Immediately notify iOS admin app by inserting into support_contacts
+        function notifyAdminNow(lastMessage) {
+            var ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImphcGxydGxwb3BlZnZna2VjcGlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3Njc1NTcsImV4cCI6MjA4NzM0MzU1N30.q0JVwQJdJcpNUcyt2opxE-yRlhBnWdO3oq4IUMk6L5M';
+            fetch('https://japlrtlpopefvgkecpif.supabase.co/rest/v1/support_contacts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': ANON_KEY,
+                    'Authorization': 'Bearer ' + ANON_KEY,
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify({
+                    name:    'Website Visitor',
+                    email:   '',
+                    phone:   '',
+                    message: lastMessage,
+                    source:  'website'
+                })
+            }).catch(function() {});
         }
 
         function addMessage(text, sender) {
