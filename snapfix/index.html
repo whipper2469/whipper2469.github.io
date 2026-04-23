@@ -736,7 +736,8 @@
                 addMessage(data.reply, 'bot');
 
                 if (data.requestHuman) {
-                    addMessage("I've notified Kevin. He'll be with you shortly!", 'bot');
+                    addMessage("I've notified Kevin. He'll be with you shortly! To help him reach you faster, can you leave your name and email or phone?", 'bot');
+                    showContactForm(message);
                 }
             } catch (error) {
                 typingIndicator.remove();
@@ -772,6 +773,55 @@
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
+        }
+
+        // ── Show a small contact form inside the chat when user wants a human ──
+        function showContactForm(lastMessage) {
+            var formDiv = document.createElement('div');
+            formDiv.className = 'message bot';
+            formDiv.innerHTML = `
+                <div class="message-bubble" style="background:transparent;padding:0;">
+                    <form id="human-contact-form" style="display:flex;flex-direction:column;gap:7px;margin-top:4px;">
+                        <input id="hcf-name"  type="text"  placeholder="Your name"         style="padding:8px 10px;border-radius:8px;border:1px solid #ddd;font-size:0.9rem;" />
+                        <input id="hcf-email" type="email" placeholder="Email address"      style="padding:8px 10px;border-radius:8px;border:1px solid #ddd;font-size:0.9rem;" />
+                        <input id="hcf-phone" type="tel"   placeholder="Phone (optional)"   style="padding:8px 10px;border-radius:8px;border:1px solid #ddd;font-size:0.9rem;" />
+                        <button type="submit" style="padding:9px;background:#FF6535;color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;">Send my info</button>
+                        <div id="hcf-sent" style="display:none;color:green;font-size:0.85rem;text-align:center;">Got it! Kevin will be in touch soon ✓</div>
+                    </form>
+                </div>`;
+            messagesContainer.appendChild(formDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            document.getElementById('human-contact-form').addEventListener('submit', async function(ev) {
+                ev.preventDefault();
+                var name  = (document.getElementById('hcf-name').value  || '').trim();
+                var email = (document.getElementById('hcf-email').value || '').trim();
+                var phone = (document.getElementById('hcf-phone').value || '').trim();
+
+                // Insert into support_contacts so the iOS admin app gets notified
+                try {
+                    await fetch('https://japlrtlpopefvgkecpif.supabase.co/rest/v1/support_contacts', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImphcGxydGxwb3BlZnZna2VjcGlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3Njc1NTcsImV4cCI6MjA4NzM0MzU1N30.q0JVwQJdJcpNUcyt2opxE-yRlhBnWdO3oq4IUMk6L5M',
+                            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImphcGxydGxwb3BlZnZna2VjcGlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3Njc1NTcsImV4cCI6MjA4NzM0MzU1N30.q0JVwQJdJcpNUcyt2opxE-yRlhBnWdO3oq4IUMk6L5M',
+                            'Prefer': 'return=minimal'
+                        },
+                        body: JSON.stringify({
+                            name:    name  || 'Website Visitor',
+                            email:   email,
+                            phone:   phone,
+                            message: lastMessage,
+                            source:  'website'
+                        })
+                    });
+                } catch(e) { /* non-fatal */ }
+
+                // Show success
+                document.getElementById('human-contact-form').style.display = 'none';
+                document.getElementById('hcf-sent').style.display = 'block';
+            });
         }
     </script>
 </body>
