@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SnapFix - AI-Powered Home Repair Assistant</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -27,7 +25,6 @@
             background: linear-gradient(135deg, var(--navy) 0%, var(--dark-navy) 100%);
             color: var(--cream);
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
         .background-orbs {
@@ -63,15 +60,6 @@
             animation-delay: 5s;
         }
 
-        .orb-3 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(255, 101, 53, 0.2), transparent);
-            top: 50%;
-            right: 20%;
-            animation-delay: 10s;
-        }
-
         @keyframes float {
             0%, 100% { transform: translate(0, 0) scale(1); }
             33% { transform: translate(30px, -30px) scale(1.1); }
@@ -84,7 +72,7 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(15, 26, 61, 0.7);
+            background: rgba(15, 26, 61, 0.8);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 248, 240, 0.1);
         }
@@ -103,28 +91,29 @@
             font-size: 28px;
             font-weight: 700;
             letter-spacing: -1px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-        }
-
-        .logo-text span:first-child {
             color: var(--cream);
         }
 
-        .logo-text span:last-child {
+        .logo span:last-child {
             color: var(--orange);
         }
 
         .nav-links {
             display: flex;
-            gap: 20px;
+            gap: 48px;
             align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 248, 240, 0.7);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--cream);
         }
 
         .nav-cta {
@@ -134,13 +123,6 @@
             border-radius: 100px;
             font-weight: 600;
             box-shadow: 0 4px 20px rgba(255, 101, 53, 0.3);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-            border: none;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 15px;
-            cursor: pointer;
         }
 
         .nav-cta:hover {
@@ -148,16 +130,17 @@
             box-shadow: 0 8px 30px rgba(255, 101, 53, 0.5);
         }
 
-        .hero {
+        section {
             position: relative;
             z-index: 1;
-            padding-top: 180px;
-            padding-bottom: 80px;
-            text-align: center;
             max-width: 1200px;
             margin: 0 auto;
-            padding-left: 60px;
-            padding-right: 60px;
+            padding: 100px 60px;
+        }
+
+        .hero {
+            padding-top: 180px;
+            text-align: center;
         }
 
         .badge {
@@ -174,18 +157,6 @@
             margin-bottom: 60px;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         h1 {
@@ -195,14 +166,12 @@
             line-height: 1.1;
             margin-bottom: 32px;
             letter-spacing: -3px;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
         }
 
         .highlight {
             background: linear-gradient(135deg, var(--orange) 0%, #FFB020 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .subtitle {
@@ -211,8 +180,6 @@
             max-width: 750px;
             margin: 0 auto 40px;
             line-height: 1.7;
-            font-weight: 400;
-            animation: fadeInUp 0.8s ease-out 0.4s both;
         }
 
         .domain-notice {
@@ -222,7 +189,6 @@
             padding: 16px 32px;
             border-radius: 16px;
             margin-bottom: 60px;
-            animation: fadeInUp 0.8s ease-out 0.5s both;
         }
 
         .domain-notice p {
@@ -236,11 +202,6 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 20px;
-            transition: opacity 0.3s;
-        }
-
-        .domain-notice a:hover {
-            opacity: 0.8;
         }
 
         .cta-buttons {
@@ -248,8 +209,6 @@
             gap: 24px;
             justify-content: center;
             margin-bottom: 80px;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease-out 0.6s both;
         }
 
         .btn {
@@ -259,38 +218,16 @@
             font-weight: 600;
             text-decoration: none;
             display: inline-block;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
             border: none;
             cursor: pointer;
             font-family: 'DM Sans', sans-serif;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .btn:hover::before {
-            width: 300px;
-            height: 300px;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--orange) 0%, #E65530 100%);
             color: white;
             box-shadow: 0 10px 40px rgba(255, 101, 53, 0.4);
-            position: relative;
-            z-index: 1;
         }
 
         .btn-primary:hover {
@@ -302,53 +239,185 @@
             background: rgba(255, 248, 240, 0.08);
             color: var(--cream);
             border: 2px solid rgba(255, 248, 240, 0.2);
-            backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
             background: rgba(255, 248, 240, 0.15);
-            border-color: rgba(255, 248, 240, 0.4);
             transform: translateY(-4px);
         }
 
-        .app-icon-section {
-            animation: fadeInUp 0.8s ease-out 0.8s both;
+        h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 60px;
+            text-align: center;
         }
 
-        .app-icon-container {
-            position: relative;
-            display: inline-block;
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
         }
 
-        .app-icon-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(255, 101, 53, 0.3), transparent);
-            filter: blur(50px);
-            animation: pulse 3s infinite ease-in-out;
+        .feature-card {
+            background: rgba(255, 248, 240, 0.05);
+            border: 1px solid rgba(255, 248, 240, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.3s;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+        .feature-card:hover {
+            background: rgba(255, 248, 240, 0.08);
+            transform: translateY(-8px);
         }
 
-        .app-icon-svg {
-            position: relative;
-            z-index: 2;
-            width: 240px;
-            height: 240px;
-            filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.5));
-            animation: iconFloat 4s infinite ease-in-out;
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 24px;
         }
 
-        @keyframes iconFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .feature-card p {
+            color: rgba(255, 248, 240, 0.7);
+            line-height: 1.6;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .pricing-card {
+            background: rgba(255, 248, 240, 0.05);
+            border: 2px solid rgba(255, 248, 240, 0.1);
+            border-radius: 24px;
+            padding: 48px 32px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--orange);
+            background: rgba(255, 101, 53, 0.1);
+        }
+
+        .pricing-card h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .price {
+            font-size: 48px;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--orange);
+            margin-bottom: 32px;
+        }
+
+        .price-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .price-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 248, 240, 0.1);
+            color: rgba(255, 248, 240, 0.8);
+        }
+
+        /* Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 120px;
+            right: 40px;
+            width: 400px;
+            height: 600px;
+            background: rgba(15, 26, 61, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 248, 240, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            display: none;
+            flex-direction: column;
+            z-index: 998;
+        }
+
+        .chat-widget.active {
+            display: flex;
+        }
+
+        .chat-header {
+            padding: 24px;
+            border-bottom: 1px solid rgba(255, 248, 240, 0.1);
+        }
+
+        .chat-header h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .chat-status {
+            font-size: 13px;
+            color: #4ade80;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 16px;
+            line-height: 1.5;
+        }
+
+        .message.bot {
+            background: rgba(255, 248, 240, 0.1);
+            align-self: flex-start;
+        }
+
+        .message.user {
+            background: linear-gradient(135deg, var(--orange) 0%, #E65530 100%);
+            align-self: flex-end;
+            color: white;
+        }
+
+        .chat-input-container {
+            padding: 20px;
+            border-top: 1px solid rgba(255, 248, 240, 0.1);
+        }
+
+        .chat-input {
+            width: 100%;
+            background: rgba(255, 248, 240, 0.05);
+            border: 1px solid rgba(255, 248, 240, 0.15);
+            border-radius: 12px;
+            padding: 14px;
+            color: var(--cream);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            resize: none;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--orange);
         }
 
         .chat-button {
@@ -361,12 +430,11 @@
             border-radius: 100px;
             font-size: 16px;
             font-weight: 600;
-            text-decoration: none;
             display: flex;
             align-items: center;
             gap: 12px;
             box-shadow: 0 8px 30px rgba(255, 101, 53, 0.5);
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             z-index: 999;
             cursor: pointer;
             border: none;
@@ -378,159 +446,24 @@
             box-shadow: 0 12px 40px rgba(255, 101, 53, 0.7);
         }
 
-        .chat-icon {
-            width: 20px;
-            height: 20px;
-        }
-
-        .chat-modal {
-            display: none;
-            position: fixed;
-            bottom: 120px;
-            right: 40px;
-            width: 400px;
-            height: 600px;
-            background: rgba(15, 26, 61, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            border: 1px solid rgba(255, 248, 240, 0.1);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            z-index: 998;
-            flex-direction: column;
-        }
-
-        .chat-modal.active {
-            display: flex;
-        }
-
-        .chat-header {
-            padding: 24px;
-            border-bottom: 1px solid rgba(255, 248, 240, 0.1);
-        }
-
-        .chat-header h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 20px;
-            margin-bottom: 8px;
-        }
-
-        .chat-header p {
-            font-size: 14px;
-            color: rgba(255, 248, 240, 0.6);
-        }
-
-        .chat-body {
-            flex: 1;
-            padding: 24px;
-            overflow-y: auto;
-        }
-
-        .chat-form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .form-group label {
-            font-size: 14px;
-            font-weight: 600;
-            color: rgba(255, 248, 240, 0.9);
-        }
-
-        .form-group input,
-        .form-group textarea {
-            background: rgba(255, 248, 240, 0.05);
-            border: 1px solid rgba(255, 248, 240, 0.15);
-            border-radius: 12px;
-            padding: 14px;
-            color: var(--cream);
-            font-family: 'DM Sans', sans-serif;
-            font-size: 15px;
-            transition: all 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--orange);
-            background: rgba(255, 248, 240, 0.08);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, var(--orange) 0%, #E65530 100%);
-            color: white;
-            padding: 16px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'DM Sans', sans-serif;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 101, 53, 0.5);
-        }
-
         @media (max-width: 768px) {
             .nav-container {
                 padding: 20px 24px;
             }
 
-            .logo {
-                font-size: 24px;
-            }
-
-            .hero {
-                padding-top: 140px;
-                padding-left: 24px;
-                padding-right: 24px;
+            .nav-links a:not(.nav-cta) {
+                display: none;
             }
 
             h1 {
                 font-size: 52px;
             }
 
-            .subtitle {
-                font-size: 18px;
+            section {
+                padding: 60px 24px;
             }
 
-            .cta-buttons {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .btn {
-                width: 100%;
-            }
-
-            .app-icon-svg {
-                width: 180px;
-                height: 180px;
-            }
-
-            .chat-button {
-                bottom: 24px;
-                right: 24px;
-                padding: 16px 28px;
-                font-size: 14px;
-            }
-
-            .chat-modal {
-                bottom: 100px;
+            .chat-widget {
                 right: 24px;
                 left: 24px;
                 width: auto;
@@ -542,29 +475,19 @@
     <div class="background-orbs">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
     </div>
 
     <nav>
         <div class="nav-container">
             <div class="logo">
-                <svg class="logo-icon" viewBox="0 0 40 40" fill="none">
-                    <rect width="40" height="40" rx="10" fill="url(#logoGrad)"/>
-                    <path d="M20 10L14 14V22L20 26L26 22V14L20 10Z" fill="white" fill-opacity="0.95"/>
-                    <path d="M20 18L17 20V24L20 26L23 24V20L20 18Z" fill="#FF6535"/>
-                    <defs>
-                        <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40">
-                            <stop offset="0%" stop-color="#1B2B5E"/>
-                            <stop offset="100%" stop-color="#2A3F7E"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <div class="logo-text">
-                    <span>Snap</span><span>Fix</span>
-                </div>
+                <span>Snap</span><span>Fix</span>
             </div>
             <div class="nav-links">
-                <button onclick="toggleChat()" class="nav-cta">Try Demo</button>
+                <a href="#how-it-works">How it works</a>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#contractors">Contractors</a>
+                <a href="mailto:kevin@snapfix.homes" class="nav-cta">Join Waitlist</a>
             </div>
         </div>
     </nav>
@@ -587,96 +510,196 @@
         </div>
         
         <div class="cta-buttons">
-            <button onclick="toggleChat()" class="btn btn-primary">Try Demo Chat</button>
-            <a href="mailto:kevin@snapfix.homes?subject=Waitlist%20Signup" class="btn btn-secondary">Join Waitlist</a>
+            <button onclick="openChat()" class="btn btn-primary">Start Live Chat</button>
+            <a href="mailto:kevin@snapfix.homes?subject=Waitlist" class="btn btn-secondary">Join Waitlist</a>
         </div>
-        
-        <div class="app-icon-section">
-            <div class="app-icon-container">
-                <div class="app-icon-glow"></div>
-                <svg class="app-icon-svg" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="240" height="240" rx="56" fill="url(#appGradient)"/>
-                    <path d="M120 55L180 95V175H150V135H90V175H60V95L120 55Z" 
-                          fill="white" fill-opacity="0.15"/>
-                    <g transform="translate(85, 100)">
-                        <path d="M35 10L45 0L70 25L60 35L50 25L20 55L10 45L40 15L35 10Z" 
-                              fill="white" stroke="white" stroke-width="2" stroke-linejoin="miter"/>
-                        <path d="M65 30L70 25L75 30L75 35L70 40L65 35L65 30Z" 
-                              fill="none" stroke="white" stroke-width="3" stroke-linejoin="miter"/>
-                        <circle cx="15" cy="50" r="4" fill="#FF6535">
-                            <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite"/>
-                        </circle>
-                        <circle cx="25" cy="60" r="3" fill="#FFB020">
-                            <animate attributeName="opacity" values="0.4;1;0.4" dur="2.5s" repeatCount="indefinite"/>
-                        </circle>
-                        <circle cx="5" cy="60" r="3.5" fill="#FF6535">
-                            <animate attributeName="opacity" values="1;0.5;1" dur="3s" repeatCount="indefinite"/>
-                        </circle>
-                    </g>
-                    <defs>
-                        <linearGradient id="appGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#1B2B5E"/>
-                            <stop offset="100%" style="stop-color:#2A3F7E"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
+    </section>
+
+    <section id="how-it-works">
+        <h2>How it works</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📸</div>
+                <h3>1. Snap a Photo</h3>
+                <p>Take a quick photo of your home repair issue using your phone camera.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>2. Get AI Diagnosis</h3>
+                <p>Our AI analyzes the problem and provides instant repair guidance and cost estimates.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔧</div>
+                <h3>3. Connect with Contractors</h3>
+                <p>Match with trusted local contractors in Kitchener-Waterloo to get the job done.</p>
             </div>
         </div>
     </section>
 
-    <div class="chat-modal" id="chatModal">
-        <div class="chat-header">
-            <h3>Try SnapFix Demo</h3>
-            <p>Describe your home repair issue</p>
+    <section id="features">
+        <h2>Features</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Instant Diagnosis</h3>
+                <p>Get immediate AI-powered analysis of your home repair issues in seconds.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏠</div>
+                <h3>Local Contractors</h3>
+                <p>Connect with vetted contractors in the Kitchener-Waterloo area.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>24/7 Support</h3>
+                <p>Chat with our AI assistant anytime, or connect with a live agent during business hours.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Cost Estimates</h3>
+                <p>Get accurate cost estimates before committing to any repairs.</p>
+            </div>
         </div>
-        <div class="chat-body">
-            <form class="chat-form" onsubmit="handleSubmit(event)">
-                <div class="form-group">
-                    <label>What needs fixing?</label>
-                    <textarea placeholder="E.g., My kitchen faucet is leaking..." required></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Your Email</label>
-                    <input type="email" placeholder="you@example.com" required>
-                </div>
-                <button type="submit" class="submit-btn">Get AI Diagnosis</button>
-            </form>
+    </section>
+
+    <section id="pricing">
+        <h2>Pricing</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Free</h3>
+                <div class="price">$0</div>
+                <ul class="price-features">
+                    <li>AI Diagnosis</li>
+                    <li>Basic Support</li>
+                    <li>Cost Estimates</li>
+                </ul>
+                <button onclick="openChat()" class="btn btn-secondary">Get Started</button>
+            </div>
+            <div class="pricing-card featured">
+                <h3>Pro</h3>
+                <div class="price">$9.99<span style="font-size: 20px;">/mo</span></div>
+                <ul class="price-features">
+                    <li>Priority Contractor Matching</li>
+                    <li>24/7 Live Support</li>
+                    <li>Unlimited Diagnoses</li>
+                    <li>Emergency Response</li>
+                </ul>
+                <button onclick="openChat()" class="btn btn-primary">Coming Soon</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="contractors">
+        <h2>For Contractors</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>Qualified Leads</h3>
+                <p>Receive pre-qualified leads from homeowners who already know what needs fixing.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📍</div>
+                <h3>Local Focus</h3>
+                <p>All leads are from the Kitchener-Waterloo area - your service region.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Simple Pricing</h3>
+                <p>Pay only for completed jobs. No monthly fees or subscriptions.</p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 60px;">
+            <a href="mailto:kevin@snapfix.homes?subject=Contractor%20Partnership" class="btn btn-primary">Become a Partner</a>
+        </div>
+    </section>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-header">
+            <h3>SnapFix Support</h3>
+            <div class="chat-status">● Online</div>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot">
+                Hi! I'm the SnapFix assistant. How can I help you today?<br><br>
+                Type "live agent" anytime to connect with a real person!
+            </div>
+        </div>
+        <div class="chat-input-container">
+            <textarea 
+                class="chat-input" 
+                id="chatInput" 
+                placeholder="Type your message..."
+                rows="2"
+                onkeypress="if(event.key==='Enter' && !event.shiftKey){event.preventDefault();sendMessage();}"
+            ></textarea>
         </div>
     </div>
 
-    <button onclick="toggleChat()" class="chat-button">
-        <svg class="chat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-        </svg>
-        <span id="chatButtonText">Try Demo</span>
+    <button onclick="toggleChat()" class="chat-button" id="chatButton">
+        💬 <span id="chatButtonText">Chat with Us</span>
     </button>
 
     <script>
+        let chatOpen = false;
+
         function toggleChat() {
-            const modal = document.getElementById('chatModal');
-            const buttonText = document.getElementById('chatButtonText');
-            modal.classList.toggle('active');
-            buttonText.textContent = modal.classList.contains('active') ? 'Close' : 'Try Demo';
-        }
-
-        function handleSubmit(event) {
-            event.preventDefault();
-            alert('Demo mode! Full chat will be available at snapfix.homes soon.');
-            toggleChat();
-        }
-
-        document.addEventListener('click', function(event) {
-            const modal = document.getElementById('chatModal');
-            const chatButton = document.querySelector('.chat-button');
-            const navCta = document.querySelector('.nav-cta');
-            
-            if (!modal.contains(event.target) && 
-                !chatButton.contains(event.target) && 
-                !navCta.contains(event.target) &&
-                !event.target.closest('.btn-primary')) {
-                modal.classList.remove('active');
-                document.getElementById('chatButtonText').textContent = 'Try Demo';
+            chatOpen = !chatOpen;
+            document.getElementById('chatWidget').classList.toggle('active');
+            document.getElementById('chatButtonText').textContent = chatOpen ? 'Close Chat' : 'Chat with Us';
+            if (chatOpen) {
+                document.getElementById('chatInput').focus();
             }
+        }
+
+        function openChat() {
+            if (!chatOpen) toggleChat();
+        }
+
+        function addMessage(text, isUser) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message ' + (isUser ? 'user' : 'bot');
+            messageDiv.textContent = text;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addMessage(message, true);
+            input.value = '';
+
+            // Check for live agent keywords
+            const liveAgentKeywords = ['live agent', 'talk to person', 'human', 'real person', 'speak to someone'];
+            const needsLiveAgent = liveAgentKeywords.some(keyword => message.toLowerCase().includes(keyword));
+
+            setTimeout(() => {
+                if (needsLiveAgent) {
+                    addMessage('Connecting you with a live agent! You can reach us at:\n\n📧 kevin@snapfix.homes\n📞 Text/Call: Coming soon\n\nOr I can continue helping you here. What works best?', false);
+                } else if (message.toLowerCase().includes('price') || message.toLowerCase().includes('cost')) {
+                    addMessage('Our pricing is simple:\n\n• Free tier: AI diagnosis + basic support\n• Pro ($9.99/mo): Priority matching + 24/7 live support\n\nWhat else can I help with?', false);
+                } else if (message.toLowerCase().includes('contractor')) {
+                    addMessage('We connect you with vetted contractors in Kitchener-Waterloo. Email kevin@snapfix.homes to learn about our contractor partnership program!', false);
+                } else {
+                    addMessage('Thanks for your message! The full chat will be available when we launch at snapfix.homes. For now, email kevin@snapfix.homes or type "live agent" to connect with our team!', false);
+                }
+            }, 800);
+        }
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
         });
     </script>
 </body>
