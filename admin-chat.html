@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnapFix - Admin Chat</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0F1A3D; color: #fff;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        h1 { margin-bottom: 40px; font-size: 32px; }
+        .sessions { display: grid; gap: 20px; }
+        .session-card {
+            background: #1B2B5E; border-radius: 12px; padding: 24px;
+            border: 2px solid #2A3F7E;
+        }
+        .session-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #2A3F7E;
+        }
+        .session-id { font-family: monospace; font-size: 14px; color: #a0a0a0; }
+        .session-time { font-size: 13px; color: #808080; }
+        .messages { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+        .msg {
+            padding: 12px 16px; border-radius: 12px; max-width: 70%;
+            line-height: 1.5; word-wrap: break-word;
+        }
+        .msg.user {
+            background: #FF6535; align-self: flex-end; color: white;
+        }
+        .msg.admin {
+            background: #2A3F7E; align-self: flex-start;
+        }
+        .msg-time {
+            font-size: 11px; opacity: 0.7; margin-top: 4px;
+        }
+        .reply-box {
+            display: flex; gap: 12px; margin-top: 16px;
+            padding-top: 16px; border-top: 1px solid #2A3F7E;
+        }
+        .reply-input {
+            flex: 1; background: #0F1A3D; border: 1px solid #2A3F7E;
+            border-radius: 8px; padding: 12px; color: #fff;
+            font-size: 15px; font-family: inherit; resize: none;
+        }
+        .reply-btn {
+            background: #FF6535; color: white; border: none;
+            padding: 12px 24px; border-radius: 8px; cursor: pointer;
+            font-weight: 600; font-size: 15px;
+        }
+        .reply-btn:hover { background: #E65530; }
+        .empty { text-align: center; padding: 60px; color: #808080; }
+        .refresh-btn {
+            background: #2A3F7E; color: white; border: none;
+            padding: 12px 24px; border-radius: 8px; cursor: pointer;
+            margin-bottom: 20px; font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💬 SnapFix Chat Admin</h1>
+        <button onclick="loadChats()" class="refresh-btn">🔄 Refresh</button>
+        <div id="sessions" class="sessions"></div>
+    </div>
+
+    <script>
+        const { createClient } = supabase;
+        const supabaseClient = createClient(
+            'https://japlrtlpopefvgkecpif.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImphcGxydGxwb3BlZnZna2VjcGlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTMyMzA5ODYsImV4cCI6MjAyODgwNjk4Nn0.4wMDKL-2O7-ek7WXYNYLpI7TYJFNYLpI7TYJFNYLpI8'
+        );
+
+        async function loadChats() {
+            const { data, error } = await supabaseClient
+                .from('chat_messages')
+                .select('*')
+                .order('created_at', { ascending: true });
+
+            if (error) {
+                console.error('Error:', error);
+                return;
+            }
+
+            const sessions = {};
+            data.forEach(msg => {
+                if (!sessions[msg.session_id]) {
+                    sessions[msg.session_id] = [];
+                }
+                sessions[msg.session_id].push(msg);
+            });
+
+            const container = document.getElementById('sessions');
+            if (Object.keys(sessions).length === 0) {
+                container.innerHTML = '<div class="empty">No chats yet</div>';
+                return;
+            }
+
+            container.innerHTML = Object.entries(sessions).reverse().map(([sessionId, messages]) => {
+                const lastMsg = messages[messages.length - 1];
+                return `
+                    <div class="session-card">
+                        <div class="session-header">
+                            <div class="session-id">${sessionId}</div>
+                            <div class="session-time">${new Date(lastMsg.created_at).toLocaleString()}</div>
+                        </div>
+                        <div class="messages">
+                            ${messages.map(msg => `
+                                <div class="msg ${msg.sender}">
+                                    <div>${msg.message}</div>
+                                    <div class="msg-time">${new Date(msg.created_at).toLocaleTimeString()}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="reply-box">
+                            <textarea 
+                                class="reply-input" 
+                                placeholder="Type your reply..."
+                                rows="2"
+                                id="input_${sessionId}"
+                            ></textarea>
+                            <button class="reply-btn" onclick="sendReply('${sessionId}')">Send</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        async function sendReply(sessionId) {
+            const input = document.getElementById('input_' + sessionId);
+            const message = input.value.trim();
+            if (!message) return;
+
+            try {
+                await supabaseClient.from('chat_messages').insert({
+                    session_id: sessionId,
+                    message: message,
+                    sender: 'admin'
+                });
+
+                input.value = '';
+                loadChats();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error sending message');
+            }
+        }
+
+        supabaseClient
+            .channel('admin_chat')
+            .on('postgres_changes', {
+                event: 'INSERT',
+                schema: 'public',
+                table: 'chat_messages'
+            }, () => {
+                loadChats();
+            })
+            .subscribe();
+
+        loadChats();
+        setInterval(loadChats, 30000);
+    </script>
+</body>
+</html>
