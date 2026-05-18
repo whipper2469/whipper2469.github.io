@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - Tender</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #c0715a;
+            --primary-dark: #a65d48;
+            --secondary: #f4e8e1;
+            --accent: #e89b7e;
+            --text: #2c2c2c;
+            --text-light: #6a6a6a;
+            --bg: #fdfbf9;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(253, 251, 249, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(192, 113, 90, 0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .hero-support {
+            margin-top: 80px;
+            padding: 5rem 2rem 3rem;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--bg) 100%);
+            text-align: center;
+        }
+
+        .hero-support h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .hero-support p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(192, 113, 90, 0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(192, 113, 90, 0.15);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .contact-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .contact-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .contact-card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            color: var(--primary-dark);
+        }
+
+        .faq-section {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(192, 113, 90, 0.08);
+        }
+
+        .faq-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .faq-item {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(192, 113, 90, 0.1);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .faq-item p {
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        footer {
+            background: var(--text);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .hero-support h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-support p {
+                font-size: 1rem;
+            }
+
+            .faq-section {
+                padding: 2rem;
+            }
+
+            .faq-section h2 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">Tender</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+                <li><a href="terms.html">Terms</a></li>
+                <li><a href="support.html">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero-support">
+        <h1>We're Here to Help</h1>
+        <p>Have questions about Tender? We're here to make your experience as smooth as possible.</p>
+    </div>
+
+    <div class="content">
+        <div class="contact-grid">
+            <div class="contact-card">
+                <span class="contact-icon">📧</span>
+                <h3>Email Support</h3>
+                <p>Send us an email and we'll get back to you within 24-48 hours.</p>
+                <a href="mailto:kevin.8@icloud.com">kevin.8@icloud.com</a>
+            </div>
+
+            <div class="contact-card">
+                <span class="contact-icon">💬</span>
+                <h3>General Inquiries</h3>
+                <p>Questions about features, pricing, or anything else?</p>
+                <a href="mailto:kevin.8@icloud.com">Contact Us</a>
+            </div>
+
+            <div class="contact-card">
+                <span class="contact-icon">🐛</span>
+                <h3>Report a Bug</h3>
+                <p>Found an issue? Let us know so we can fix it.</p>
+                <a href="mailto:kevin.8@icloud.com">Report Issue</a>
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3>Is Tender free to use?</h3>
+                <p>Yes! Tender is completely free with all features available at no cost. There are no in-app purchases or subscriptions.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What devices does Tender support?</h3>
+                <p>Tender is currently available for iOS devices (iPhone and iPad) running iOS 14.0 or later. An Android version is planned for future release.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Is my data private and secure?</h3>
+                <p>Absolutely. All your data is stored locally on your device. We don't have servers, databases, or any way to access your information. Your partner's details, preferences, and notes stay completely private on your device. For more details, see our <a href="privacy.html" style="color: var(--primary);">Privacy Policy</a>.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Do I need to create an account?</h3>
+                <p>No! Tender doesn't require any account creation, login, or personal information. Just download the app and start using it immediately.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can I back up my data?</h3>
+                <p>Your data is backed up automatically through your device's iCloud backup (if enabled). When you restore your device or get a new one, your Tender data will be restored along with your other app data.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What if I delete the app?</h3>
+                <p>If you uninstall Tender, all your data will be deleted from your device. Make sure you have iCloud backup enabled if you want to preserve your data for future reinstallation.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>How do the date night suggestions work?</h3>
+                <p>Tender provides bi-weekly date ideas that you can filter by your budget. The suggestions are designed to help you plan thoughtful, memorable experiences with your partner.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Does Tender work without internet?</h3>
+                <p>Most features work offline, including viewing your partner's profile, setting reminders, and accessing stored notes. However, features like finding nearby movies, comedy shows, and date night venues require an internet connection.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>How do I set up reminders?</h3>
+                <p>Go to the Reminders tab in the app and tap the "+" button to create a new reminder. You can set it to repeat randomly, weekly, or monthly. Make sure you've granted notification permissions in your device settings.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What is Cooling Off Mode?</h3>
+                <p>Cooling Off Mode is a feature designed to help during tense moments. It provides a 5-minute timer to give both partners space to breathe, offers suggestions for making things right, and includes pre-written messages you can send to communicate constructively.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can I use Tender for multiple partners?</h3>
+                <p>Currently, Tender is designed for managing one partner profile at a time. If you need to switch profiles, you would need to update the information manually.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>How do I delete my data?</h3>
+                <p>You can delete individual items within the app at any time. To completely remove all data, simply uninstall the app from your device. Since all data is stored locally, uninstalling the app permanently deletes everything.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>I have a feature request. How can I share it?</h3>
+                <p>We'd love to hear your ideas! Send your feature requests to <a href="mailto:kevin.8@icloud.com" style="color: var(--primary);">kevin.8@icloud.com</a>. We're constantly working to improve Tender based on user feedback.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>How do I report a bug or technical issue?</h3>
+                <p>If you encounter a bug, please email us at <a href="mailto:kevin.8@icloud.com" style="color: var(--primary);">kevin.8@icloud.com</a> with:</p>
+                <ul style="margin-left: 2rem; margin-top: 1rem;">
+                    <li>A description of the issue</li>
+                    <li>Your device model and iOS version</li>
+                    <li>Steps to reproduce the problem (if applicable)</li>
+                    <li>Screenshots (if helpful)</li>
+                </ul>
+                <p style="margin-top: 1rem;">We'll investigate and work on a fix as quickly as possible.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Is there a way to sync data across devices?</h3>
+                <p>Currently, Tender doesn't support cross-device syncing. Your data stays on the device where you installed the app. However, iCloud backup will preserve your data if you restore or switch to a new iPhone.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Tender. All rights reserved. | 
+        <a href="index.html">Home</a> | 
+        <a href="privacy.html">Privacy</a> | 
+        <a href="terms.html">Terms</a> | 
+        <a href="support.html">Support</a></p>
+    </footer>
+</body>
+</html>
