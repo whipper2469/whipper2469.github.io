@@ -3,298 +3,546 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SnapFix - AI-Powered Home Repair Assistant</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <title>Tender - The App for Your Better Half</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --navy: #1B2B5E;
-            --orange: #FF6535;
-            --light-blue: #2A3F7E;
-            --dark-navy: #0F1A3D;
-            --cream: #FFF8F0;
+            --primary: #c0715a;
+            --primary-dark: #a65d48;
+            --secondary: #f4e8e1;
+            --accent: #e89b7e;
+            --text: #2c2c2c;
+            --text-light: #6a6a6a;
+            --bg: #fdfbf9;
+            --card-bg: #ffffff;
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'DM Sans', sans-serif;
-            background: linear-gradient(135deg, var(--navy) 0%, var(--dark-navy) 100%);
-            color: var(--cream);
-            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
-        .background-orbs {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
-            opacity: 0.4;
-        }
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            animation: float 20s infinite ease-in-out;
-        }
-        .orb-1 {
-            width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(255, 101, 53, 0.3), transparent);
-            top: -200px; left: -200px;
-        }
-        .orb-2 {
-            width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(42, 63, 126, 0.4), transparent);
-            bottom: -250px; right: -250px;
-            animation-delay: 5s;
-        }
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -30px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-        }
+
+        /* Navigation */
         nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            background: rgba(15, 26, 61, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 248, 240, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(253, 251, 249, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(192, 113, 90, 0.1);
         }
-        .nav-container {
-            max-width: 1400px; margin: 0 auto; padding: 24px 60px;
-            display: flex; justify-content: space-between; align-items: center;
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+
         .logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 28px; font-weight: 700; letter-spacing: -1px; color: var(--cream);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
         }
-        .logo span:last-child { color: var(--orange); }
-        .nav-links { display: flex; gap: 48px; align-items: center; }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
         .nav-links a {
-            color: rgba(255, 248, 240, 0.7); text-decoration: none;
-            font-size: 15px; font-weight: 500; transition: color 0.3s;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
         }
-        .nav-links a:hover { color: var(--cream); }
-        .nav-cta {
-            background: linear-gradient(135deg, var(--orange) 0%, #E65530 100%);
-            color: white !important; padding: 14px 32px; border-radius: 100px;
-            font-weight: 600; box-shadow: 0 4px 20px rgba(255, 101, 53, 0.3);
+
+        .nav-links a:hover {
+            color: var(--primary);
         }
-        section { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 100px 60px; }
-        .hero { padding-top: 180px; text-align: center; }
-        .badge {
-            display: inline-flex; align-items: center; gap: 10px;
-            background: rgba(255, 101, 53, 0.12); border: 1.5px solid rgba(255, 101, 53, 0.3);
-            color: var(--orange); padding: 12px 28px; border-radius: 100px;
-            font-size: 14px; font-weight: 600; margin-bottom: 60px;
-            letter-spacing: 0.5px; text-transform: uppercase;
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 8rem 2rem 6rem;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--bg) 100%);
+            position: relative;
+            overflow: hidden;
         }
-        h1 {
-            font-family: 'Space Grotesk', sans-serif; font-size: 96px; font-weight: 700;
-            line-height: 1.1; margin-bottom: 32px; letter-spacing: -3px;
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(192, 113, 90, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
         }
-        .highlight {
-            background: linear-gradient(135deg, var(--orange) 0%, #FFB020 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
         }
-        .subtitle {
-            font-size: 24px; color: rgba(255, 248, 240, 0.7);
-            max-width: 750px; margin: 0 auto 40px; line-height: 1.7;
+
+        .hero .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
         }
-        .domain-notice {
-            display: inline-block; background: rgba(255, 248, 240, 0.08);
-            border: 1px solid rgba(255, 248, 240, 0.15);
-            padding: 16px 32px; border-radius: 16px; margin-bottom: 60px;
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
         }
-        .domain-notice p { font-size: 16px; color: rgba(255, 248, 240, 0.8); margin-bottom: 8px; }
-        .domain-notice a { color: var(--orange); text-decoration: none; font-weight: 600; font-size: 20px; }
-        .cta-buttons { display: flex; gap: 24px; justify-content: center; margin-bottom: 80px; }
+
+        .hero-content .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
         .btn {
-            padding: 20px 44px; border-radius: 100px; font-size: 18px; font-weight: 600;
-            text-decoration: none; display: inline-block; transition: all 0.3s;
-            border: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
         }
+
         .btn-primary {
-            background: linear-gradient(135deg, var(--orange) 0%, #E65530 100%);
-            color: white; box-shadow: 0 10px 40px rgba(255, 101, 53, 0.4);
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(192, 113, 90, 0.3);
         }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 6px 20px rgba(192, 113, 90, 0.4);
+            transform: translateY(-2px);
+        }
+
         .btn-secondary {
-            background: rgba(255, 248, 240, 0.08); color: var(--cream);
-            border: 2px solid rgba(255, 248, 240, 0.2);
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
         }
-        .chat-widget {
-            position: fixed; bottom: 120px; right: 40px; width: 400px; height: 600px;
-            background: rgba(15, 26, 61, 0.98); backdrop-filter: blur(20px);
-            border-radius: 24px; border: 1px solid rgba(255, 248, 240, 0.1);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            display: none; flex-direction: column; z-index: 998;
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
         }
-        .chat-widget.active { display: flex; }
-        .chat-header { padding: 24px; border-bottom: 1px solid rgba(255, 248, 240, 0.1); }
-        .chat-header h3 { font-size: 18px; margin-bottom: 8px; }
-        .chat-status { font-size: 13px; color: #4ade80; }
-        .chat-messages {
-            flex: 1; overflow-y: auto; padding: 24px;
-            display: flex; flex-direction: column; gap: 16px;
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .message { max-width: 80%; padding: 12px 16px; border-radius: 16px; line-height: 1.5; }
-        .message.bot { background: rgba(255, 248, 240, 0.1); align-self: flex-start; }
-        .message.user {
-            background: linear-gradient(135deg, var(--orange) 0%, #E65530 100%);
-            align-self: flex-end; color: white;
+
+        .phone-mockup {
+            width: 300px;
+            height: 600px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 40px;
+            box-shadow: 0 20px 60px rgba(192, 113, 90, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: fadeInUp 1s ease-out;
         }
-        .chat-input-container { padding: 20px; border-bottom: 1px solid rgba(255, 248, 240, 0.1); }
-        .chat-input {
-            width: 100%; background: rgba(255, 248, 240, 0.05);
-            border: 1px solid rgba(255, 248, 240, 0.15); border-radius: 12px;
-            padding: 14px; color: var(--cream); font-family: 'DM Sans', sans-serif;
-            font-size: 15px; resize: none;
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .chat-button {
-            position: fixed; bottom: 40px; right: 40px;
-            background: linear-gradient(135deg, var(--orange) 0%, #E65530 100%);
-            color: white; padding: 18px 36px; border-radius: 100px;
-            font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 12px;
-            box-shadow: 0 8px 30px rgba(255, 101, 53, 0.5);
-            transition: all 0.3s; z-index: 999; cursor: pointer; border: none;
-            font-family: 'DM Sans', sans-serif;
+
+        .phone-mockup::before {
+            content: '💛';
+            font-size: 4rem;
+            animation: pulse 2s ease-in-out infinite;
         }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: var(--bg);
+        }
+
+        .features .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text);
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(192, 113, 90, 0.08);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(192, 113, 90, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* Download Section */
+        .download {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .download .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .download h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .download p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+        }
+
+        .download .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .download .btn-primary:hover {
+            background: var(--secondary);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 3rem 2rem 2rem;
+        }
+
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-desc {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .footer-section h4 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            opacity: 0.6;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .nav-links a:not(.nav-cta) { display: none; }
-            h1 { font-size: 52px; }
-            section { padding: 60px 24px; }
-            .chat-widget { right: 24px; left: 24px; width: auto; }
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+                flex-direction: column;
+            }
+
+            .phone-mockup {
+                width: 250px;
+                height: 500px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .download h2 {
+                font-size: 2rem;
+            }
+
+            footer .container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="background-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
-    
+    <!-- Navigation -->
     <nav>
-        <div class="nav-container">
-            <div class="logo"><span>Snap</span><span>Fix</span></div>
-            <div class="nav-links">
-                <a href="mailto:kevin@snapfix.homes" class="nav-cta">Join Waitlist</a>
-            </div>
+        <div class="container">
+            <a href="index.html" class="logo">Tender</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+                <li><a href="terms.html">Terms</a></li>
+                <li><a href="support.html">Support</a></li>
+            </ul>
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <section class="hero">
-        <div class="badge">🚀 Coming Soon to iOS & Android</div>
-        <h1>Snap it.<br><span class="highlight">Fix it.</span></h1>
-        <p class="subtitle">
-            AI-powered home repair diagnosis in seconds. Snap a photo, get instant answers,
-            and connect with trusted local contractors.
-        </p>
-        <div class="domain-notice">
-            <p>Full app launching at</p>
-            <a href="https://snapfix.homes">snapfix.homes</a>
-        </div>
-        <div class="cta-buttons">
-            <button onclick="openChat()" class="btn btn-primary">Start Chat</button>
-            <a href="mailto:kevin@snapfix.homes?subject=Waitlist" class="btn btn-secondary">Join Waitlist</a>
+        <div class="container">
+            <div class="hero-content">
+                <h1>The App for Your Better Half</h1>
+                <p class="subtitle">Never forget the moments that matter. Tender helps you be the partner they deserve with thoughtful reminders, date ideas, and relationship tools.</p>
+                <div class="cta-buttons">
+                    <a href="#download" class="btn btn-primary">Download on App Store</a>
+                    <a href="support.html" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="phone-mockup"></div>
+            </div>
         </div>
     </section>
 
-    <div class="chat-widget" id="chatWidget">
-        <div class="chat-header">
-            <h3>SnapFix Support</h3>
-            <div class="chat-status">● Live Agent Available</div>
-        </div>
-        <div class="chat-messages" id="chatMessages">
-            <div class="message bot">
-                Hi! I'm Kevin from SnapFix. How can I help you today?
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Everything You Need to Be Thoughtful</h2>
+            <p class="section-subtitle">Tender is designed to help you show up for your partner in meaningful ways, every single day.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">👤</span>
+                    <h3>Partner Profile</h3>
+                    <p>Store important details like their birthday, anniversary, favorite flowers, restaurants, and gift ideas all in one place.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🌙</span>
+                    <h3>Date Night Ideas</h3>
+                    <p>Get bi-weekly date suggestions filtered by your budget and searchable near your location. Never run out of ideas.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🎬</span>
+                    <h3>Movies & Shows</h3>
+                    <p>Browse movies now playing with voting features and direct ticket links. Find comedy shows near you instantly.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🔔</span>
+                    <h3>Smart Reminders</h3>
+                    <p>Set random, weekly, or monthly reminders to do something thoughtful. Let Tender keep you on track.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">❄️</span>
+                    <h3>Cooling Off Mode</h3>
+                    <p>Step away gracefully with a 5-minute timer, get suggestions on making things right, and send pre-made messages.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🔒</span>
+                    <h3>Private & Secure</h3>
+                    <p>All your data stays on your device. No accounts required, no data collected, completely private.</p>
+                </div>
             </div>
         </div>
-        <div class="chat-input-container">
-            <textarea 
-                class="chat-input" 
-                id="chatInput" 
-                placeholder="Type your message..."
-                rows="2"
-                onkeypress="if(event.key==='Enter' && !event.shiftKey){event.preventDefault();sendMessage();}"
-            ></textarea>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download" id="download">
+        <div class="container">
+            <h2>Ready to Be a Better Partner?</h2>
+            <p>Download Tender today and start showing up for the person you love.</p>
+            <a href="#" class="btn btn-primary">Coming Soon to App Store</a>
         </div>
-    </div>
+    </section>
 
-    <button onclick="toggleChat()" class="chat-button">
-        💬 <span id="chatButtonText">Chat with Us</span>
-    </button>
-
-    <script>
-        const { createClient } = supabase;
-        const supabaseClient = createClient(
-            'https://japlrtlpopefvgkecpif.supabase.co',
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImphcGxydGxwb3BlZnZna2VjcGlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTMyMzA5ODYsImV4cCI6MjAyODgwNjk4Nn0.4wMDKL-2O7-ek7WXYNYLpI7TYJFNYLpI7TYJFNYLpI8'
-        );
-
-        const sessionId = 'web_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-        let chatOpen = false;
-       let hasNotified = false;
-
-        function toggleChat() {
-            chatOpen = !chatOpen;
-            document.getElementById('chatWidget').classList.toggle('active');
-            document.getElementById('chatButtonText').textContent = chatOpen ? 'Close Chat' : 'Chat with Us';
-            if (chatOpen) document.getElementById('chatInput').focus();
-        }
-
-        function openChat() {
-            if (!chatOpen) toggleChat();
-        }
-
-        async function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-            if (!message) return;
-
-            addMessage(message, true);
-            input.value = '';
-
-            try {
-                await supabaseClient.from('chat_messages').insert({
-                    session_id: sessionId,
-                    message: message,
-                    sender: 'user'
-                });
-
-                if (!hasNotified) {
-                    await fetch('https://ntfy.sh/snapfix_chat', {
-                        method: 'POST',
-                        body: `New chat message from website: ${message}`,
-                        headers: { 'Title': '💬 SnapFix Chat', 'Priority': 'high' }
-                    });
-                    hasNotified = true;
-                }
-
-                setTimeout(() => {
-                    addMessage('Thanks! Kevin will respond shortly. Check back here or email kevin@snapfix.homes', false);
-                }, 1000);
-            } catch (error) {
-                console.error('Error:', error);
-                addMessage('Message sent! Kevin will respond via email at kevin@snapfix.homes', false);
-            }
-        }
-
-        function addMessage(text, isUser) {
-            const messagesDiv = document.getElementById('chatMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message ' + (isUser ? 'user' : 'bot');
-            messageDiv.textContent = text;
-            messagesDiv.appendChild(messageDiv);
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        }
-
-        supabaseClient
-            .channel('chat_' + sessionId)
-            .on('postgres_changes', {
-                event: 'INSERT',
-                schema: 'public',
-                table: 'chat_messages',
-                filter: `session_id=eq.${sessionId}`
-            }, (payload) => {
-                if (payload.new.sender === 'admin') {
-                    addMessage(payload.new.message, false);
-                }
-            })
-            .subscribe();
-    </script>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div>
+                <div class="footer-brand">Tender</div>
+                <p class="footer-desc">The app for your better half. Helping you be the partner they deserve, one thoughtful moment at a time.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul class="footer-links">
+                    <li><a href="support.html">Contact Us</a></li>
+                    <li><a href="support.html">FAQs</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Tender. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
