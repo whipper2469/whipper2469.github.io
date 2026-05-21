@@ -1,1 +1,385 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Diamonds - Trick Taking Card Game</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    :root {
+        --card-bg: #fff;
+        --card-text: #000;
+    }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #0a2f0a; color: #fff; margin:0; padding:10px; text-align:center; }
+    h1 { color:#ffcc00; margin:8px; }
+    .container { max-width: 1000px; margin:0 auto; }
+    .card {
+        width: 72px; height: 102px; background: var(--card-bg); color: var(--card-text);
+        border-radius: 10px; display: inline-flex; align-items: center; justify-content: center;
+        font-size: 28px; margin: 5px; box-shadow: 0 5px 12px rgba(0,0,0,0.8);
+        cursor: pointer; transition: all 0.2s;
+    }
+    .card:hover { transform: scale(1.12) rotate(3deg); }
+    .red { color: #c00; }
+    .area { background: rgba(0,0,0,0.5); padding: 12px; margin: 10px; border-radius: 12px; }
+    button { padding: 12px 22px; margin: 6px; font-size: 17px; background:#ffcc00; color:black; border:none; border-radius:8px; cursor:pointer; }
+    .modal {
+        position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95);
+        display:none; align-items:center; justify-content:center; z-index:200;
+    }
+    .deck-option {
+        display:inline-block; margin:8px; padding:10px; background:#222; border-radius:8px; cursor:pointer;
+    }
+    .trick-area { width:340px; height:170px; border:4px dashed #fff; border-radius:20px; margin:20px auto; display:flex; align-items:center; justify-content:center; gap:20px; font-size:32px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>♦️ DIAMONDS ♦️</h1>
+    <button onclick="showSettings()">⚙️ Settings</button>
+    <button onclick="startNewHand()">New Hand</button>
+    <button onclick="restartGame()">Restart Game</button>
+
+    <div style="margin:15px 0; font-size:19px;">
+        <strong>NS:</strong> <span id="ns-total">0</span> — 
+        <strong>EW:</strong> <span id="ew-total">0</span> 
+        <span style="margin-left:20px; color:#ffcc00;">First to 500 wins</span>
+    </div>
+
+    <div id="bidding-area" class="area" style="display:none;"></div>
+
+    <div class="area">
+        North (<span id="north-name">North</span>) — Tricks: <span id="north-tricks">0</span> | Bid: <span id="north-bid">0</span>
+    </div>
+
+    <div style="display:flex; justify-content:center; gap:30px; flex-wrap:wrap;">
+        <div class="area">West (<span id="west-name">West</span>) — Tricks: <span id="west-tricks">0</span> | Bid: <span id="west-bid">0</span></div>
+        <div id="trick" class="trick-area"></div>
+        <div class="area">East (<span id="east-name">East</span>) — Tricks: <span id="east-tricks">0</span> | Bid: <span id="east-bid">0</span></div>
+    </div>
+
+    <div class="area">You (<span id="south-name">You</span>) — Tricks: <span id="south-tricks">0</span> | Bid: <span id="south-bid">0</span></div>
+
+    <div id="player-hand" style="margin:25px 0; min-height:130px;"></div>
+
+    <div id="log" style="height:160px; overflow-y:auto; background:#00000080; padding:12px; text-align:left; margin:15px auto; max-width:800px; border-radius:8px; font-size:15px;"></div>
+</div>
+
+<!-- Settings Modal -->
+<div id="settings-modal" class="modal">
+    <div style="background:#1a3a1a; padding:25px; border-radius:16px; width:90%; max-width:520px;">
+        <h2>Game Settings</h2>
+        
+        <label>Player Names:</label><br>
+        <input id="south-name-input" placeholder="Your Name" style="width:80%; padding:8px; margin:5px;"><br>
+        <input id="north-name-input" placeholder="North" style="width:80%; padding:8px; margin:5px;"><br><br>
+
+        <label>Card Deck:</label><br>
+        <div id="deck-options"></div>
+
+        <button onclick="saveSettings()" style="margin-top:20px;">Save & Close</button>
+    </div>
+</div>
+
+<script>
+// ====================== FULL DIAMONDS GAME ======================
+let players = { south: [], north: [], east: [], west: [] };
+let currentTrick = [];
+let bids = { south: 0, north: 0, east: 0, west: 0 };
+let isNil = { south: false, north: false, east: false, west: false };
+let tricksWon = { south: 0, north: 0, east: 0, west: 0 };
+let totalScore = { ns: 0, ew: 0 };
+
+let currentPlayer = 'south';
+let gameLog = [];
+const biddingOrder = ['south', 'west', 'north', 'east'];
+let currentBidIndex = 0;
+
+let playerNames = { south: "You", north: "North", east: "East", west: "West" };
+let currentDeck = "classic"; // classic, neon, forest, dark, luxury, cyber
+
+const deckStyles = {
+    classic: { bg: "#fff", text: "#000" },
+    neon: { bg: "#0ff", text: "#000" },
+    forest: { bg: "#0a3", text: "#ff0" },
+    dark: { bg: "#222", text: "#0f0" },
+    luxury: { bg: "#ffd700", text: "#000" },
+    cyber: { bg: "#00ffff", text: "#000" }
+};
+
+function applyDeckStyle() {
+    const s = deckStyles[currentDeck];
+    document.documentElement.style.setProperty('--card-bg', s.bg);
+    document.documentElement.style.setProperty('--card-text', s.text);
+}
+
+// Create deck
+function createDeck() {
+    const suits = ['♠','♥','♦','♣'];
+    const ranks = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
+    let deck = [];
+    for (let suit of suits) {
+        for (let rank of ranks) {
+            deck.push({rank, suit, value: ranks.indexOf(rank)});
+        }
+    }
+    // Shuffle animation simulation
+    for (let i = deck.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+    return deck;
+}
+
+function dealWithAnimation() {
+    const deck = createDeck();
+    players.south = deck.slice(0,13);
+    players.north = deck.slice(13,26);
+    players.east = deck.slice(26,39);
+    players.west = deck.slice(39,52);
+
+    Object.keys(players).forEach(p => {
+        players[p].sort((a,b) => a.value - b.value || ['♠','♥','♦','♣'].indexOf(a.suit) - ['♠','♥','♦','♣'].indexOf(b.suit));
+    });
+
+    log("🃏 Shuffling and dealing new hand...");
+    setTimeout(() => {
+        renderAll();
+        renderPlayerHand();
+    }, 800);
+}
+
+function renderAll() {
+    document.getElementById('south-tricks').textContent = tricksWon.south;
+    document.getElementById('north-tricks').textContent = tricksWon.north;
+    document.getElementById('east-tricks').textContent = tricksWon.east;
+    document.getElementById('west-tricks').textContent = tricksWon.west;
+
+    document.getElementById('south-bid').textContent = isNil.south ? "NIL" : bids.south;
+    document.getElementById('north-bid').textContent = isNil.north ? "NIL" : bids.north;
+    document.getElementById('east-bid').textContent = isNil.east ? "NIL" : bids.east;
+    document.getElementById('west-bid').textContent = isNil.west ? "NIL" : bids.west;
+
+    document.getElementById('ns-total').textContent = totalScore.ns;
+    document.getElementById('ew-total').textContent = totalScore.ew;
+}
+
+function startBidding() {
+    bids = { south: 0, north: 0, east: 0, west: 0 };
+    isNil = { south: false, north: false, east: false, west: false };
+    currentBidIndex = 0;
+    document.getElementById('bidding-area').style.display = 'block';
+    document.getElementById('player-hand').style.display = 'none';
+    nextBid();
+}
+
+function nextBid() {
+    const player = biddingOrder[currentBidIndex];
+    const area = document.getElementById('bidding-area');
+    area.innerHTML = `<h2>${playerNames[player]}'s Bid</h2>`;
+
+    if (player === 'south') {
+        area.innerHTML += `<p>Choose bid or NIL:</p>`;
+        for (let i = 0; i <= 7; i++) {
+            const btn = document.createElement('button');
+            btn.textContent = i;
+            btn.onclick = () => makeBid(player, i, false);
+            area.appendChild(btn);
+        }
+        const nilBtn = document.createElement('button');
+        nilBtn.textContent = "NIL";
+        nilBtn.style.background = "#c00";
+        nilBtn.onclick = () => makeBid(player, 0, true);
+        area.appendChild(nilBtn);
+    } else {
+        const aiNil = Math.random() < 0.18;
+        const aiBid = aiNil ? 0 : Math.floor(Math.random()*6)+2;
+        setTimeout(() => makeBid(player, aiBid, aiNil), 900);
+    }
+}
+
+function makeBid(player, amount, nil) {
+    bids[player] = amount;
+    isNil[player] = nil;
+    log(`${playerNames[player]} bids ${nil ? "NIL" : amount}`);
+    renderAll();
+    currentBidIndex++;
+    if (currentBidIndex < 4) nextBid();
+    else {
+        document.getElementById('bidding-area').style.display = 'none';
+        document.getElementById('player-hand').style.display = 'block';
+        log("Play begins!");
+        currentPlayer = 'south';
+        renderPlayerHand();
+    }
+}
+
+function renderPlayerHand() {
+    const handDiv = document.getElementById('player-hand');
+    handDiv.innerHTML = '';
+    players.south.forEach((card, i) => {
+        const div = document.createElement('div');
+        div.className = `card ${card.suit === '♥' || card.suit === '♦' ? 'red' : ''}`;
+        div.textContent = card.rank + card.suit;
+        div.onclick = () => playCard('south', i);
+        handDiv.appendChild(div);
+    });
+}
+
+function playCard(player, index) {
+    if (player !== currentPlayer || currentTrick.length >= 4) return;
+    
+    const card = players[player].splice(index, 1)[0];
+    currentTrick.push({player, card});
+    renderPlayerHand();
+    updateTrickDisplay();
+    
+    const order = ['south','west','north','east'];
+    currentPlayer = order[(order.indexOf(player)+1)%4];
+    
+    if (currentTrick.length === 4) setTimeout(determineTrickWinner, 700);
+    else if (currentPlayer !== 'south') setTimeout(aiPlay, 600);
+}
+
+function updateTrickDisplay() {
+    const div = document.getElementById('trick');
+    div.innerHTML = currentTrick.map(c => 
+        `<span class="${c.card.suit==='♥'||c.card.suit==='♦'?'red':''}">${c.card.rank}${c.card.suit}</span>`
+    ).join('');
+}
+
+function aiPlay() {
+    const hand = players[currentPlayer];
+    const ledSuit = currentTrick[0]?.card.suit || null;
+    let playable = ledSuit ? hand.filter(c => c.suit === ledSuit) : hand;
+    if (!playable.length) playable = hand;
+    
+    const choice = playable[Math.floor(Math.random()*playable.length)];
+    playCard(currentPlayer, hand.indexOf(choice));
+}
+
+function determineTrickWinner() {
+    let winnerIndex = 0;
+    const diamonds = currentTrick.map((e,i) => e.card.suit==='♦' ? i : -1).filter(i=>i>=0);
+    
+    if (diamonds.length > 0) {
+        winnerIndex = diamonds[diamonds.length-1];
+        log(`♦ LAST DIAMOND WINS!`);
+    } else {
+        const led = currentTrick[0].card.suit;
+        let best = currentTrick[0].card.value;
+        for (let i=1; i<4; i++) {
+            if (currentTrick[i].card.suit === led && currentTrick[i].card.value > best) {
+                best = currentTrick[i].card.value;
+                winnerIndex = i;
+            }
+        }
+    }
+
+    const winner = currentTrick[winnerIndex].player;
+    tricksWon[winner]++;
+    log(`${playerNames[winner]} won the trick`);
+    renderAll();
+
+    currentTrick = [];
+    document.getElementById('trick').innerHTML = '';
+
+    if (players.south.length === 0) setTimeout(endHand, 800);
+    else {
+        currentPlayer = winner;
+        if (currentPlayer !== 'south') setTimeout(aiPlay, 600);
+    }
+}
+
+function endHand() {
+    const nsTricks = tricksWon.south + tricksWon.north;
+    const ewTricks = tricksWon.east + tricksWon.west;
+    let nsScore = 0, ewScore = 0;
+
+    const nsBidTotal = bids.south + bids.north;
+    const ewBidTotal = bids.east + bids.west;
+
+    nsScore += (nsTricks >= nsBidTotal) ? nsBidTotal*10 : -nsBidTotal*10;
+    ewScore += (ewTricks >= ewBidTotal) ? ewBidTotal*10 : -ewBidTotal*10;
+
+    // Sandbagging penalty (10 points per 10 overtricks)
+    const nsOver = Math.floor((nsTricks - nsBidTotal)/10);
+    const ewOver = Math.floor((ewTricks - ewBidTotal)/10);
+    if (nsOver > 0) nsScore -= nsOver * 10;
+    if (ewOver > 0) ewScore -= ewOver * 10;
+
+    // NIL
+    if (isNil.south) nsScore += (tricksWon.south === 0) ? 100 : -100;
+    if (isNil.north) nsScore += (tricksWon.north === 0) ? 100 : -100;
+    if (isNil.east || isNil.west) {
+        const made = (isNil.east && tricksWon.east===0) || (isNil.west && tricksWon.west===0);
+        ewScore += made ? 100 : -100;
+    }
+
+    totalScore.ns += nsScore;
+    totalScore.ew += ewScore;
+
+    log(`Hand ended. NS: ${nsScore} | EW: ${ewScore}`);
+    renderAll();
+
+    if (totalScore.ns >= 500 || totalScore.ew >= 500) setTimeout(showGameOver, 1200);
+    else setTimeout(startNewHand, 1800);
+}
+
+function showGameOver() {
+    const winner = totalScore.ns >= 500 ? "North-South" : "East-West";
+    alert(`🎉 GAME OVER! 🎉\n\n${winner} Wins!\nFinal Score: NS ${totalScore.ns} — EW ${totalScore.ew}`);
+    restartGame();
+}
+
+function log(msg) {
+    gameLog.push(msg);
+    const div = document.getElementById('log');
+    div.innerHTML = gameLog.slice(-20).join('<br>');
+    div.scrollTop = div.scrollHeight;
+}
+
+function startNewHand() {
+    gameLog = [];
+    document.getElementById('log').innerHTML = '';
+    dealWithAnimation();
+    setTimeout(startBidding, 1200);
+}
+
+function restartGame() {
+    totalScore = { ns: 0, ew: 0 };
+    startNewHand();
+}
+
+// ==================== SETTINGS ====================
+function showSettings() {
+    document.getElementById('settings-modal').style.display = 'flex';
+    
+    document.getElementById('south-name-input').value = playerNames.south;
+    document.getElementById('north-name-input').value = playerNames.north;
+
+    const container = document.getElementById('deck-options');
+    container.innerHTML = '';
+    Object.keys(deckStyles).forEach(key => {
+        const div = document.createElement('div');
+        div.className = 'deck-option';
+        div.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+        div.onclick = () => { currentDeck = key; applyDeckStyle(); };
+        container.appendChild(div);
+    });
+}
+
+function saveSettings() {
+    playerNames.south = document.getElementById('south-name-input').value || "You";
+    playerNames.north = document.getElementById('north-name-input').value || "North";
+    document.getElementById('south-name').textContent = playerNames.south;
+    document.getElementById('north-name').textContent = playerNames.north;
+    document.getElementById('settings-modal').style.display = 'none';
+}
+
+// Initialize
+applyDeckStyle();
+startNewHand();
+</script>
+</body>
+</html>
