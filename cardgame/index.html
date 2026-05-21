@@ -5,6 +5,158 @@
 <title>Diamonds</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+    body { font-family: Arial, sans-serif; background: #0a2f0a; color: #fff; margin:0; padding:10px; text-align:center; }
+    h1 { color:#ffcc00; }
+    .card { width: 70px; height: 100px; background: white; color: black; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-size: 28px; margin: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.7); cursor: pointer; }
+    .red { color: red; }
+    .area { background: rgba(0,0,0,0.6); padding: 12px; margin: 10px; border-radius: 12px; }
+    .trick-area { width: 380px; height: 140px; border: 4px dashed #ffcc00; border-radius: 20px; margin: 20px auto; display:flex; align-items:center; justify-content:center; gap:12px; font-size: 32px; }
+    button { padding: 12px 20px; margin: 6px; background:#ffcc00; color:black; border:none; border-radius:8px; cursor:pointer; font-weight:bold; }
+    .nil { color: #ff4444; font-weight: bold; }
+</style>
+</head>
+<body>
+<h1>♦️ DIAMONDS ♦️</h1>
+
+<div style="margin:10px 0; font-size:18px;">
+    NS: <span id="ns-total">0</span> — EW: <span id="ew-total">0</span> (First to 500)
+</div>
+
+<div id="bidding-area" class="area" style="display:none;"></div>
+
+<div class="area">North — Tricks: <span id="north-tricks">0</span> | Bid: <span id="north-bid">0</span></div>
+
+<div style="display:flex; justify-content:center; gap:30px; flex-wrap:wrap;">
+    <div class="area">West — Tricks: <span id="west-tricks">0</span> | Bid: <span id="west-bid">0</span></div>
+    <div id="trick" class="trick-area"></div>
+    <div class="area">East — Tricks: <span id="east-tricks">0</span> | Bid: <span id="east-bid">0</span></div>
+</div>
+
+<div class="area">You — Tricks: <span id="south-tricks">0</span> | Bid: <span id="south-bid">0</span></div>
+
+<div id="player-hand" style="margin:20px 0; min-height:140px;"></div>
+
+<div style="margin:15px;">
+    <button onclick="startNewHand()">New Hand</button>
+    <button onclick="restartGame()">Restart Game</button>
+</div>
+
+<div id="log" style="height:140px; overflow-y:auto; background:#00000080; padding:10px; text-align:left; max-width:800px; margin:15px auto; border-radius:8px; font-size:14px;"></div>
+
+<script>
+// ====================== CLEAN WORKING VERSION ======================
+let players = { south: [] };
+let currentTrick = [];
+let bids = { south: 0, north: 0, east: 0, west: 0 };
+let tricksWon = { south: 0, north: 0, east: 0, west: 0 };
+let totalScore = { ns: 0, ew: 0 };
+
+function log(msg) {
+    const logDiv = document.getElementById('log');
+    logDiv.innerHTML += `<div>${msg}</div>`;
+    logDiv.scrollTop = logDiv.scrollHeight;
+}
+
+function createCardElement(card) {
+    const div = document.createElement('div');
+    div.className = `card ${card.suit === '♥' || card.suit === '♦' ? 'red' : ''}`;
+    div.textContent = card.rank + card.suit;
+    div.onclick = () => playCard(card);
+    return div;
+}
+
+function renderPlayerHand() {
+    const div = document.getElementById('player-hand');
+    div.innerHTML = '';
+    players.south.forEach(card => div.appendChild(createCardElement(card)));
+}
+
+function playCard(card) {
+    const index = players.south.indexOf(card);
+    if (index === -1) return;
+    
+    players.south.splice(index, 1);
+    currentTrick.push({player: 'south', card});
+    
+    const cardDiv = createCardElement(card);
+    document.getElementById('trick').appendChild(cardDiv);
+    
+    renderPlayerHand();
+    log(`You played ${card.rank}${card.suit}`);
+    
+    if (currentTrick.length === 4) setTimeout(determineTrickWinner, 800);
+}
+
+function determineTrickWinner() {
+    log("Trick complete");
+    currentTrick = [];
+    document.getElementById('trick').innerHTML = '';
+    if (players.south.length === 0) endHand();
+}
+
+function endHand() {
+    log("Hand finished. Scoring coming soon...");
+    setTimeout(startNewHand, 1500);
+}
+
+function startNewHand() {
+    document.getElementById('log').innerHTML = '';
+    document.getElementById('trick').innerHTML = '';
+
+    const suits = ['♠','♥','♦','♣'];
+    const ranks = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
+    let deck = [];
+    for (let s of suits) for (let r of ranks) deck.push({rank:r, suit:s});
+    
+    // Shuffle
+    for (let i = deck.length-1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i+1));
+        [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+    
+    players.south = deck.slice(0,13);
+    
+    // Bidding
+    const bidding = document.getElementById('bidding-area');
+    bidding.style.display = 'block';
+    bidding.innerHTML = `<h2>Your Bid</h2>`;
+    
+    for (let i = 0; i <= 8; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        btn.onclick = () => {
+            bids.south = i;
+            log(`You bid ${i}`);
+            bidding.style.display = 'none';
+            renderPlayerHand();
+        };
+        bidding.appendChild(btn);
+    }
+    
+    renderPlayerHand();
+    log("New hand dealt. Click your cards to play.");
+}
+
+function restartGame() {
+    totalScore = { ns: 0, ew: 0 };
+    startNewHand();
+}
+
+function showRules() {
+    alert("♦ DIAMONDS ♦\n\n• Last Diamond played wins the trick\n• Bid how many tricks your team will take\n• First team to 500 points wins");
+}
+
+// Start the game
+startNewHand();
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Diamonds</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
     body { font-family: 'Segoe UI', Arial, sans-serif; background: #0a2f0a; color: #fff; margin:0; padding:10px; text-align:center; }
     h1 { color:#ffcc00; }
     .card-container { width: 78px; height: 112px; perspective: 2000px; display: inline-block; margin: 4px; }
