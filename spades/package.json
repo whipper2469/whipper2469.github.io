@@ -1,8 +1,0 @@
-{
-  "name": "elite-spades",
-  "version": "1.0.0",
-  "description": "Premium Spades card game",
-  "scripts": {
-    "start": "echo 'Open index.html in browser'"
-  }
-}
