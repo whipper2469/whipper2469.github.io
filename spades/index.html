@@ -3,6 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elite Spades</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+  <!-- CardMeister for beautiful SVG cards -->
+  <script src="https://cardmeister.github.io/latest/cardmeister.min.js"></script>
+</head>
+<body class="min-h-screen flex flex-col overflow-hidden">
+  <!-- Lobby -->
+  <div id="lobby" class="flex-1 flex items-center justify-center bg-gradient-to-br from-zinc-900 to-black">
+    <div class="text-center space-y-8">
+      <h1 class="text-8xl font-black tracking-tighter bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent">ELITE SPADES</h1>
+      <p class="text-xl text-zinc-400">Premium • Beautiful • Smart AI</p>
+      <div class="space-y-4">
+        <button onclick="startGame(false)" class="w-80 py-6 text-2xl font-semibold bg-emerald-600 hover:bg-emerald-500 rounded-2xl shadow-xl transition">Play vs 3 AI</button>
+        <button onclick="startGame(true)" class="w-80 py-6 text-2xl font-semibold bg-amber-600 hover:bg-amber-500 rounded-2xl shadow-xl transition">Play with Partner + 2 AI</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Screen -->
+  <div id="game-screen" class="hidden flex-1 flex flex-col">
+    <!-- Header -->
+    <div class="bg-zinc-900 border-b border-zinc-800 p-4 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <div>Team You + Partner: <span id="score-us" class="font-mono text-2xl">0</span></div>
+        <div>Opponents: <span id="score-them" class="font-mono text-2xl">0</span></div>
+      </div>
+      <div id="status" class="font-mono text-lg"></div>
+      <button onclick="endGame()" class="px-6 py-2 bg-red-600 hover:bg-red-500 rounded-xl">End Game</button>
+    </div>
+
+    <!-- Table -->
+    <div class="flex-1 relative bg-emerald-950 flex items-center justify-center overflow-hidden" id="table">
+      <canvas id="canvas" width="1100" height="700" class="shadow-2xl rounded-3xl"></canvas>
+      
+      <!-- Player Labels -->
+      <div id="player-labels" class="absolute inset-0 pointer-events-none"></div>
+    </div>
+
+    <!-- Bottom Controls -->
+    <div class="bg-zinc-900 p-4">
+      <div id="bidding-area" class="hidden flex items-center justify-center gap-4 mb-4">
+        <span class="text-xl">Your Bid:</span>
+        <input id="bid-input" type="number" min="0" max="13" value="4" class="w-20 bg-zinc-800 text-center text-3xl font-mono rounded-xl p-2">
+        <button onclick="submitBid()" class="px-10 py-3 bg-emerald-600 hover:bg-emerald-500 rounded-xl text-xl">Bid</button>
+      </div>
+      <div id="hand-area" class="flex gap-3 justify-center min-h-[140px]"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en" class="bg-zinc-950 text-white">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Elite Spades • Premium</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.css">
