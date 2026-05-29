@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cherish - The App for Your Better Half</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #5a8f9c;
+            --primary-dark: #3d6e7a;
+            --secondary: #eaf2f4;
+            --accent: #f06292;
+            --text: #2c2c2c;
+            --text-light: #6a6a6a;
+            --bg: #f5f0f2;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(245, 240, 242, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(90, 143, 156, 0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 8rem 2rem 6rem;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--bg) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(90, 143, 156, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        .hero .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(90, 143, 156, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 6px 20px rgba(90, 143, 156, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Phone mockup */
+        .phone-mockup {
+            width: 280px;
+            position: relative;
+            animation: fadeInUp 1s ease-out;
+            filter: drop-shadow(0 24px 48px rgba(90,143,156,0.25)) drop-shadow(0 8px 16px rgba(0,0,0,0.12));
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .phone-outer {
+            background: #1a1a1a;
+            border-radius: 44px;
+            padding: 12px;
+        }
+
+        .phone-screen {
+            background: #f0eaed;
+            border-radius: 34px;
+            overflow: hidden;
+            font-family: -apple-system, 'SF Pro Display', sans-serif;
+        }
+
+        /* Status bar */
+        .status-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px 4px;
+            background: #f0eaed;
+            position: relative;
+        }
+        .status-time { font-size: 13px; font-weight: 700; color: #111; }
+        .dynamic-island {
+            width: 90px; height: 24px;
+            background: #111; border-radius: 20px;
+            position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .di-dot { width: 7px; height: 7px; border-radius: 50%; background: #d4600a; }
+        .status-right { display: flex; align-items: center; gap: 4px; }
+        .signal-bars { display: flex; align-items: flex-end; gap: 1.5px; }
+        .bar { width: 3px; background: #333; border-radius: 1px; }
+        .b1{height:4px;} .b2{height:6px;} .b3{height:8px;opacity:0.3;} .b4{height:10px;opacity:0.3;}
+        .battery-icon {
+            width: 20px; height: 10px; border: 1.5px solid #333;
+            border-radius: 2px; position: relative;
+        }
+        .battery-icon::after {
+            content:''; position:absolute; right:-4px; top:50%; transform:translateY(-50%);
+            width:2px; height:5px; background:#333; border-radius:0 1px 1px 0;
+        }
+        .battery-fill {
+            position:absolute; left:1px; top:1px; bottom:1px;
+            width:60%; background:#333; border-radius:1px;
+        }
+
+        /* App screen content */
+        .app-screen {
+            padding: 10px 20px 26px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .app-hearts { font-size: 42px; margin: 14px 0 8px; text-align: center; }
+        .app-title { font-size: 28px; font-weight: 300; color: #4a8a96; margin-bottom: 2px; }
+        .app-subtitle { font-size: 11px; color: #999; margin-bottom: 18px; }
+        .app-agree-label { font-size: 10px; color: #aaa; align-self: flex-start; margin-bottom: 7px; }
+        .app-agree-box {
+            background: white; border-radius: 14px;
+            width: 100%; padding: 10px 13px; margin-bottom: 13px;
+        }
+        .app-agree-row {
+            display: flex; align-items: center; gap: 7px;
+            font-size: 10px; color: #555; padding: 3px 0;
+        }
+        .app-agree-row + .app-agree-row {
+            border-top: 1px solid #f0f0f0; margin-top: 4px; padding-top: 7px;
+        }
+        .app-checkbox {
+            width: 15px; height: 15px; border: 1.5px solid #ccc;
+            border-radius: 3px; flex-shrink: 0;
+        }
+        .app-link { color: #4a8a96; font-weight: 600; }
+        .app-field-label {
+            font-size: 9px; font-weight: 600; letter-spacing: 0.08em;
+            color: #999; text-transform: uppercase;
+            align-self: flex-start; margin-bottom: 4px;
+        }
+        .app-input {
+            background: white; border-radius: 12px; width: 100%;
+            padding: 10px 13px; margin-bottom: 10px;
+            font-size: 11px; color: #4a8a96;
+        }
+        .app-input.placeholder { color: #ccc; }
+        .app-forgot {
+            align-self: flex-end; font-size: 10px;
+            color: #4a8a96; font-weight: 600; margin-bottom: 12px;
+        }
+        .app-btn-signin {
+            width: 100%; background: #6a9faa; color: white;
+            border-radius: 13px; padding: 11px;
+            font-size: 13px; font-weight: 500; text-align: center; margin-bottom: 12px;
+        }
+        .app-or {
+            font-size: 10px; color: #bbb; margin-bottom: 9px;
+            display: flex; align-items: center; gap: 7px; width: 100%;
+        }
+        .app-or::before, .app-or::after { content:''; flex:1; height:1px; background:#e0e0e0; }
+        .app-btn-apple {
+            width: 100%; background: #555; color: white;
+            border-radius: 13px; padding: 11px;
+            font-size: 12px; font-weight: 500; text-align: center;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: var(--bg);
+        }
+
+        .features .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text);
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(90, 143, 156, 0.08);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(90, 143, 156, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* Download Section */
+        .download {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .download .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .download h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .download p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+        }
+
+        .download .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .download .btn-primary:hover {
+            background: var(--secondary);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 3rem 2rem 2rem;
+        }
+
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-desc {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .footer-section h4 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            opacity: 0.6;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+                flex-direction: column;
+            }
+
+            .phone-mockup {
+                width: 240px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .download h2 {
+                font-size: 2rem;
+            }
+
+            footer .container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">Cherish</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+                <li><a href="terms.html">Terms</a></li>
+                <li><a href="support.html">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>The App for Your Better Half</h1>
+                <p class="subtitle">Never forget the moments that matter. Cherish helps you be the partner they deserve with thoughtful reminders, date ideas, and relationship tools.</p>
+                <div class="cta-buttons">
+                    <a href="#download" class="btn btn-primary">Download on App Store</a>
+                    <a href="support.html" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <!-- Phone mockup showing Cherish login screen -->
+                <div class="phone-mockup">
+                    <div class="phone-outer">
+                        <div class="phone-screen">
+                            <!-- Status bar -->
+                            <div class="status-bar">
+                                <span class="status-time">9:51</span>
+                                <div class="dynamic-island"><div class="di-dot"></div></div>
+                                <div class="status-right">
+                                    <div class="signal-bars">
+                                        <div class="bar b1"></div>
+                                        <div class="bar b2"></div>
+                                        <div class="bar b3"></div>
+                                        <div class="bar b4"></div>
+                                    </div>
+                                    <div class="battery-icon"><div class="battery-fill"></div></div>
+                                </div>
+                            </div>
+                            <!-- App content -->
+                            <div class="app-screen">
+                                <div class="app-hearts">💗💕</div>
+                                <div class="app-title">Cherish</div>
+                                <div class="app-subtitle">Your relationship companion</div>
+
+                                <div class="app-agree-label">Please read and agree before signing in:</div>
+                                <div class="app-agree-box">
+                                    <div class="app-agree-row">
+                                        <div class="app-checkbox"></div>
+                                        <span>I agree to the <span class="app-link">Terms of Service</span></span>
+                                    </div>
+                                    <div class="app-agree-row">
+                                        <div class="app-checkbox"></div>
+                                        <span>I agree to the <span class="app-link">Privacy Policy</span></span>
+                                    </div>
+                                </div>
+
+                                <div class="app-field-label">Email</div>
+                                <div class="app-input" style="color:#4a8a96;">your@email.com</div>
+
+                                <div class="app-field-label">Password</div>
+                                <div class="app-input placeholder">••••••••</div>
+
+                                <div class="app-forgot">Forgot password?</div>
+                                <div class="app-btn-signin">Sign In</div>
+                                <div class="app-or">OR</div>
+                                <div class="app-btn-apple">🍎 Continue with Apple</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Everything You Need to Be Thoughtful</h2>
+            <p class="section-subtitle">Cherish is designed to help you show up for your partner in meaningful ways, every single day.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">👤</span>
+                    <h3>Partner Profile</h3>
+                    <p>Store important details like their birthday, anniversary, favorite flowers, restaurants, and gift ideas all in one place.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🌙</span>
+                    <h3>Date Night Ideas</h3>
+                    <p>Get bi-weekly date suggestions filtered by your budget and searchable near your location. Never run out of ideas.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🎬</span>
+                    <h3>Movies & Shows</h3>
+                    <p>Browse movies now playing with voting features and direct ticket links. Find comedy shows near you instantly.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🔔</span>
+                    <h3>Smart Reminders</h3>
+                    <p>Set random, weekly, or monthly reminders to do something thoughtful. Let Cherish keep you on track.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">❄️</span>
+                    <h3>Cooling Off Mode</h3>
+                    <p>Step away gracefully with a 5-minute timer, get suggestions on making things right, and send pre-made messages.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🔒</span>
+                    <h3>Private & Secure</h3>
+                    <p>All your data stays on your device. No accounts required, no data collected, completely private.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download" id="download">
+        <div class="container">
+            <h2>Ready to Be a Better Partner?</h2>
+            <p>Download Cherish today and start showing up for the person you love.</p>
+            <a href="#" class="btn btn-primary">Coming Soon to App Store</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div>
+                <div class="footer-brand">Cherish</div>
+                <p class="footer-desc">The app for your better half. Helping you be the partner they deserve, one thoughtful moment at a time.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul class="footer-links">
+                    <li><a href="support.html">Contact Us</a></li>
+                    <li><a href="support.html">FAQs</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Cherish. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
